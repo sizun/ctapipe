@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>SubarrayConfig &mdash; ctapipe v0.1.dev1036</title>
+  <title>Serializer &mdash; ctapipe v0.1.dev1036</title>
   
 
   
@@ -127,11 +127,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>SubarrayConfig</li>
+    <li>Serializer</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/api/ctapipe.instrument.obsconfig.SubarrayConfig.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/ctapipe.io.serializer.Serializer.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -141,14 +141,82 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="subarrayconfig">
-<h1>SubarrayConfig<a class="headerlink" href="#subarrayconfig" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="serializer">
+<h1>Serializer<a class="headerlink" href="#serializer" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="ctapipe.instrument.obsconfig.SubarrayConfig">
-<em class="property">class </em><code class="descclassname">ctapipe.instrument.obsconfig.</code><code class="descname">SubarrayConfig</code><span class="sig-paren">(</span><em>run_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/instrument/obsconfig.html#SubarrayConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.instrument.obsconfig.SubarrayConfig" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="ctapipe.instrument.obsconfig.BaseConfig.html#ctapipe.instrument.obsconfig.BaseConfig" title="ctapipe.instrument.obsconfig.BaseConfig"><code class="xref py py-class docutils literal"><span class="pre">ctapipe.instrument.obsconfig.BaseConfig</span></code></a></p>
-<p>Description of a particular Subarray used during an observation or
-during a monte-carlo production</p>
+<dt id="ctapipe.io.serializer.Serializer">
+<em class="property">class </em><code class="descclassname">ctapipe.io.serializer.</code><code class="descname">Serializer</code><span class="sig-paren">(</span><em>filename</em>, <em>format='fits'</em>, <em>mode='x'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/io/serializer.html#Serializer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.io.serializer.Serializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Serializes ctapipe.core.Component, write it to a file thanks
+to its Writer object
+For some formats (i.e. pickle +gzip), read serialized components from
+a file</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">writer</span> <span class="o">=</span> <span class="n">Serializer</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;output.pickle&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;pickle&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">input_containers</span><span class="p">:</span>
+<span class="gp">... </span>      <span class="n">writer</span><span class="o">.</span><span class="n">add_container</span><span class="p">(</span><span class="n">container</span><span class="o">.</span><span class="n">dl0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>or using the context manager syntax
+&gt;&gt;&gt; with Serializer(filename='output.fits', format='fits', mode='w') as writer:
+&gt;&gt;&gt; for container in input_containers:
+...     writer.add_container(container.dl0)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filename: str</strong></p>
+<blockquote>
+<div><p>full path name for i/o file</p>
+</div></blockquote>
+<p><strong>format: str ('fits', 'img', 'pickle')</strong></p>
+<p><strong>mode: str ('write', 'read')</strong></p>
+<blockquote>
+<div><p>: use this serializer as writer or reader</p>
+</div></blockquote>
+<p><strong>mode: str</strong></p>
+<blockquote>
+<div><p>'w' open for writing, truncating the file first
+'x' open for exclusive creation, failing if the file already exists
+'a' open for writing, appending to the end of the file if it exists</p>
+</div></blockquote>
+<p><strong>Raises</strong></p>
+<p><strong>------</strong></p>
+<p><strong>NotImplementedError: when format is not implemented</strong></p>
+<p class="last"><strong>ValueError: when mode is not correct</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Summary</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.io.serializer.Serializer.add_container" title="ctapipe.io.serializer.Serializer.add_container"><code class="xref py py-obj docutils literal"><span class="pre">add_container</span></code></a>(container)</td>
+<td>Add a container to serializer</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.io.serializer.Serializer.close" title="ctapipe.io.serializer.Serializer.close"><code class="xref py py-obj docutils literal"><span class="pre">close</span></code></a>()</td>
+<td>Write data to disk</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods Documentation</p>
+<dl class="method">
+<dt id="ctapipe.io.serializer.Serializer.add_container">
+<code class="descname">add_container</code><span class="sig-paren">(</span><em>container</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/io/serializer.html#Serializer.add_container"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.io.serializer.Serializer.add_container" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a container to serializer</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ctapipe.io.serializer.Serializer.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/io/serializer.html#Serializer.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.io.serializer.Serializer.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write data to disk</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
