@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.core.container &mdash; ctapipe v0.1.dev1036</title>
+  <title>ctapipe.core.container &mdash; ctapipe v0.1.dev1187</title>
   
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1036" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.1.dev1187" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.1.dev1036
+                0.1.dev1187
               </div>
             
           
@@ -143,145 +143,219 @@
            <div itemprop="articleBody">
             
   <h1>Source code for ctapipe.core.container</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pformat</span>
-
-<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="k">import</span> <span class="n">Table</span>
-<span class="kn">from</span> <span class="nn">astropy.units</span> <span class="k">import</span> <span class="n">Quantity</span>
+<span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pformat</span>
+<span class="kn">from</span> <span class="nn">textwrap</span> <span class="k">import</span> <span class="n">wrap</span>
 
 
 <div class="viewcode-block" id="Container"><a class="viewcode-back" href="../../../api/ctapipe.core.Container.html#ctapipe.core.Container">[docs]</a><span class="k">class</span> <span class="nc">Container</span><span class="p">:</span>
-
     <span class="sd">&quot;&quot;&quot;Generic class that can hold and accumulate data to be passed</span>
 <span class="sd">    between Components.</span>
 
 <span class="sd">    The purpose of this class is to provide a flexible data structure</span>
 <span class="sd">    that works a bit like a dict or blank Python class, but prevents</span>
-<span class="sd">    the user from accessing members that have not been defined</span>
-<span class="sd">    a-priori (more like a C struct).  Generally, one can make a</span>
-<span class="sd">    sub-class and &quot;Register&quot; all of the members that should be there</span>
-<span class="sd">    in the `__init__` method by calling `~Container.add_item`.</span>
+<span class="sd">    the user from accessing members that have not been defined a</span>
+<span class="sd">    priori (more like a C struct), and also keeps metdata information</span>
+<span class="sd">    such as a description, defaults, and units for each item in the</span>
+<span class="sd">    container.</span>
 
-<span class="sd">    Container members can be accessed like a dict `container[&#39;item&#39;]</span>
-<span class="sd">    or with `continer.item` syntax.  You can also iterate over the</span>
-<span class="sd">    member names (useful for serialization). However, new data cannot</span>
-<span class="sd">    be added arbitrarily. One must call</span>
-<span class="sd">    `~ctapipe.core.Container.add_item` to add a new variable to the</span>
-<span class="sd">    Container, otherwise an `AttributeError` will be thrown.</span>
+<span class="sd">    Containers can transform the data into a `dict` using the `</span>
+<span class="sd">    Container.as_dict()` method.  This allows them to be written to an</span>
+<span class="sd">    output table for example, where each Item defines a column. The</span>
+<span class="sd">    `dict` conversion can be made recursively and even flattened so</span>
+<span class="sd">    that a nested set of `Containers` can be translated into a set of</span>
+<span class="sd">    columns in a flat table without naming conflicts (the name of the</span>
+<span class="sd">    parent Item is pre-pended).</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    name: str</span>
-<span class="sd">        name of container instance</span>
-<span class="sd">    kwargs: key=value</span>
-<span class="sd">        initial data (`add_item` is called automatically for each)</span>
+<span class="sd">    To use this class, all members must be defined as `Item`s with</span>
+<span class="sd">    default values specified.  For hierarchical data structures, Items</span>
+<span class="sd">    can use `Container` subclasses or a `Map` as the default value.</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; data = Container(&quot;data&quot;)</span>
-<span class="sd">    &gt;&gt;&gt; data.add_item(&quot;x&quot;)</span>
-<span class="sd">    &gt;&gt;&gt; data.x = 3</span>
-<span class="sd">    &gt;&gt;&gt; print(data.x)</span>
-<span class="sd">    3</span>
-<span class="sd">    &gt;&gt;&gt; print(data[&#39;x&#39;])</span>
-<span class="sd">    3</span>
+<span class="sd">    You should not make class hierarchies of Containers and only ever</span>
+<span class="sd">    subclass the Container base class</span>
+
+<span class="sd">    &gt;&gt;&gt;    class MyContainer(Container):</span>
+<span class="sd">    &gt;&gt;&gt;        x = Item(100,&quot;The X value&quot;)</span>
+<span class="sd">    &gt;&gt;&gt;        energy = Item(-1, &quot;Energy measurement&quot;, unit=u.TeV)</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt;    cont = MyContainer()</span>
+<span class="sd">    &gt;&gt;&gt;    print(cont.x)</span>
+<span class="sd">    100</span>
+<span class="sd">    &gt;&gt;&gt;    # metdata will become header keywords in an output file:</span>
+<span class="sd">    &gt;&gt;&gt;    cont.meta[&#39;KEY&#39;] = value  </span>
+
+<span class="sd">    `Items` inside `Containers` can contain instances of other</span>
+<span class="sd">    `Containers`, to allow for a hierarchy of containers, and can also</span>
+<span class="sd">    contain a `Map` for the case where one wants e.g. a set of</span>
+<span class="sd">    sub-classes indexed by a value like the `telescope_id`. Examples</span>
+<span class="sd">    of this can be found in `ctapipe.io.containers`</span>
+
+<span class="sd">    `Containers` work by shadowing all class variables (which must be</span>
+<span class="sd">    instances of `Item`) with instance variables of the same name the</span>
+<span class="sd">    hold the value expected. If `Container.reset()` is called, all</span>
+<span class="sd">    instance variables are reset to their default values as defined in</span>
+<span class="sd">    the class.</span>
+
+<span class="sd">    Finally, `Containers` can have associated metadata via their</span>
+<span class="sd">    `meta` attribute, which is a `dict` of keywords to values.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Container&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;_name&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">object</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_metadata&quot;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Prevent new attributes that aren&#39;t in the class definition&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+            <span class="nb">object</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> has no attribute &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">meta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;metadata associated with this container&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="s2">&quot;_meta&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;_meta&quot;</span><span class="p">,</span> <span class="n">Container</span><span class="p">(</span><span class="s2">&quot;meta&quot;</span><span class="p">))</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meta</span>
+        <span class="sd">&quot;&quot;&quot;metadata key/values associated with this Container.</span>
 
-<div class="viewcode-block" id="Container.add_item"><a class="viewcode-back" href="../../../api/ctapipe.core.Container.html#ctapipe.core.Container.add_item">[docs]</a>    <span class="k">def</span> <span class="nf">add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Add a new item of data to this Container, initialized to None by</span>
-<span class="sd">        default, or value if specified.</span>
+<span class="sd">        When written to an output file, these will become headers, so</span>
+<span class="sd">        should represent data that does not change after the</span>
+<span class="sd">        `Container` is constructed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;item &#39;</span><span class="si">{}</span><span class="s2">&#39; is already in Container&quot;</span>
-                                 <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span>
 
-    <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="c1"># prevent setting od values that are not yet registered</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;item &#39;</span><span class="si">{}</span><span class="s2">&#39; doesn&#39;t exist in </span><span class="si">{}</span><span class="s2">&quot;</span>
-                                 <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-
-    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="c1"># allow getting value by string e.g. cont[&#39;x&#39;]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
-
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
-        <span class="c1"># string representation (e.g. `print(cont)`)</span>
-        <span class="k">return</span> <span class="n">pformat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># standard representation</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">.</span><span class="si">{1}</span><span class="s1">(&quot;</span><span class="si">{2}</span><span class="s1">&quot;, </span><span class="si">{3}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span>
-                                            <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
-                                            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
-                                            <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
-
-    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># allow iterating over item names</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">))</span>
-
-<div class="viewcode-block" id="Container.as_dict"><a class="viewcode-back" href="../../../api/ctapipe.core.Container.html#ctapipe.core.Container.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Creates a dictionary of Container items unrolling recursively</span>
-<span class="sd">        nested containers.&#39;&#39;&#39;</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Container</span><span class="p">):</span>
-                <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
-                <span class="k">continue</span>
-            <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
-        <span class="k">return</span> <span class="n">d</span></div>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        a dict of the Item metadata of each attribute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">val</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">Item</span><span class="p">)}</span>
 
 <div class="viewcode-block" id="Container.items"><a class="viewcode-back" href="../../../api/ctapipe.core.Container.html#ctapipe.core.Container.items">[docs]</a>    <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Iterate over pairs of key, value. Just like the dictionary method&#39;&#39;&#39;</span>
-        <span class="c1"># allow iterating over item names</span>
-        <span class="k">return</span> <span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">))</span></div>
+        <span class="sd">&quot;&quot;&quot;dict-like access, but skip any hidden items like _metadata&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                 <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span> <span class="p">)</span></div>
 
-<div class="viewcode-block" id="Container.to_table"><a class="viewcode-back" href="../../../api/ctapipe.core.Container.html#ctapipe.core.Container.to_table">[docs]</a>    <span class="k">def</span> <span class="nf">to_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Create Table from Container&#39;&#39;&#39;</span>
-        <span class="c1"># Scalar `Quantity` objects do not have __len__ method which is</span>
-        <span class="c1"># needed by Table.write. We artificially change their shape</span>
-        <span class="c1"># With chunking this should not be an issue</span>
-        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">)</span> <span class="ow">and</span> <span class="n">val</span><span class="o">.</span><span class="n">isscalar</span><span class="p">:</span>
-                <span class="n">val</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="viewcode-block" id="Container.as_dict"><a class="viewcode-back" href="../../../api/ctapipe.core.Container.html#ctapipe.core.Container.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        convert the `Container` into a dictionary</span>
 
-        <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
-        <span class="n">dtype</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">dtype</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        recursive: bool</span>
+<span class="sd">            sub-Containers should also be converted to dicts</span>
+<span class="sd">        flatten: type</span>
+<span class="sd">            return a flat dictionary, with any sub-item keys generated</span>
+<span class="sd">            by appending the sub-Container name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">recursive</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">):</span> <span class="k">continue</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">Container</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">Map</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">flatten</span><span class="p">:</span>
+                        <span class="n">d</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span> <span class="n">v</span>
+                                  <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">val</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(</span><span class="n">recursive</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(</span><span class="n">recursive</span><span class="o">=</span><span class="n">recursive</span><span class="p">,</span>
+                                             <span class="n">flatten</span><span class="o">=</span><span class="n">flatten</span><span class="p">)</span>
+                    <span class="k">continue</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+            <span class="k">return</span> <span class="n">d</span></div>
 
-        <span class="c1"># It depends on chunking syntax:</span>
-        <span class="c1"># data = [v for _, v.chunk in self.items()]</span>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Container.disable_attribute_check"><a class="viewcode-back" href="../../../api/ctapipe.core.Container.html#ctapipe.core.Container.disable_attribute_check">[docs]</a>    <span class="k">def</span> <span class="nf">disable_attribute_check</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Globally turn off attribute checking for all Containers,</span>
+<span class="sd">        which provides a ~5-10x speed up for setting attributes.</span>
+<span class="sd">        This may be used e.g. after code is tested to speed up operation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">__setattr__</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="n">__setattr__</span></div>
 
-        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
-                     <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">,</span>
-                     <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span>
-                     <span class="n">meta</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">as_dict</span><span class="p">())</span></div>
+<div class="viewcode-block" id="Container.reset"><a class="viewcode-back" href="../../../api/ctapipe.core.Container.html#ctapipe.core.Container.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; set all values back to their default values&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Item</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">default</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">recursive</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Container</span><span class="p">):</span>
+                <span class="n">value</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Container.write"><a class="viewcode-back" href="../../../api/ctapipe.core.Container.html#ctapipe.core.Container.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Write table using astropy.table write method&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pformat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(</span><span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 
-        <span class="n">table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_table</span><span class="p">()</span>
-        <span class="c1"># Write HDU name</span>
-        <span class="n">table</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s2">&quot;EXTNAME&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
-        <span class="n">table</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">),]</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">extra</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">Container</span><span class="p">):</span>
+                <span class="n">extra</span> <span class="o">=</span> <span class="s2">&quot;.*&quot;</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">Map</span><span class="p">):</span>
+                <span class="n">extra</span> <span class="o">=</span> <span class="s2">&quot;[*]&quot;</span>
+            <span class="n">desc</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{:&gt;30s}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">+</span><span class="n">extra</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="n">wrap</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="n">subsequent_indent</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">*</span><span class="mi">32</span><span class="p">)</span>
+            <span class="n">text</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+        <span class="k">return</span>  <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
 
-        <span class="k">return</span> <span class="n">table</span></div></div>
+
+<div class="viewcode-block" id="Map"><a class="viewcode-back" href="../../../api/ctapipe.core.Map.html#ctapipe.core.Map">[docs]</a><span class="k">class</span> <span class="nc">Map</span><span class="p">(</span><span class="n">defaultdict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A dictionary of sub-containers that can be added to a Container. This</span>
+<span class="sd">    may be used e.g. to store a set of identical sub-Containers (e.g. indexed</span>
+<span class="sd">    by `tel_id` or algorithm name).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Map.as_dict"><a class="viewcode-back" href="../../../api/ctapipe.core.Map.html#ctapipe.core.Map.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">recursive</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">Container</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">Map</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">flatten</span><span class="p">:</span>
+                        <span class="n">d</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span> <span class="n">v</span>
+                                  <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">val</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(</span><span class="n">recursive</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">as_dict</span><span class="p">(</span><span class="n">recursive</span><span class="o">=</span><span class="n">recursive</span><span class="p">,</span>
+                                             <span class="n">flatten</span><span class="o">=</span><span class="n">flatten</span><span class="p">)</span>
+                    <span class="k">continue</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+            <span class="k">return</span> <span class="n">d</span></div>
+
+<div class="viewcode-block" id="Map.reset"><a class="viewcode-back" href="../../../api/ctapipe.core.Map.html#ctapipe.core.Map.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">Container</span><span class="p">):</span>
+                <span class="n">val</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Item"><a class="viewcode-back" href="../../../api/ctapipe.core.Item.html#ctapipe.core.Item">[docs]</a><span class="k">class</span> <span class="nc">Item</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines the metadata associated with a value in a Container</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    default:</span>
+<span class="sd">        default value of the item (this will be set when the `Container`</span>
+<span class="sd">        is constructed, as well as when  `Container.reset()` is called</span>
+<span class="sd">    description: str</span>
+<span class="sd">        Help text associated with the item</span>
+<span class="sd">    unit: `astropy.units.Quantity`</span>
+<span class="sd">        unit to convert to when writing output, or None for no conversion</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="n">default</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="o">=</span> <span class="n">unit</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">desc</span><span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">desc</span> <span class="o">+=</span> <span class="s1">&#39; [</span><span class="si">{}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">desc</span></div>
+
 </pre></div>
 
            </div>
@@ -294,7 +368,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, ctapipe developers.
-      Last updated on 04 Jan 2016.
+      Last updated on 09 Dec 2016.
 
     </p>
   </div>
@@ -316,7 +390,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.1.dev1036',
+            VERSION:'0.1.dev1187',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

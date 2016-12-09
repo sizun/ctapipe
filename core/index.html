@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Core Structures and Base Classes (core) &mdash; ctapipe v0.1.dev1036</title>
+  <title>Core Structures and Base Classes (core) &mdash; ctapipe v0.1.dev1187</title>
   
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1036" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.1.dev1187" href="../index.html"/>
         <link rel="next" title="Component" href="../api/ctapipe.core.Component.html"/>
         <link rel="prev" title="TiltedGroundFrame" href="../api/ctapipe.coordinates.TiltedGroundFrame.html"/> 
 
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.dev1036
+                0.1.dev1187
               </div>
             
           
@@ -212,19 +212,25 @@ to provide a common interface.</p>
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.core.Component.html#ctapipe.core.Component" title="ctapipe.core.Component"><code class="xref py py-obj docutils literal"><span class="pre">Component</span></code></a>([parent])</td>
 <td>Base class of all Components (sometimes called workers, makers, etc).</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.core.Container.html#ctapipe.core.Container" title="ctapipe.core.Container"><code class="xref py py-obj docutils literal"><span class="pre">Container</span></code></a>([name])</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.core.Container.html#ctapipe.core.Container" title="ctapipe.core.Container"><code class="xref py py-obj docutils literal"><span class="pre">Container</span></code></a>()</td>
 <td>Generic class that can hold and accumulate data to be passed between Components.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.core.Tool.html#ctapipe.core.Tool" title="ctapipe.core.Tool"><code class="xref py py-obj docutils literal"><span class="pre">Tool</span></code></a>(**kwargs)</td>
 <td>A base class for all executable tools (applications) that handles configuration loading/saving, logging, command-line processing, and provenance meta-data handling.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.core.Item.html#ctapipe.core.Item" title="ctapipe.core.Item"><code class="xref py py-obj docutils literal"><span class="pre">Item</span></code></a>(default[,&nbsp;description,&nbsp;unit])</td>
+<td>Defines the metadata associated with a value in a Container</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.core.Map.html#ctapipe.core.Map" title="ctapipe.core.Map"><code class="xref py py-obj docutils literal"><span class="pre">Map</span></code></a></td>
+<td>A dictionary of sub-containers that can be added to a Container.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="class-inheritance-diagram">
 <h4>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h4>
-<object data="../_images/inheritance-57fa81ee12b9b596790868a98cf9633a75995dd2.svg" type="image/svg+xml">
-            <p class="warning">Inheritance diagram of ctapipe.core.component.Component, ctapipe.core.container.Container, ctapipe.core.tool.Tool</p></object>
+<object data="../_images/inheritance-f0dcbe9c694be2402630b9039e319cdcb99a20df.svg" type="image/svg+xml">
+            <p class="warning">Inheritance diagram of ctapipe.core.component.Component, ctapipe.core.container.Container, ctapipe.core.tool.Tool, ctapipe.core.container.Item, ctapipe.core.container.Map</p></object>
 </div>
 </div>
 </div>
@@ -250,7 +256,7 @@ to provide a common interface.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, ctapipe developers.
-      Last updated on 04 Jan 2016.
+      Last updated on 09 Dec 2016.
 
     </p>
   </div>
@@ -272,7 +278,7 @@ to provide a common interface.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1.dev1036',
+            VERSION:'0.1.dev1187',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

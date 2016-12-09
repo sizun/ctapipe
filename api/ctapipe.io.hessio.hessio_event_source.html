@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>hessio_event_source &mdash; ctapipe v0.1.dev1036</title>
+  <title>hessio_event_source &mdash; ctapipe v0.1.dev1187</title>
   
 
   
@@ -32,9 +32,9 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1036" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.1.dev1187" href="../index.html"/>
         <link rel="up" title="Input/Output (io)" href="../io/index.html"/>
-        <link rel="next" title="RawData" href="ctapipe.io.containers.RawData.html"/>
+        <link rel="next" title="DataContainer" href="ctapipe.io.containers.DataContainer.html"/>
         <link rel="prev" title="CameraGeometry" href="ctapipe.io.camera.CameraGeometry.html"/> 
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.1.dev1036
+                0.1.dev1187
               </div>
             
           
@@ -98,7 +98,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../instrument/index.html">Instrument (<code class="docutils literal"><span class="pre">instrument</span></code>)</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../io/index.html">Input/Output (<code class="docutils literal"><span class="pre">io</span></code>)</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../io/index.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../io/index.html#acces-to-raw-data">Acces to Raw Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io/index.html#container-classes">Container Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io/index.html#access-to-raw-data">Access to Raw Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io/index.html#serialization-of-containers">Serialization of Containers:</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../io/index.html#reference-api">Reference/API</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../io/index.html#module-ctapipe.io.camera">ctapipe.io.camera Module</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../io/index.html#module-ctapipe.io.hessio">ctapipe.io.hessio Module</a><ul class="current">
@@ -106,6 +108,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../io/index.html#module-ctapipe.io.containers">ctapipe.io.containers Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../io/index.html#module-ctapipe.io.serializer">ctapipe.io.serializer Module</a></li>
 </ul>
 </li>
 </ul>
@@ -163,7 +166,7 @@
 <h1>hessio_event_source<a class="headerlink" href="#hessio-event-source" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="ctapipe.io.hessio.hessio_event_source">
-<code class="descclassname">ctapipe.io.hessio.</code><code class="descname">hessio_event_source</code><span class="sig-paren">(</span><em>url</em>, <em>max_events=None</em>, <em>allowed_tels=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/io/hessio.html#hessio_event_source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.io.hessio.hessio_event_source" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">ctapipe.io.hessio.</code><code class="descname">hessio_event_source</code><span class="sig-paren">(</span><em>url</em>, <em>max_events=None</em>, <em>allowed_tels=None</em>, <em>requested_event=None</em>, <em>use_event_id=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/io/hessio.html#hessio_event_source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.io.hessio.hessio_event_source" title="Permalink to this definition">¶</a></dt>
 <dd><p>A generator that streams data from an EventIO/HESSIO MC data file
 (e.g. a standard CTA data file.)</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -179,11 +182,20 @@
 <div><p>maximum number of events to read</p>
 </div></blockquote>
 <p><strong>allowed_tels</strong> : list[int]</p>
-<blockquote class="last">
+<blockquote>
 <div><p>select only a subset of telescope, if None, all are read. This can
 be used for example emulate the final CTA data format, where there
 would be 1 telescope per file (whereas in current monte-carlo,
 they are all interleaved into one file)</p>
+</div></blockquote>
+<p><strong>requested_event</strong> : int</p>
+<blockquote>
+<div><p>Seek to a paricular event index</p>
+</div></blockquote>
+<p><strong>use_event_id</strong> : bool</p>
+<blockquote class="last">
+<div><p>If True ,'requested_event' now seeks for a particular event id instead
+of index</p>
 </div></blockquote>
 </td>
 </tr>
@@ -200,7 +212,7 @@ they are all interleaved into one file)</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ctapipe.io.containers.RawData.html" class="btn btn-neutral float-right" title="RawData" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ctapipe.io.containers.DataContainer.html" class="btn btn-neutral float-right" title="DataContainer" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="ctapipe.io.camera.CameraGeometry.html" class="btn btn-neutral" title="CameraGeometry" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -213,7 +225,7 @@ they are all interleaved into one file)</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, ctapipe developers.
-      Last updated on 04 Jan 2016.
+      Last updated on 09 Dec 2016.
 
     </p>
   </div>
@@ -235,7 +247,7 @@ they are all interleaved into one file)</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1.dev1036',
+            VERSION:'0.1.dev1187',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

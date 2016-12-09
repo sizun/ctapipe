@@ -1,0 +1,56 @@
+
+
+DataContainer
+===================================
+
+.. currentmodule:: ctapipe.io.containers
+
+.. autoclass:: DataContainer
+   :show-inheritance:
+
+   
+
+   
+   
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+   
+      ~DataContainer.count
+      ~DataContainer.dl0
+      ~DataContainer.dl1
+      ~DataContainer.dl2
+      ~DataContainer.inst
+      ~DataContainer.mc
+      ~DataContainer.mcheader
+      ~DataContainer.trig
+
+   
+   
+
+   
+   
+   
+
+   
+   
+
+   .. rubric:: Attributes Documentation
+
+   
+   .. autoattribute:: count
+   .. autoattribute:: dl0
+   .. autoattribute:: dl1
+   .. autoattribute:: dl2
+   .. autoattribute:: inst
+   .. autoattribute:: mc
+   .. autoattribute:: mcheader
+   .. autoattribute:: trig
+
+   
+   
+
+   
+   
+   

@@ -19,6 +19,7 @@ Container
 
    .. autosummary::
    
+      ~Container.attributes
       ~Container.meta
 
    
@@ -31,11 +32,10 @@ Container
 
    .. autosummary::
    
-      ~Container.add_item
       ~Container.as_dict
+      ~Container.disable_attribute_check
       ~Container.items
-      ~Container.to_table
-      ~Container.write
+      ~Container.reset
 
    
    
@@ -46,6 +46,7 @@ Container
    .. rubric:: Attributes Documentation
 
    
+   .. autoattribute:: attributes
    .. autoattribute:: meta
 
    
@@ -57,11 +58,10 @@ Container
    .. rubric:: Methods Documentation
 
    
-   .. automethod:: add_item
    .. automethod:: as_dict
+   .. automethod:: disable_attribute_check
    .. automethod:: items
-   .. automethod:: to_table
-   .. automethod:: write
+   .. automethod:: reset
 
    
    

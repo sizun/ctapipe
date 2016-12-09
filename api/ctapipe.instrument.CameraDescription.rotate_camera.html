@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>rotate_camera &mdash; ctapipe v0.1.dev1036</title>
+  <title>rotate_camera &mdash; ctapipe v0.1.dev1187</title>
   
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1036" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.1.dev1187" href="../index.html"/>
         <link rel="up" title="Instrument (instrument)" href="../instrument/index.html"/>
         <link rel="next" title="Camera" href="ctapipe.instrument.CameraDescription.Camera.html"/>
         <link rel="prev" title="make_rectangular_camera_geometry" href="ctapipe.instrument.CameraDescription.make_rectangular_camera_geometry.html"/> 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.1.dev1036
+                0.1.dev1187
               </div>
             
           
@@ -169,6 +169,11 @@
 specified angle. Modifies the CameraGeometry in-place (so
 after this is called, the pix_x and pix_y arrays are
 rotated.</p>
+<p>Note: This is intended only to correct simulated data that are
+rotated by a fixed angle.  For the more general case of
+correction for camera pointing errors (rotations,
+translations, skews, etc), you should use a true coordinate
+transformation defined in <a class="reference internal" href="../coordinates/index.html#module-ctapipe.coordinates" title="ctapipe.coordinates"><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.coordinates</span></code></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -207,7 +212,7 @@ rotated.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, ctapipe developers.
-      Last updated on 04 Jan 2016.
+      Last updated on 09 Dec 2016.
 
     </p>
   </div>
@@ -229,7 +234,7 @@ rotated.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1.dev1036',
+            VERSION:'0.1.dev1187',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

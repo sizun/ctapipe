@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Container &mdash; ctapipe v0.1.dev1036</title>
+  <title>Container &mdash; ctapipe v0.1.dev1187</title>
   
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1036" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.1.dev1187" href="../index.html"/>
         <link rel="up" title="Core Structures and Base Classes (core)" href="../core/index.html"/>
         <link rel="next" title="Tool" href="ctapipe.core.Tool.html"/>
         <link rel="prev" title="Component" href="ctapipe.core.Component.html"/> 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.1.dev1036
+                0.1.dev1187
               </div>
             
           
@@ -161,48 +161,51 @@
 <h1>Container<a class="headerlink" href="#container" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="ctapipe.core.Container">
-<em class="property">class </em><code class="descclassname">ctapipe.core.</code><code class="descname">Container</code><span class="sig-paren">(</span><em>name='Container'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/core/container.html#Container"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.core.Container" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">ctapipe.core.</code><code class="descname">Container</code><a class="reference internal" href="../_modules/ctapipe/core/container.html#Container"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.core.Container" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Generic class that can hold and accumulate data to be passed
 between Components.</p>
 <p>The purpose of this class is to provide a flexible data structure
 that works a bit like a dict or blank Python class, but prevents
-the user from accessing members that have not been defined
-a-priori (more like a C struct).  Generally, one can make a
-sub-class and &quot;Register&quot; all of the members that should be there
-in the <code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code> method by calling <a class="reference internal" href="#ctapipe.core.Container.add_item" title="ctapipe.core.Container.add_item"><code class="xref py py-obj docutils literal"><span class="pre">add_item</span></code></a>.</p>
-<p>Container members can be accessed like a dict <code class="xref py py-obj docutils literal"><span class="pre">container['item']</span>
-<span class="pre">or</span> <span class="pre">with</span> <span class="pre">`continer.item</span></code> syntax.  You can also iterate over the
-member names (useful for serialization). However, new data cannot
-be added arbitrarily. One must call
-<a class="reference internal" href="#ctapipe.core.Container.add_item" title="ctapipe.core.Container.add_item"><code class="xref py py-obj docutils literal"><span class="pre">add_item</span></code></a> to add a new variable to the
-Container, otherwise an <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.5)"><code class="xref py py-obj docutils literal"><span class="pre">AttributeError</span></code></a> will be thrown.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name: str</strong></p>
-<blockquote>
-<div><p>name of container instance</p>
-</div></blockquote>
-<p><strong>kwargs: key=value</strong></p>
-<blockquote class="last">
-<div><p>initial data (<a class="reference internal" href="#ctapipe.core.Container.add_item" title="ctapipe.core.Container.add_item"><code class="xref py py-obj docutils literal"><span class="pre">add_item</span></code></a> is called automatically for each)</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Examples</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">Container</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
-<span class="go">3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span>
-<span class="go">3</span>
+the user from accessing members that have not been defined a
+priori (more like a C struct), and also keeps metdata information
+such as a description, defaults, and units for each item in the
+container.</p>
+<p>Containers can transform the data into a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></a> using the `
+Container.as_dict()` method.  This allows them to be written to an
+output table for example, where each Item defines a column. The
+<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></a> conversion can be made recursively and even flattened so
+that a nested set of <code class="xref py py-obj docutils literal"><span class="pre">Containers</span></code> can be translated into a set of
+columns in a flat table without naming conflicts (the name of the
+parent Item is pre-pended).</p>
+<p>To use this class, all members must be defined as <code class="xref py py-obj docutils literal"><span class="pre">Item`s</span> <span class="pre">with</span>
+<span class="pre">default</span> <span class="pre">values</span> <span class="pre">specified.</span>&#160; <span class="pre">For</span> <span class="pre">hierarchical</span> <span class="pre">data</span> <span class="pre">structures,</span> <span class="pre">Items</span>
+<span class="pre">can</span> <span class="pre">use</span> <span class="pre">`Container</span></code> subclasses or a <a class="reference internal" href="ctapipe.core.Map.html#ctapipe.core.Map" title="ctapipe.core.Map"><code class="xref py py-obj docutils literal"><span class="pre">Map</span></code></a> as the default value.</p>
+<p>You should not make class hierarchies of Containers and only ever
+subclass the Container base class</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>   <span class="k">class</span> <span class="nc">MyContainer</span><span class="p">(</span><span class="n">Container</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>       <span class="n">x</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="s2">&quot;The X value&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>       <span class="n">energy</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Energy measurement&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">TeV</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="n">cont</span> <span class="o">=</span> <span class="n">MyContainer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="nb">print</span><span class="p">(</span><span class="n">cont</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="go">100</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="c1"># metdata will become header keywords in an output file:</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="n">cont</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s1">&#39;KEY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>  
 </pre></div>
 </div>
+<p><code class="xref py py-obj docutils literal"><span class="pre">Items</span></code> inside <code class="xref py py-obj docutils literal"><span class="pre">Containers</span></code> can contain instances of other
+<code class="xref py py-obj docutils literal"><span class="pre">Containers</span></code>, to allow for a hierarchy of containers, and can also
+contain a <a class="reference internal" href="ctapipe.core.Map.html#ctapipe.core.Map" title="ctapipe.core.Map"><code class="xref py py-obj docutils literal"><span class="pre">Map</span></code></a> for the case where one wants e.g. a set of
+sub-classes indexed by a value like the <code class="xref py py-obj docutils literal"><span class="pre">telescope_id</span></code>. Examples
+of this can be found in <a class="reference internal" href="../io/index.html#module-ctapipe.io.containers" title="ctapipe.io.containers"><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.io.containers</span></code></a></p>
+<p><code class="xref py py-obj docutils literal"><span class="pre">Containers</span></code> work by shadowing all class variables (which must be
+instances of <a class="reference internal" href="ctapipe.core.Item.html#ctapipe.core.Item" title="ctapipe.core.Item"><code class="xref py py-obj docutils literal"><span class="pre">Item</span></code></a>) with instance variables of the same name the
+hold the value expected. If <a class="reference internal" href="#ctapipe.core.Container.reset" title="ctapipe.core.Container.reset"><code class="xref py py-obj docutils literal"><span class="pre">Container.reset()</span></code></a> is called, all
+instance variables are reset to their default values as defined in
+the class.</p>
+<p>Finally, <code class="xref py py-obj docutils literal"><span class="pre">Containers</span></code> can have associated metadata via their
+<a class="reference internal" href="#ctapipe.core.Container.meta" title="ctapipe.core.Container.meta"><code class="xref py py-obj docutils literal"><span class="pre">meta</span></code></a> attribute, which is a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></a> of keywords to values.</p>
 <p class="rubric">Attributes Summary</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -210,8 +213,11 @@ Container, otherwise an <a class="reference external" href="https://docs.python.
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.core.Container.meta" title="ctapipe.core.Container.meta"><code class="xref py py-obj docutils literal"><span class="pre">meta</span></code></a></td>
-<td>metadata associated with this container</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.core.Container.attributes" title="ctapipe.core.Container.attributes"><code class="xref py py-obj docutils literal"><span class="pre">attributes</span></code></a></td>
+<td>a dict of the Item metadata of each attribute.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.core.Container.meta" title="ctapipe.core.Container.meta"><code class="xref py py-obj docutils literal"><span class="pre">meta</span></code></a></td>
+<td>metadata key/values associated with this Container.</td>
 </tr>
 </tbody>
 </table>
@@ -222,61 +228,78 @@ Container, otherwise an <a class="reference external" href="https://docs.python.
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.core.Container.add_item" title="ctapipe.core.Container.add_item"><code class="xref py py-obj docutils literal"><span class="pre">add_item</span></code></a>(name[,&nbsp;value])</td>
-<td>Add a new item of data to this Container, initialized to None by default, or value if specified.</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.core.Container.as_dict" title="ctapipe.core.Container.as_dict"><code class="xref py py-obj docutils literal"><span class="pre">as_dict</span></code></a>([recursive,&nbsp;flatten])</td>
+<td>convert the <a class="reference internal" href="#ctapipe.core.Container" title="ctapipe.core.Container"><code class="xref py py-obj docutils literal"><span class="pre">Container</span></code></a> into a dictionary</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.core.Container.as_dict" title="ctapipe.core.Container.as_dict"><code class="xref py py-obj docutils literal"><span class="pre">as_dict</span></code></a>()</td>
-<td>Creates a dictionary of Container items unrolling recursively nested containers.</td>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.core.Container.disable_attribute_check" title="ctapipe.core.Container.disable_attribute_check"><code class="xref py py-obj docutils literal"><span class="pre">disable_attribute_check</span></code></a>()</td>
+<td>Globally turn off attribute checking for all Containers, which provides a ~5-10x speed up for setting attributes.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#ctapipe.core.Container.items" title="ctapipe.core.Container.items"><code class="xref py py-obj docutils literal"><span class="pre">items</span></code></a>()</td>
-<td>Iterate over pairs of key, value.</td>
+<td>dict-like access, but skip any hidden items like _metadata</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.core.Container.to_table" title="ctapipe.core.Container.to_table"><code class="xref py py-obj docutils literal"><span class="pre">to_table</span></code></a>()</td>
-<td>Create Table from Container</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.core.Container.write" title="ctapipe.core.Container.write"><code class="xref py py-obj docutils literal"><span class="pre">write</span></code></a>(*args,&nbsp;**kwargs)</td>
-<td>Write table using astropy.table write method</td>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.core.Container.reset" title="ctapipe.core.Container.reset"><code class="xref py py-obj docutils literal"><span class="pre">reset</span></code></a>([recursive])</td>
+<td>set all values back to their default values</td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
+<dt id="ctapipe.core.Container.attributes">
+<code class="descname">attributes</code><a class="headerlink" href="#ctapipe.core.Container.attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>a dict of the Item metadata of each attribute.</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="ctapipe.core.Container.meta">
 <code class="descname">meta</code><a class="headerlink" href="#ctapipe.core.Container.meta" title="Permalink to this definition">¶</a></dt>
-<dd><p>metadata associated with this container</p>
+<dd><p>metadata key/values associated with this Container.</p>
+<p>When written to an output file, these will become headers, so
+should represent data that does not change after the
+<a class="reference internal" href="#ctapipe.core.Container" title="ctapipe.core.Container"><code class="xref py py-obj docutils literal"><span class="pre">Container</span></code></a> is constructed.</p>
 </dd></dl>
 
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
-<dt id="ctapipe.core.Container.add_item">
-<code class="descname">add_item</code><span class="sig-paren">(</span><em>name</em>, <em>value=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/core/container.html#Container.add_item"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.core.Container.add_item" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a new item of data to this Container, initialized to None by
-default, or value if specified.</p>
+<dt id="ctapipe.core.Container.as_dict">
+<code class="descname">as_dict</code><span class="sig-paren">(</span><em>recursive=False</em>, <em>flatten=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/core/container.html#Container.as_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.core.Container.as_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert the <a class="reference internal" href="#ctapipe.core.Container" title="ctapipe.core.Container"><code class="xref py py-obj docutils literal"><span class="pre">Container</span></code></a> into a dictionary</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>recursive: bool</strong></p>
+<blockquote>
+<div><p>sub-Containers should also be converted to dicts</p>
+</div></blockquote>
+<p><strong>flatten: type</strong></p>
+<blockquote class="last">
+<div><p>return a flat dictionary, with any sub-item keys generated
+by appending the sub-Container name.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="method">
-<dt id="ctapipe.core.Container.as_dict">
-<code class="descname">as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/core/container.html#Container.as_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.core.Container.as_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a dictionary of Container items unrolling recursively
-nested containers.</p>
+<dl class="classmethod">
+<dt id="ctapipe.core.Container.disable_attribute_check">
+<em class="property">classmethod </em><code class="descname">disable_attribute_check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/core/container.html#Container.disable_attribute_check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.core.Container.disable_attribute_check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Globally turn off attribute checking for all Containers,
+which provides a ~5-10x speed up for setting attributes.
+This may be used e.g. after code is tested to speed up operation.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="ctapipe.core.Container.items">
 <code class="descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/core/container.html#Container.items"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.core.Container.items" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterate over pairs of key, value. Just like the dictionary method</p>
+<dd><p>dict-like access, but skip any hidden items like _metadata</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="ctapipe.core.Container.to_table">
-<code class="descname">to_table</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/core/container.html#Container.to_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.core.Container.to_table" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create Table from Container</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="ctapipe.core.Container.write">
-<code class="descname">write</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/core/container.html#Container.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.core.Container.write" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write table using astropy.table write method</p>
+<dt id="ctapipe.core.Container.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><em>recursive=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/core/container.html#Container.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.core.Container.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>set all values back to their default values</p>
 </dd></dl>
 
 </dd></dl>
@@ -303,7 +326,7 @@ nested containers.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, ctapipe developers.
-      Last updated on 04 Jan 2016.
+      Last updated on 09 Dec 2016.
 
     </p>
   </div>
@@ -325,7 +348,7 @@ nested containers.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1.dev1036',
+            VERSION:'0.1.dev1187',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

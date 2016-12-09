@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.analysis.camera.chargeresolution &mdash; ctapipe v0.1.dev1036</title>
+  <title>ctapipe.analysis.camera.chargeresolution &mdash; ctapipe v0.1.dev1187</title>
   
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1036" href="../../../../index.html"/>
+    <link rel="top" title="ctapipe v0.1.dev1187" href="../../../../index.html"/>
         <link rel="up" title="Module code" href="../../../index.html"/> 
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.1.dev1036
+                0.1.dev1187
               </div>
             
           
@@ -255,7 +255,7 @@
 
                 <span class="c1"># Check events have true charge included</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">mc</span><span class="o">.</span><span class="n">tel</span><span class="p">[</span><span class="n">tels</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">photo_electrons</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">mc</span><span class="o">.</span><span class="n">tel</span><span class="p">[</span><span class="n">tels</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">photo_electron_image</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
                         <span class="k">raise</span> <span class="ne">KeyError</span>
                 <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                     <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s1">&#39;[chargeres] Source does not &#39;</span>
@@ -263,8 +263,8 @@
                     <span class="k">raise</span>
 
             <span class="k">for</span> <span class="n">telid</span> <span class="ow">in</span> <span class="n">tels</span><span class="p">:</span>
-                <span class="n">true_charge</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">mc</span><span class="o">.</span><span class="n">tel</span><span class="p">[</span><span class="n">telid</span><span class="p">]</span><span class="o">.</span><span class="n">photo_electrons</span>
-                <span class="n">measured_charge</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">dl1</span><span class="o">.</span><span class="n">tel</span><span class="p">[</span><span class="n">telid</span><span class="p">]</span><span class="o">.</span><span class="n">pe_charge</span>
+                <span class="n">true_charge</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">mc</span><span class="o">.</span><span class="n">tel</span><span class="p">[</span><span class="n">telid</span><span class="p">]</span><span class="o">.</span><span class="n">photo_electron_image</span>
+                <span class="n">measured_charge</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">dl1</span><span class="o">.</span><span class="n">tel</span><span class="p">[</span><span class="n">telid</span><span class="p">]</span><span class="o">.</span><span class="n">calibrated_image</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">add_charges</span><span class="p">(</span><span class="n">true_charge</span><span class="p">,</span> <span class="n">measured_charge</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ChargeResolution.get_charge_resolution"><a class="viewcode-back" href="../../../../api/ctapipe.analysis.camera.ChargeResolution.html#ctapipe.analysis.camera.ChargeResolution.get_charge_resolution">[docs]</a>    <span class="k">def</span> <span class="nf">get_charge_resolution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -446,7 +446,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, ctapipe developers.
-      Last updated on 04 Jan 2016.
+      Last updated on 09 Dec 2016.
 
     </p>
   </div>
@@ -468,7 +468,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'0.1.dev1036',
+            VERSION:'0.1.dev1187',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

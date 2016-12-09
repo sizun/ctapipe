@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CameraFrame &mdash; ctapipe v0.1.dev1036</title>
+  <title>CameraFrame &mdash; ctapipe v0.1.dev1187</title>
   
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1036" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.1.dev1187" href="../index.html"/>
         <link rel="up" title="Coordinates (coordinates)" href="../coordinates/index.html"/>
         <link rel="next" title="GroundFrame" href="ctapipe.coordinates.GroundFrame.html"/>
         <link rel="prev" title="project_to_ground" href="ctapipe.coordinates.project_to_ground.html"/> 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.1.dev1036
+                0.1.dev1187
               </div>
             
           
@@ -190,21 +190,51 @@ used to describe the positions of the pixels in the focal plane</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.coordinates.CameraFrame.default_representation" title="ctapipe.coordinates.CameraFrame.default_representation"><code class="xref py py-obj docutils literal"><span class="pre">default_representation</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.coordinates.CameraFrame.array_direction" title="ctapipe.coordinates.CameraFrame.array_direction"><code class="xref py py-obj docutils literal"><span class="pre">array_direction</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.coordinates.CameraFrame.frame_specific_representation_info" title="ctapipe.coordinates.CameraFrame.frame_specific_representation_info"><code class="xref py py-obj docutils literal"><span class="pre">frame_specific_representation_info</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.coordinates.CameraFrame.default_representation" title="ctapipe.coordinates.CameraFrame.default_representation"><code class="xref py py-obj docutils literal"><span class="pre">default_representation</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.coordinates.CameraFrame.name" title="ctapipe.coordinates.CameraFrame.name"><code class="xref py py-obj docutils literal"><span class="pre">name</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.coordinates.CameraFrame.focal_length" title="ctapipe.coordinates.CameraFrame.focal_length"><code class="xref py py-obj docutils literal"><span class="pre">focal_length</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.coordinates.CameraFrame.frame_attributes" title="ctapipe.coordinates.CameraFrame.frame_attributes"><code class="xref py py-obj docutils literal"><span class="pre">frame_attributes</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.coordinates.CameraFrame.frame_specific_representation_info" title="ctapipe.coordinates.CameraFrame.frame_specific_representation_info"><code class="xref py py-obj docutils literal"><span class="pre">frame_specific_representation_info</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.coordinates.CameraFrame.name" title="ctapipe.coordinates.CameraFrame.name"><code class="xref py py-obj docutils literal"><span class="pre">name</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.coordinates.CameraFrame.pointing_direction" title="ctapipe.coordinates.CameraFrame.pointing_direction"><code class="xref py py-obj docutils literal"><span class="pre">pointing_direction</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.coordinates.CameraFrame.rotation" title="ctapipe.coordinates.CameraFrame.rotation"><code class="xref py py-obj docutils literal"><span class="pre">rotation</span></code></a></td>
 <td></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
+<dt id="ctapipe.coordinates.CameraFrame.array_direction">
+<code class="descname">array_direction</code><em class="property"> = None</em><a class="headerlink" href="#ctapipe.coordinates.CameraFrame.array_direction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="ctapipe.coordinates.CameraFrame.default_representation">
 <code class="descname">default_representation</code><a class="headerlink" href="#ctapipe.coordinates.CameraFrame.default_representation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ctapipe.coordinates.CameraFrame.focal_length">
+<code class="descname">focal_length</code><em class="property"> = None</em><a class="headerlink" href="#ctapipe.coordinates.CameraFrame.focal_length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ctapipe.coordinates.CameraFrame.frame_attributes">
+<code class="descname">frame_attributes</code><em class="property"> = OrderedDict([('focal_length', &lt;astropy.coordinates.baseframe.FrameAttribute object&gt;), ('rotation', &lt;astropy.coordinates.baseframe.FrameAttribute object&gt;), ('pointing_direction', &lt;astropy.coordinates.baseframe.FrameAttribute object&gt;), ('array_direction', &lt;astropy.coordinates.baseframe.FrameAttribute object&gt;)])</em><a class="headerlink" href="#ctapipe.coordinates.CameraFrame.frame_attributes" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -215,6 +245,16 @@ used to describe the positions of the pixels in the focal plane</p>
 <dl class="attribute">
 <dt id="ctapipe.coordinates.CameraFrame.name">
 <code class="descname">name</code><em class="property"> = 'cameraframe'</em><a class="headerlink" href="#ctapipe.coordinates.CameraFrame.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ctapipe.coordinates.CameraFrame.pointing_direction">
+<code class="descname">pointing_direction</code><em class="property"> = None</em><a class="headerlink" href="#ctapipe.coordinates.CameraFrame.pointing_direction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ctapipe.coordinates.CameraFrame.rotation">
+<code class="descname">rotation</code><em class="property"> = &lt;Quantity 0.0 deg&gt;</em><a class="headerlink" href="#ctapipe.coordinates.CameraFrame.rotation" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -241,7 +281,7 @@ used to describe the positions of the pixels in the focal plane</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, ctapipe developers.
-      Last updated on 04 Jan 2016.
+      Last updated on 09 Dec 2016.
 
     </p>
   </div>
@@ -263,7 +303,7 @@ used to describe the positions of the pixels in the focal plane</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1.dev1036',
+            VERSION:'0.1.dev1187',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
