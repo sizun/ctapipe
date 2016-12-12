@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting Started For Developers &mdash; ctapipe v0.1.dev1187</title>
+  <title>Getting Started For Developers &mdash; ctapipe v0.1.dev1190</title>
   
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1187" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.1.dev1190" href="../index.html"/>
         <link rel="next" title="Development Guidelines" href="../development/index.html"/>
         <link rel="prev" title="CTA Experimental Pipeline Framework (ctapipe)" href="../index.html"/> 
 
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.dev1187
+                0.1.dev1190
               </div>
             
           
@@ -170,19 +170,13 @@ choose another name if you like)</p>
 <p>Next, switch to this new virtual environment and install some other useful tools for development:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">source</span> activate cta
 
-conda install ipython ipython-notebook ipython-qtconsole spyder pyflakes traitlets
+conda install pyhessio ipython ipython-notebook ipython-qtconsole spyder pyflakes traitlets
 conda install -c conda-forge autopep8 graphviz
 </pre></div>
 </div>
 <p>Next, you should create a directory where you can store the software you check out. For example:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>mkdir ctasoft
 <span class="nb">cd</span> ctasoft
-</pre></div>
-</div>
-<p>If you want to access SimTelArrray data files (recommended), you must first install the <code class="xref py py-obj docutils literal"><span class="pre">pyhessio</span></code> package.  This can be done by:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/cta-observatory/pyhessio
-conda build pyhessio
-conda install --use-local pyhessio
 </pre></div>
 </div>
 </div>
@@ -283,7 +277,7 @@ issue pull-requests.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, ctapipe developers.
-      Last updated on 09 Dec 2016.
+      Last updated on 12 Dec 2016.
 
     </p>
   </div>
@@ -305,7 +299,7 @@ issue pull-requests.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1.dev1187',
+            VERSION:'0.1.dev1190',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
