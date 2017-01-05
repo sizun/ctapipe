@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.image.toymodel &mdash; ctapipe v0.1.dev1190</title>
+  <title>ctapipe.image.toymodel &mdash; ctapipe v0.1.dev1212</title>
   
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1190" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.1.dev1212" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.1.dev1190
+                0.1.dev1212
               </div>
             
           
@@ -184,7 +184,7 @@
 <span class="sd">    length : float</span>
 <span class="sd">        length of shower (major axis)</span>
 <span class="sd">    psi : convertable to `astropy.coordinates.Angle`</span>
-<span class="sd">        rotation angle about the centroid (0=up)</span>
+<span class="sd">        rotation angle about the centroid (0=x-axis)</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -192,7 +192,7 @@
 <span class="sd">    a `scipy.stats` object</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">aligned_covariance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">width</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="p">]])</span>
+    <span class="n">aligned_covariance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">length</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">]])</span>
     <span class="c1"># rotate by psi angle: C&#39; = R C R+</span>
     <span class="n">rotation</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">rotation_matrix_2d</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span>
     <span class="n">rotated_covariance</span> <span class="o">=</span> <span class="n">rotation</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">aligned_covariance</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">rotation</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
@@ -243,8 +243,8 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, ctapipe developers.
-      Last updated on 12 Dec 2016.
+        &copy; Copyright 2017, ctapipe developers.
+      Last updated on 05 Jan 2017.
 
     </p>
   </div>
@@ -266,7 +266,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.1.dev1190',
+            VERSION:'0.1.dev1212',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

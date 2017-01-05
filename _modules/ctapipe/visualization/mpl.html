@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.visualization.mpl &mdash; ctapipe v0.1.dev1190</title>
+  <title>ctapipe.visualization.mpl &mdash; ctapipe v0.1.dev1212</title>
   
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1190" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.1.dev1212" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.1.dev1190
+                0.1.dev1212
               </div>
             
           
@@ -482,14 +482,14 @@
 <span class="sd">        width: float</span>
 <span class="sd">            minor axis</span>
 <span class="sd">        angle: float</span>
-<span class="sd">            rotation angle wrt &quot;up&quot; about the centroid, clockwise, in radians</span>
+<span class="sd">            rotation angle wrt x-axis about the centroid, anticlockwise, in radians</span>
 <span class="sd">        asymmetry: float</span>
 <span class="sd">            3rd-order moment for directionality if known</span>
 <span class="sd">        kwargs:</span>
 <span class="sd">            any MatPlotLib style arguments to pass to the Ellipse patch</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ellipse</span> <span class="o">=</span> <span class="n">Ellipse</span><span class="p">(</span><span class="n">xy</span><span class="o">=</span><span class="n">centroid</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">length</span><span class="p">,</span>
+        <span class="n">ellipse</span> <span class="o">=</span> <span class="n">Ellipse</span><span class="p">(</span><span class="n">xy</span><span class="o">=</span><span class="n">centroid</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">length</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
                           <span class="n">angle</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">ellipse</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
@@ -506,11 +506,19 @@
 <span class="sd">            any style keywords to pass to matplotlib (e.g. color=&#39;red&#39;</span>
 <span class="sd">            or linewidth=6)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">el</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_ellipse</span><span class="p">(</span><span class="n">centroid</span><span class="o">=</span><span class="p">(</span><span class="n">momparams</span><span class="o">.</span><span class="n">cen_x</span><span class="p">,</span> <span class="n">momparams</span><span class="o">.</span><span class="n">cen_y</span><span class="p">),</span>
-                              <span class="n">length</span><span class="o">=</span><span class="n">momparams</span><span class="o">.</span><span class="n">length</span><span class="p">,</span>
-                              <span class="n">width</span><span class="o">=</span><span class="n">momparams</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="n">momparams</span><span class="o">.</span><span class="n">psi</span><span class="p">,</span>
+
+        <span class="c1"># strip off any units</span>
+        <span class="n">cen_x</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">momparams</span><span class="o">.</span><span class="n">cen_x</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">cen_y</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">momparams</span><span class="o">.</span><span class="n">cen_y</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">momparams</span><span class="o">.</span><span class="n">length</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">momparams</span><span class="o">.</span><span class="n">width</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+
+
+        <span class="n">el</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_ellipse</span><span class="p">(</span><span class="n">centroid</span><span class="o">=</span><span class="p">(</span><span class="n">cen_x</span><span class="p">,</span> <span class="n">cen_y</span><span class="p">),</span>
+                              <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="p">,</span>
+                              <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="n">momparams</span><span class="o">.</span><span class="n">psi</span><span class="o">.</span><span class="n">rad</span><span class="p">,</span>
                               <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">momparams</span><span class="o">.</span><span class="n">cen_x</span><span class="p">,</span> <span class="n">momparams</span><span class="o">.</span><span class="n">cen_y</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">cen_x</span><span class="p">,</span> <span class="n">cen_y</span><span class="p">,</span>
                        <span class="p">(</span><span class="s2">&quot;(</span><span class="si">{:.02f}</span><span class="s2">,</span><span class="si">{:.02f}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span>
                         <span class="s2">&quot;[w=</span><span class="si">{:.02f}</span><span class="s2">,l=</span><span class="si">{:.02f}</span><span class="s2">]&quot;</span><span class="p">)</span>
                        <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">momparams</span><span class="o">.</span><span class="n">cen_x</span><span class="p">,</span>
@@ -602,8 +610,8 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, ctapipe developers.
-      Last updated on 12 Dec 2016.
+        &copy; Copyright 2017, ctapipe developers.
+      Last updated on 05 Jan 2017.
 
     </p>
   </div>
@@ -625,7 +633,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.1.dev1190',
+            VERSION:'0.1.dev1212',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

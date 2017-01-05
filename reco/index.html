@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reconstruction (reco) &mdash; ctapipe v0.1.dev1190</title>
+  <title>Reconstruction (reco) &mdash; ctapipe v0.1.dev1212</title>
   
 
   
@@ -32,8 +32,8 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1190" href="../index.html"/>
-        <link rel="next" title="Utilities (utils)" href="../utils/index.html"/>
+    <link rel="top" title="ctapipe v0.1.dev1212" href="../index.html"/>
+        <link rel="next" title="MEst" href="../api/ctapipe.reco.MEst.html"/>
         <link rel="prev" title="Serializer" href="../api/ctapipe.io.serializer.Serializer.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.1.dev1190
+                0.1.dev1212
               </div>
             
           
@@ -99,7 +99,11 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reconstruction (<code class="docutils literal"><span class="pre">reco</span></code>)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reference-api">Reference/API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.reco">ctapipe.reco Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.reco">ctapipe.reco Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#classes">Classes</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -160,6 +164,43 @@
 <h2>Reference/API<a class="headerlink" href="#reference-api" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-ctapipe.reco">
 <span id="ctapipe-reco-package"></span><h3>ctapipe.reco Package<a class="headerlink" href="#module-ctapipe.reco" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="functions">
+<h4>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.reco.MEst.html#ctapipe.reco.MEst" title="ctapipe.reco.MEst"><code class="xref py py-obj docutils literal"><span class="pre">MEst</span></code></a>(origin,&nbsp;circles,&nbsp;weights)</td>
+<td>calculates the M-Estimator: a modified χ² that becomes</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.reco.dist_to_traces.html#ctapipe.reco.dist_to_traces" title="ctapipe.reco.dist_to_traces"><code class="xref py py-obj docutils literal"><span class="pre">dist_to_traces</span></code></a>(core,&nbsp;circles)</td>
+<td>This function calculates the M-Estimator from the distances of the suggested core position to all traces of the given GreatCircles.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="classes">
+<h4>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.reco.FitGammaHillas.html#ctapipe.reco.FitGammaHillas" title="ctapipe.reco.FitGammaHillas"><code class="xref py py-obj docutils literal"><span class="pre">FitGammaHillas</span></code></a>()</td>
+<td>class that reconstructs the direction of an atmospheric shower</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.reco.RecoShowerGeomAlgorithm.html#ctapipe.reco.RecoShowerGeomAlgorithm" title="ctapipe.reco.RecoShowerGeomAlgorithm"><code class="xref py py-obj docutils literal"><span class="pre">RecoShowerGeomAlgorithm</span></code></a>([parent])</td>
+<td>This is the base class from which all direction reconstruction</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.reco.TooFewTelescopesException.html#ctapipe.reco.TooFewTelescopesException" title="ctapipe.reco.TooFewTelescopesException"><code class="xref py py-obj docutils literal"><span class="pre">TooFewTelescopesException</span></code></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -171,7 +212,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../utils/index.html" class="btn btn-neutral float-right" title="Utilities (utils)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../api/ctapipe.reco.MEst.html" class="btn btn-neutral float-right" title="MEst" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../api/ctapipe.io.serializer.Serializer.html" class="btn btn-neutral" title="Serializer" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -183,8 +224,8 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, ctapipe developers.
-      Last updated on 12 Dec 2016.
+        &copy; Copyright 2017, ctapipe developers.
+      Last updated on 05 Jan 2017.
 
     </p>
   </div>
@@ -206,7 +247,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1.dev1190',
+            VERSION:'0.1.dev1212',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
