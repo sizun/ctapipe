@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.image.hillas &mdash; ctapipe v0.1.dev1212</title>
+  <title>ctapipe.image.hillas &mdash; ctapipe v0.1.dev1214</title>
   
 
   
@@ -32,7 +32,7 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1212" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.1.dev1214" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.1.dev1212
+                0.1.dev1214
               </div>
             
           
@@ -164,7 +164,8 @@
 
 <span class="sd">CHANGE LOG:</span>
 <span class="sd">===========</span>
-<span class="sd">* MP: Speed comparison for an image in a 960 pixel camera for image created with &quot;mock&quot;,</span>
+<span class="sd">* MP: Speed comparison for an image in a 960 pixel camera for image created with &quot;mock&quot;::</span>
+
 <span class="sd">    %timeit -n 10000</span>
 <span class="sd">    hillas_parameters_1(pix_x, pix_y, image, higherMoments=True)                        best of 3:     598 µs per loop</span>
 <span class="sd">    hillas_parameters_1(pix_x, pix_y, image, higherMoments=False)                       best of 3:     391 µs per loop</span>
@@ -182,12 +183,16 @@
 <span class="sd">    hillas_parameters_4(pix_x, pix_y, image, higherMoments=False, recalculate_pixels=True)       best of 3:      70.4 µs per loop</span>
 <span class="sd">    hillas_parameters_4(pix_x, pix_y, image, higherMoments=False, recalculate_pixels=False)      best of 3:      62.7 µs per loop</span>
 
-<span class="sd">    (any way to compare compiled versions?)</span>
 
-<span class="sd">* MP: all routines tested with +/- combinations and x/y swaps of &quot;mini-camera&quot;</span>
+<span class="sd">(any way to compare compiled versions?)</span>
+
+<span class="sd">* MP: all routines tested with +/- combinations and x/y swaps of &quot;mini-camera&quot;::</span>
+
 <span class="sd">        pix_x = array([1.1, 1.1, 1, 1, 1, 1, 1, 1])</span>
 <span class="sd">        pix_y = array([0, 1, 2, 3, 4, 5, 6, 7])</span>
 <span class="sd">        image = array([0., 10, 3, 5, 7, 6, 2, 4 ])</span>
+
+
 <span class="sd">    TODO: add this as a test, with known results (change sign of psi where needed):</span>
 <span class="sd">        (MomentParameters(size=37.0, cen_x=1.027027027027027, cen_y=3.4864864864864864,</span>
 <span class="sd">        length=1.9951647036522218, width=0.028933760477638449, r=3.6346076177074274,</span>
@@ -257,8 +262,11 @@
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;MomentParameters&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;HighOrderMomentParameters&#39;</span><span class="p">,</span>
     <span class="s1">&#39;hillas_parameters&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;hillas_parameters_1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;hillas_parameters_2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;hillas_parameters_3&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;hillas_parameters_4&#39;</span><span class="p">,</span>
     <span class="s1">&#39;HillasParameterizationError&#39;</span><span class="p">,</span>
 <span class="p">]</span>
 
@@ -268,11 +276,11 @@
 <span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">HillasParameterizationError</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
-    <span class="k">pass</span>
+<div class="viewcode-block" id="HillasParameterizationError"><a class="viewcode-back" href="../../../api/ctapipe.image.hillas.HillasParameterizationError.html#ctapipe.image.HillasParameterizationError">[docs]</a><span class="k">class</span> <span class="nc">HillasParameterizationError</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
+    <span class="k">pass</span></div>
 
 
-<span class="k">def</span> <span class="nf">hillas_parameters_1</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="hillas_parameters_1"><a class="viewcode-back" href="../../../api/ctapipe.image.hillas_parameters_1.html#ctapipe.image.hillas_parameters_1">[docs]</a><span class="k">def</span> <span class="nf">hillas_parameters_1</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute Hillas parameters for a given shower image.</span>
 
 <span class="sd">    Reference: Appendix of the Whipple Crab paper Weekes et al. (1998) /</span>
@@ -290,8 +298,6 @@
 <span class="sd">        Pixel y-coordinate</span>
 <span class="sd">    image : array_like</span>
 <span class="sd">        Pixel values corresponding</span>
-<span class="sd">    higherMoments : Boolean (default True)</span>
-<span class="sd">        Calculate also higher moments</span>
 <span class="sd">    recalculate_pixels : Boolean (default True)</span>
 <span class="sd">        Recalculate the pixel higher multiples (e.g., if pixels move (!) or</span>
 <span class="sd">        pixel list changes between calls)</span>
@@ -406,7 +412,7 @@
                              <span class="n">psi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">delta</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span>
                              <span class="n">miss</span><span class="o">=</span><span class="n">miss</span><span class="p">,</span>
                              <span class="n">skewness</span><span class="o">=</span><span class="n">skewness</span><span class="p">,</span>
-                            <span class="n">kurtosis</span><span class="o">=</span><span class="n">kurtosis</span><span class="p">)</span>
+                            <span class="n">kurtosis</span><span class="o">=</span><span class="n">kurtosis</span><span class="p">)</span></div>
 
 <span class="k">def</span> <span class="nf">static_pix</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Hold static variables for a given camera&#39;s pixel positions,</span>
@@ -448,7 +454,7 @@
                       <span class="n">static_pix</span><span class="o">.</span><span class="n">pixdata</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">*</span> <span class="n">static_pix</span><span class="o">.</span><span class="n">pixdata</span><span class="p">[</span><span class="mi">4</span><span class="p">]])</span>
 
 
-<span class="k">def</span> <span class="nf">hillas_parameters_2</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="hillas_parameters_2"><a class="viewcode-back" href="../../../api/ctapipe.image.hillas_parameters_2.html#ctapipe.image.hillas_parameters_2">[docs]</a><span class="k">def</span> <span class="nf">hillas_parameters_2</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute Hillas parameters for a given shower image.</span>
 
 <span class="sd">    Alternate implementation of `hillas_parameters` ...</span>
@@ -604,10 +610,10 @@
                             <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">rr</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
                             <span class="n">phi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">phi</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span> <span class="n">psi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">psi</span><span class="p">),</span>
                             <span class="n">miss</span><span class="o">=</span><span class="n">miss</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span> <span class="n">skewness</span><span class="o">=</span><span class="n">skewness</span><span class="p">,</span>
-                            <span class="n">kurtosis</span><span class="o">=</span><span class="n">kurtosis</span><span class="p">)</span>
+                            <span class="n">kurtosis</span><span class="o">=</span><span class="n">kurtosis</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">hillas_parameters_3</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="hillas_parameters_3"><a class="viewcode-back" href="../../../api/ctapipe.image.hillas_parameters_3.html#ctapipe.image.hillas_parameters_3">[docs]</a><span class="k">def</span> <span class="nf">hillas_parameters_3</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute Hillas parameters for a given shower image.</span>
 
 <span class="sd">    MP: probably better to use Whipple Reynolds et al 1993 paper:</span>
@@ -771,7 +777,7 @@
     <span class="k">return</span> <span class="n">MomentParameters</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">cen_x</span><span class="o">=</span><span class="n">m_x</span><span class="p">,</span> <span class="n">cen_y</span><span class="o">=</span><span class="n">m_y</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
                             <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">phi</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span> <span class="n">psi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">psi</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span>
                             <span class="n">miss</span><span class="o">=</span><span class="n">miss</span><span class="p">,</span>
-                            <span class="n">skewness</span><span class="o">=</span><span class="n">skewness</span><span class="p">,</span> <span class="n">kurtosis</span><span class="o">=</span><span class="n">kurtosis</span><span class="p">)</span>
+                            <span class="n">skewness</span><span class="o">=</span><span class="n">skewness</span><span class="p">,</span> <span class="n">kurtosis</span><span class="o">=</span><span class="n">kurtosis</span><span class="p">)</span></div>
 
 <span class="k">def</span> <span class="nf">static_xy</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Hold static variables for a given camera&#39;s pixel positions,</span>
@@ -811,7 +817,7 @@
         <span class="n">static_xy</span><span class="o">.</span><span class="n">pix_xy3</span> <span class="o">=</span> <span class="n">pix_x</span> <span class="o">*</span> <span class="n">static_xy</span><span class="o">.</span><span class="n">pix_y3</span>
         <span class="n">static_xy</span><span class="o">.</span><span class="n">pix_y4</span> <span class="o">=</span> <span class="n">static_xy</span><span class="o">.</span><span class="n">pix_y3</span> <span class="o">*</span> <span class="n">pix_y</span>
 
-<span class="k">def</span> <span class="nf">hillas_parameters_4</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="hillas_parameters_4"><a class="viewcode-back" href="../../../api/ctapipe.image.hillas_parameters_4.html#ctapipe.image.hillas_parameters_4">[docs]</a><span class="k">def</span> <span class="nf">hillas_parameters_4</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute Hillas parameters for a given shower image.</span>
 
 <span class="sd">    As for hillas_parameters_3 (old Whipple Fortran code), but more Pythonized</span>
@@ -1019,7 +1025,7 @@
                             <span class="n">phi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">phi</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span>
                             <span class="n">psi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">psi</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span>
                             <span class="n">miss</span><span class="o">=</span><span class="n">miss</span><span class="p">,</span>
-                            <span class="n">skewness</span><span class="o">=</span><span class="n">skewness</span><span class="p">,</span> <span class="n">kurtosis</span><span class="o">=</span><span class="n">kurtosis</span><span class="p">)</span>
+                            <span class="n">skewness</span><span class="o">=</span><span class="n">skewness</span><span class="p">,</span> <span class="n">kurtosis</span><span class="o">=</span><span class="n">kurtosis</span><span class="p">)</span></div>
 
 <span class="c1"># use the 1 version by default. Version 2 has apparent differences.</span>
 <span class="n">hillas_parameters</span> <span class="o">=</span> <span class="n">hillas_parameters_1</span>
@@ -1058,7 +1064,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.1.dev1212',
+            VERSION:'0.1.dev1214',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

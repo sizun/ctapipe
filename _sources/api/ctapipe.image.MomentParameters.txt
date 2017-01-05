@@ -1,0 +1,27 @@
+
+
+MomentParameters
+==============================
+
+.. currentmodule:: ctapipe.image
+
+.. autoclass:: MomentParameters
+   :show-inheritance:
+
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

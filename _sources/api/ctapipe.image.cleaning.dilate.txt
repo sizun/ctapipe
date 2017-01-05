@@ -1,0 +1,8 @@
+
+
+dilate
+=============================
+
+.. currentmodule:: ctapipe.image.cleaning
+
+.. autofunction:: dilate
