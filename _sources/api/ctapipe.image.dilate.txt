@@ -1,8 +1,0 @@
-
-
-dilate
-====================
-
-.. currentmodule:: ctapipe.image
-
-.. autofunction:: dilate

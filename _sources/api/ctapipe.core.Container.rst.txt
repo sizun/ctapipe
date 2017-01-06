@@ -1,0 +1,35 @@
+Container
+=========
+
+.. currentmodule:: ctapipe.core
+
+.. autoclass:: Container
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~Container.attributes
+      ~Container.meta
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~Container.as_dict
+      ~Container.disable_attribute_check
+      ~Container.items
+      ~Container.reset
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: attributes
+   .. autoattribute:: meta
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: as_dict
+   .. automethod:: disable_attribute_check
+   .. automethod:: items
+   .. automethod:: reset

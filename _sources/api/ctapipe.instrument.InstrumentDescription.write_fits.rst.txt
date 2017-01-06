@@ -1,0 +1,6 @@
+write_fits
+==========
+
+.. currentmodule:: ctapipe.instrument.InstrumentDescription
+
+.. autofunction:: write_fits

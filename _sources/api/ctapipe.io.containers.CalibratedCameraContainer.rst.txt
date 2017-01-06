@@ -1,0 +1,23 @@
+CalibratedCameraContainer
+=========================
+
+.. currentmodule:: ctapipe.io.containers
+
+.. autoclass:: CalibratedCameraContainer
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~CalibratedCameraContainer.calibrated_image
+      ~CalibratedCameraContainer.integration_window
+      ~CalibratedCameraContainer.peakpos
+      ~CalibratedCameraContainer.pedestal_subtracted_adc
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: calibrated_image
+   .. autoattribute:: integration_window
+   .. autoattribute:: peakpos
+   .. autoattribute:: pedestal_subtracted_adc

@@ -1,8 +1,0 @@
-
-
-dynamic_class_from_module
-=======================================
-
-.. currentmodule:: ctapipe.utils
-
-.. autofunction:: dynamic_class_from_module

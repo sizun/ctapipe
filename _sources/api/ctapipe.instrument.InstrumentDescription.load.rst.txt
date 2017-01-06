@@ -1,0 +1,6 @@
+load
+====
+
+.. currentmodule:: ctapipe.instrument.InstrumentDescription
+
+.. autofunction:: load

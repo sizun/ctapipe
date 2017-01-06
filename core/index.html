@@ -8,12 +8,10 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Core Structures and Base Classes (core) &mdash; ctapipe v0.1.dev1214</title>
+  <title>Core Structures and Base Classes (core) &mdash; ctapipe vv0.2.0.post53+git98e9b78</title>
   
 
   
-  
-    <link rel="shortcut icon" href="../_static/astropy_logo.ico"/>
   
 
   
@@ -32,7 +30,10 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1214" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ctapipe vv0.2.0.post53+git98e9b78" href="../index.html"/>
         <link rel="next" title="Component" href="../api/ctapipe.core.Component.html"/>
         <link rel="prev" title="TiltedGroundFrame" href="../api/ctapipe.coordinates.TiltedGroundFrame.html"/> 
 
@@ -62,7 +63,7 @@
             
             
               <div class="version">
-                0.1.dev1214
+                v0.2.0.post53+git98e9b78
               </div>
             
           
@@ -144,7 +145,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/core/index.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/core/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -171,8 +172,7 @@ this will also handle provenance metadata.</p>
 <p>All <em>ctapipe</em> applications should derive from these classes in order
 to provide a common interface.</p>
 <p>For details about creating command-line tools, see <a class="reference internal" href="../tools/index.html#tools"><span class="std std-ref">Command line tools (tools)</span></a></p>
-<object data="../_images/graphviz-62632f99430fd800c54ea64c527c721b93a46675.svg" type="image/svg+xml">
-            <p class="warning">digraph Core {
+<img src="../_images/graphviz-b284f75f2a0ec6a7871987f37b30de7f8404b918.png" alt="digraph Core {
 
   node [shape=rect fontsize=12 fontname=&quot;Arial&quot;];
   edge [fontname = &quot;Arial&quot; fontsize = 10 dir=front]
@@ -195,7 +195,7 @@ to provide a common interface.</p>
   Component_1 -&gt; Container_1
   Container_1 -&gt; Component_2
 
-}</p></object>
+}" />
 </div>
 <div class="section" id="reference-api">
 <h2>Reference/API<a class="headerlink" href="#reference-api" title="Permalink to this headline">¶</a></h2>
@@ -215,7 +215,7 @@ to provide a common interface.</p>
 <tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.core.Container.html#ctapipe.core.Container" title="ctapipe.core.Container"><code class="xref py py-obj docutils literal"><span class="pre">Container</span></code></a>()</td>
 <td>Generic class that can hold and accumulate data to be passed between Components.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.core.Tool.html#ctapipe.core.Tool" title="ctapipe.core.Tool"><code class="xref py py-obj docutils literal"><span class="pre">Tool</span></code></a>(**kwargs)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.core.Tool.html#ctapipe.core.Tool" title="ctapipe.core.Tool"><code class="xref py py-obj docutils literal"><span class="pre">Tool</span></code></a>(\*\*kwargs)</td>
 <td>A base class for all executable tools (applications) that handles configuration loading/saving, logging, command-line processing, and provenance meta-data handling.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.core.Item.html#ctapipe.core.Item" title="ctapipe.core.Item"><code class="xref py py-obj docutils literal"><span class="pre">Item</span></code></a>(default[,&nbsp;description,&nbsp;unit])</td>
@@ -229,8 +229,19 @@ to provide a common interface.</p>
 </div>
 <div class="section" id="class-inheritance-diagram">
 <h4>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h4>
-<object data="../_images/inheritance-f0dcbe9c694be2402630b9039e319cdcb99a20df.svg" type="image/svg+xml">
-            <p class="warning">Inheritance diagram of ctapipe.core.component.Component, ctapipe.core.container.Container, ctapipe.core.tool.Tool, ctapipe.core.container.Item, ctapipe.core.container.Map</p></object>
+<img src="../_images/inheritance-fb660d25288c837e44f610f5f95cccf29e1943e5.png" alt="Inheritance diagram of ctapipe.core.component.Component, ctapipe.core.container.Container, ctapipe.core.tool.Tool, ctapipe.core.container.Item, ctapipe.core.container.Map" usemap="#inheritance31206b1faf" class="inheritance"/>
+<map id="inheritance31206b1faf" name="inheritance31206b1faf">
+<area shape="rect" id="node1" title="A singleton application with full configuration support." alt="" coords="612,130,676,149"/>
+<area shape="rect" id="node12" title="A base class for all executable tools (applications) that handles" alt="" coords="711,130,764,149"/>
+<area shape="rect" id="node2" title="A configurable that only allows one instance." alt="" coords="464,130,577,149"/>
+<area shape="rect" id="node3" title="Base class of all Components (sometimes called" alt="" coords="342,94,409,113"/>
+<area shape="rect" id="node9" title="A parent class for Configurables that log." alt="" coords="322,130,429,149"/>
+<area shape="rect" id="node6" title="Generic class that can hold and accumulate data to be passed" alt="" coords="16,76,75,95"/>
+<area shape="rect" id="node7" title="The base class for all classes that have descriptors." alt="" coords="4,113,87,131"/>
+<area shape="rect" id="node8" title="Defines the metadata associated with a value in a Container" alt="" coords="19,40,72,59"/>
+<area shape="rect" id="node10" title="A dictionary of sub&#45;containers that can be added to a Container. This" alt="" coords="125,4,178,23"/>
+<area shape="rect" id="node11" title="defaultdict(default_factory[, ...]) &#45;&#45;&gt; dict with default factory" alt="" coords="15,4,76,23"/>
+</map>
 </div>
 </div>
 </div>
@@ -255,8 +266,7 @@ to provide a common interface.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, ctapipe developers.
-      Last updated on 05 Jan 2017.
+        &copy; Copyright ctapipe developers.  Last updated 06 Jan 2017 13:27.
 
     </p>
   </div>
@@ -278,7 +288,7 @@ to provide a common interface.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1.dev1214',
+            VERSION:'v0.2.0.post53+git98e9b78',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

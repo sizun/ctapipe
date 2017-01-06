@@ -8,12 +8,10 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CameraDisplay &mdash; ctapipe v0.1.dev1214</title>
+  <title>CameraDisplay &mdash; ctapipe vv0.2.0.post53+git98e9b78</title>
   
 
   
-  
-    <link rel="shortcut icon" href="../_static/astropy_logo.ico"/>
   
 
   
@@ -32,7 +30,10 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1214" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ctapipe vv0.2.0.post53+git98e9b78" href="../index.html"/>
         <link rel="up" title="Visualization (visualization)" href="../visualization/index.html"/>
         <link rel="prev" title="ArrayDisplay" href="ctapipe.visualization.ArrayDisplay.html"/> 
 
@@ -62,7 +63,7 @@
             
             
               <div class="version">
-                0.1.dev1214
+                v0.2.0.post53+git98e9b78
               </div>
             
           
@@ -146,7 +147,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/api/ctapipe.visualization.CameraDisplay.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/ctapipe.visualization.CameraDisplay.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -161,7 +162,7 @@
 <dl class="class">
 <dt id="ctapipe.visualization.CameraDisplay">
 <em class="property">class </em><code class="descclassname">ctapipe.visualization.</code><code class="descname">CameraDisplay</code><span class="sig-paren">(</span><em>geometry</em>, <em>image=None</em>, <em>ax=None</em>, <em>title='Camera'</em>, <em>norm='lin'</em>, <em>cmap='hot'</em>, <em>allow_pick=False</em>, <em>autoupdate=True</em>, <em>autoscale=True</em>, <em>antialiased=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/visualization/mpl.html#CameraDisplay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.visualization.CameraDisplay" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Camera Display using matplotlib.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -175,7 +176,7 @@
 <blockquote>
 <div><p>array of values corresponding to the pixels in the CameraGeometry.</p>
 </div></blockquote>
-<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v1.5.3)"><code class="xref py py-obj docutils literal"><span class="pre">matplotlib.axes.Axes</span></code></a></p>
+<p><strong>ax</strong> : <code class="xref py py-obj docutils literal"><span class="pre">matplotlib.axes.Axes</span></code></p>
 <blockquote>
 <div><p>A matplotlib axes object to plot on, or None to create a new one</p>
 </div></blockquote>
@@ -190,9 +191,9 @@ Supported str arguments are
 - 'lin': linear scale
 - 'log': logarithmic scale (base 10)</p>
 </div></blockquote>
-<p><strong>cmap</strong> : str or <a class="reference external" href="http://matplotlib.org/api/colors_api.html#matplotlib.colors.Colormap" title="(in Matplotlib v1.5.3)"><code class="xref py py-obj docutils literal"><span class="pre">matplotlib.colors.Colormap</span></code></a> (default 'hot')</p>
+<p><strong>cmap</strong> : str or <code class="xref py py-obj docutils literal"><span class="pre">matplotlib.colors.Colormap</span></code> (default 'hot')</p>
 <blockquote>
-<div><p>Color map to use (see <a class="reference external" href="http://matplotlib.org/api/cm_api.html#module-matplotlib.cm" title="(in Matplotlib v1.5.3)"><code class="xref py py-obj docutils literal"><span class="pre">matplotlib.cm</span></code></a>)</p>
+<div><p>Color map to use (see <code class="xref py py-obj docutils literal"><span class="pre">matplotlib.cm</span></code>)</p>
 </div></blockquote>
 <p><strong>allow_pick</strong> : bool (default False)</p>
 <blockquote>
@@ -229,7 +230,7 @@ instance, and change the data, rather than generating new
 CameraDisplays.</dd>
 <dt>Pixel Implementation:</dt>
 <dd>Pixels are rendered as a
-<a class="reference external" href="http://matplotlib.org/api/collections_api.html#matplotlib.collections.PatchCollection" title="(in Matplotlib v1.5.3)"><code class="xref py py-obj docutils literal"><span class="pre">matplotlib.collections.PatchCollection</span></code></a> of Polygons (either 6
+<code class="xref py py-obj docutils literal"><span class="pre">matplotlib.collections.PatchCollection</span></code> of Polygons (either 6
 or 4 sided).  You can access the PatchCollection directly (to
 e.g. change low-level style parameters) via
 <code class="xref py py-obj docutils literal"><span class="pre">CameraDisplay.pixels</span></code></dd>
@@ -263,7 +264,7 @@ plt.savefig(filename). This includes <code class="xref py py-obj docutils litera
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.visualization.CameraDisplay.add_colorbar" title="ctapipe.visualization.CameraDisplay.add_colorbar"><code class="xref py py-obj docutils literal"><span class="pre">add_colorbar</span></code></a>(**kwargs)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.visualization.CameraDisplay.add_colorbar" title="ctapipe.visualization.CameraDisplay.add_colorbar"><code class="xref py py-obj docutils literal"><span class="pre">add_colorbar</span></code></a>(\*\*kwargs)</td>
 <td>add a colobar to the camera plot</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#ctapipe.visualization.CameraDisplay.add_ellipse" title="ctapipe.visualization.CameraDisplay.add_ellipse"><code class="xref py py-obj docutils literal"><span class="pre">add_ellipse</span></code></a>(centroid,&nbsp;length,&nbsp;width,&nbsp;angle)</td>
@@ -278,7 +279,7 @@ plt.savefig(filename). This includes <code class="xref py py-obj docutils litera
 <tr class="row-odd"><td><a class="reference internal" href="#ctapipe.visualization.CameraDisplay.on_pixel_clicked" title="ctapipe.visualization.CameraDisplay.on_pixel_clicked"><code class="xref py py-obj docutils literal"><span class="pre">on_pixel_clicked</span></code></a>(pix_id)</td>
 <td>virtual function to overide in sub-classes to do something special</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.visualization.CameraDisplay.overlay_moments" title="ctapipe.visualization.CameraDisplay.overlay_moments"><code class="xref py py-obj docutils literal"><span class="pre">overlay_moments</span></code></a>(momparams,&nbsp;**kwargs)</td>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.visualization.CameraDisplay.overlay_moments" title="ctapipe.visualization.CameraDisplay.overlay_moments"><code class="xref py py-obj docutils literal"><span class="pre">overlay_moments</span></code></a>(momparams,&nbsp;\*\*kwargs)</td>
 <td>helper to overlay ellipse from a <code class="xref py py-obj docutils literal"><span class="pre">reco.MomentParameters</span></code> structure</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#ctapipe.visualization.CameraDisplay.set_limits_minmax" title="ctapipe.visualization.CameraDisplay.set_limits_minmax"><code class="xref py py-obj docutils literal"><span class="pre">set_limits_minmax</span></code></a>(zmin,&nbsp;zmax)</td>
@@ -481,8 +482,7 @@ or linewidth=6)</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, ctapipe developers.
-      Last updated on 05 Jan 2017.
+        &copy; Copyright ctapipe developers.  Last updated 06 Jan 2017 13:27.
 
     </p>
   </div>
@@ -504,7 +504,7 @@ or linewidth=6)</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1.dev1214',
+            VERSION:'v0.2.0.post53+git98e9b78',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

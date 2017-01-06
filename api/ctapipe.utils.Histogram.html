@@ -8,12 +8,10 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Histogram &mdash; ctapipe v0.1.dev1214</title>
+  <title>Histogram &mdash; ctapipe vv0.2.0.post53+git98e9b78</title>
   
 
   
-  
-    <link rel="shortcut icon" href="../_static/astropy_logo.ico"/>
   
 
   
@@ -32,7 +30,10 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1214" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ctapipe vv0.2.0.post53+git98e9b78" href="../index.html"/>
         <link rel="up" title="Utilities (utils)" href="../utils/index.html"/>
         <link rel="next" title="Visualization (visualization)" href="../visualization/index.html"/>
         <link rel="prev" title="traitlets_config_to_fits" href="ctapipe.utils.traitlets_config_to_fits.html"/> 
@@ -63,7 +64,7 @@
             
             
               <div class="version">
-                0.1.dev1214
+                v0.2.0.post53+git98e9b78
               </div>
             
           
@@ -147,7 +148,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/api/ctapipe.utils.Histogram.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/ctapipe.utils.Histogram.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -162,7 +163,7 @@
 <dl class="class">
 <dt id="ctapipe.utils.Histogram">
 <em class="property">class </em><code class="descclassname">ctapipe.utils.</code><code class="descname">Histogram</code><span class="sig-paren">(</span><em>nbins=None</em>, <em>ranges=None</em>, <em>name='Histogram'</em>, <em>axisNames=None</em>, <em>initFromFITS=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/utils/fitshistogram.html#Histogram"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.utils.Histogram" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>An N-D histogram class with FITS image I/O.</p>
 <p>The output FITS file will contain an ImageHDU datacube and
 associated WCS headers to describe the axes of the histogram.
@@ -201,8 +202,6 @@ FITS HDU</p>
 </tr>
 </tbody>
 </table>
-<p>Initialize an unfilled histogram (need to call either
-fill() or specify initFromFITS to put data into it)</p>
 <p class="rubric">Attributes Summary</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -240,7 +239,7 @@ fill() or specify initFromFITS to put data into it)</p>
 <tr class="row-odd"><td><a class="reference internal" href="#ctapipe.utils.Histogram.draw_2d" title="ctapipe.utils.Histogram.draw_2d"><code class="xref py py-obj docutils literal"><span class="pre">draw_2d</span></code></a>([dims])</td>
 <td>draw the histogram using pcolormesh() (only works for 2D</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.utils.Histogram.fill" title="ctapipe.utils.Histogram.fill"><code class="xref py py-obj docutils literal"><span class="pre">fill</span></code></a>(datapoints,&nbsp;**kwargs)</td>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.utils.Histogram.fill" title="ctapipe.utils.Histogram.fill"><code class="xref py py-obj docutils literal"><span class="pre">fill</span></code></a>(datapoints,&nbsp;\*\*kwargs)</td>
 <td>generate a histogram from data points.  Since the results of</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#ctapipe.utils.Histogram.from_fits" title="ctapipe.utils.Histogram.from_fits"><code class="xref py py-obj docutils literal"><span class="pre">from_fits</span></code></a>(inputFITS)</td>
@@ -424,8 +423,7 @@ of the histogram is unmodified (and is &quot;counts&quot;)</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, ctapipe developers.
-      Last updated on 05 Jan 2017.
+        &copy; Copyright ctapipe developers.  Last updated 06 Jan 2017 13:27.
 
     </p>
   </div>
@@ -447,7 +445,7 @@ of the histogram is unmodified (and is &quot;counts&quot;)</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1.dev1214',
+            VERSION:'v0.2.0.post53+git98e9b78',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

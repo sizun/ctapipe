@@ -8,12 +8,10 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>FitGammaHillas &mdash; ctapipe v0.1.dev1214</title>
+  <title>FitGammaHillas &mdash; ctapipe vv0.2.0.post53+git98e9b78</title>
   
 
   
-  
-    <link rel="shortcut icon" href="../_static/astropy_logo.ico"/>
   
 
   
@@ -32,7 +30,10 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1214" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ctapipe vv0.2.0.post53+git98e9b78" href="../index.html"/>
         <link rel="up" title="Reconstruction (reco)" href="../reco/index.html"/>
         <link rel="next" title="RecoShowerGeomAlgorithm" href="ctapipe.reco.RecoShowerGeomAlgorithm.html"/>
         <link rel="prev" title="dist_to_traces" href="ctapipe.reco.dist_to_traces.html"/> 
@@ -63,7 +64,7 @@
             
             
               <div class="version">
-                0.1.dev1214
+                v0.2.0.post53+git98e9b78
               </div>
             
           
@@ -147,7 +148,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/api/ctapipe.reco.FitGammaHillas.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/ctapipe.reco.FitGammaHillas.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -162,7 +163,7 @@
 <dl class="class">
 <dt id="ctapipe.reco.FitGammaHillas">
 <em class="property">class </em><code class="descclassname">ctapipe.reco.</code><code class="descname">FitGammaHillas</code><a class="reference internal" href="../_modules/ctapipe/reco/FitGammaHillas.html#FitGammaHillas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.FitGammaHillas" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="ctapipe.reco.RecoShowerGeomAlgorithm.html#ctapipe.reco.RecoShowerGeomAlgorithm" title="ctapipe.reco.reco_algorithms.RecoShowerGeomAlgorithm"><code class="docutils literal"><span class="pre">ctapipe.reco.RecoShowerGeomAlgorithm</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">ctapipe.reco.reco_algorithms.RecoShowerGeomAlgorithm</span></code></p>
 <p>class that reconstructs the direction of an atmospheric shower
 using a simple hillas parametrisation of the camera images it
 provides a direction estimate in two steps and an estimate for the
@@ -176,19 +177,19 @@ uncertainty on the reconstructed parameters</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.FitGammaHillas.fit_core" title="ctapipe.reco.FitGammaHillas.FitGammaHillas"><code class="xref py py-obj docutils literal"><span class="pre">fit_core</span></code></a>([seed,&nbsp;test_function])</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">fit_core</span></code>([seed,&nbsp;test_function])</td>
 <td>reconstructs the shower core position from the already set up</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.reco.FitGammaHillas.fit_origin_crosses" title="ctapipe.reco.FitGammaHillas.FitGammaHillas"><code class="xref py py-obj docutils literal"><span class="pre">fit_origin_crosses</span></code></a>()</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">fit_origin_crosses</span></code>()</td>
 <td>calculates the origin of the gamma as the weighted average</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.FitGammaHillas.fit_origin_minimise" title="ctapipe.reco.FitGammaHillas.FitGammaHillas"><code class="xref py py-obj docutils literal"><span class="pre">fit_origin_minimise</span></code></a>([seed,&nbsp;test_function])</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">fit_origin_minimise</span></code>([seed,&nbsp;test_function])</td>
 <td>fits the origin of the gamma with a minimisation procedure this</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.reco.FitGammaHillas.get_great_circles" title="ctapipe.reco.FitGammaHillas.FitGammaHillas"><code class="xref py py-obj docutils literal"><span class="pre">get_great_circles</span></code></a>(hillas_dict,&nbsp;inst,&nbsp;...)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">get_great_circles</span></code>(hillas_dict,&nbsp;inst,&nbsp;...)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.reco.FitGammaHillas.predict" title="ctapipe.reco.FitGammaHillas.FitGammaHillas"><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code></a>(hillas_dict,&nbsp;inst,&nbsp;tel_phi,&nbsp;tel_theta)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code>(hillas_dict,&nbsp;inst,&nbsp;tel_phi,&nbsp;tel_theta)</td>
 <td>The function you want to call for the reconstruction of the event.</td>
 </tr>
 </tbody>
@@ -325,8 +326,7 @@ the core position fit (e.g. CoG of all telescope images)</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, ctapipe developers.
-      Last updated on 05 Jan 2017.
+        &copy; Copyright ctapipe developers.  Last updated 06 Jan 2017 13:27.
 
     </p>
   </div>
@@ -348,7 +348,7 @@ the core position fit (e.g. CoG of all telescope images)</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1.dev1214',
+            VERSION:'v0.2.0.post53+git98e9b78',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

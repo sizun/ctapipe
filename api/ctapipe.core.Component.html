@@ -8,12 +8,10 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Component &mdash; ctapipe v0.1.dev1214</title>
+  <title>Component &mdash; ctapipe vv0.2.0.post53+git98e9b78</title>
   
 
   
-  
-    <link rel="shortcut icon" href="../_static/astropy_logo.ico"/>
   
 
   
@@ -32,7 +30,10 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1214" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ctapipe vv0.2.0.post53+git98e9b78" href="../index.html"/>
         <link rel="up" title="Core Structures and Base Classes (core)" href="../core/index.html"/>
         <link rel="next" title="Container" href="ctapipe.core.Container.html"/>
         <link rel="prev" title="Core Structures and Base Classes (core)" href="../core/index.html"/> 
@@ -63,7 +64,7 @@
             
             
               <div class="version">
-                0.1.dev1214
+                v0.2.0.post53+git98e9b78
               </div>
             
           
@@ -147,7 +148,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/api/ctapipe.core.Component.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/ctapipe.core.Component.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -171,11 +172,11 @@ implemented using <code class="xref py py-obj docutils literal"><span class="pre
 descriptions. These will be automatically translated into
 configuration parameters (command-line, config file, etc). Note
 that any parameter that should be externally configurable must
-have its <code class="xref py py-obj docutils literal"><span class="pre">config</span></code> attribute set to <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.6)"><code class="xref py py-obj docutils literal"><span class="pre">True</span></code></a>, e.g. defined like
+have its <code class="xref py py-obj docutils literal"><span class="pre">config</span></code> attribute set to <a class="reference external" href="https://docs.python.org/3.5/library/constants.html#True" title="(in Python v3.5)"><code class="xref py py-obj docutils literal"><span class="pre">True</span></code></a>, e.g. defined like
 <code class="xref py py-obj docutils literal"><span class="pre">myparam</span> <span class="pre">=</span> <span class="pre">Integer(0,</span> <span class="pre">help='the</span> <span class="pre">parameter').tag(config=True)</span></code>.</p>
 <p>All components also contain a <code class="xref py py-obj docutils literal"><span class="pre">logger</span></code> instance in their <code class="xref py py-obj docutils literal"><span class="pre">log</span></code>
 attribute, that you must use to output info, debugging data,
-warnings, etc (do not use <a class="reference external" href="http://docs.python.org/3/library/functions.html#print" title="(in Python v3.5)"><code class="xref py py-obj docutils literal"><span class="pre">print()</span></code></a> statements, instead use
+warnings, etc (do not use <code class="xref py py-obj docutils literal"><span class="pre">print()</span></code> statements, instead use
 <code class="xref py py-obj docutils literal"><span class="pre">self.log.info()</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">self.log.warn()</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">self.log.debug()</span></code>, etc).</p>
 <p>Components are generally used within <a class="reference internal" href="ctapipe.core.Tool.html#ctapipe.core.Tool" title="ctapipe.core.Tool"><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.core.Tool</span></code></a>
 subclasses, which provide configuration handling and command-line
@@ -194,22 +195,6 @@ tool generation.</p>
 <span class="n">comp</span><span class="o">.</span><span class="n">some_option</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span> <span class="c1"># will fail validation</span>
 </pre></div>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>parent: Tool or Component</strong></p>
-<blockquote>
-<div><p>Tool or component that is the Parent of this one</p>
-</div></blockquote>
-<p><strong>kwargs: type</strong></p>
-<blockquote class="last">
-<div><p>other paremeters</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 </div>
@@ -233,8 +218,7 @@ tool generation.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, ctapipe developers.
-      Last updated on 05 Jan 2017.
+        &copy; Copyright ctapipe developers.  Last updated 06 Jan 2017 13:27.
 
     </p>
   </div>
@@ -256,7 +240,7 @@ tool generation.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1.dev1214',
+            VERSION:'v0.2.0.post53+git98e9b78',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

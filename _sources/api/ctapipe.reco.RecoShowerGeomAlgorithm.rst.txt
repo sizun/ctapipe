@@ -1,0 +1,17 @@
+RecoShowerGeomAlgorithm
+=======================
+
+.. currentmodule:: ctapipe.reco
+
+.. autoclass:: RecoShowerGeomAlgorithm
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~RecoShowerGeomAlgorithm.predict
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: predict

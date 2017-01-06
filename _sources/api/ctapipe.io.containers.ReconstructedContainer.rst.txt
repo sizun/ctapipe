@@ -1,0 +1,21 @@
+ReconstructedContainer
+======================
+
+.. currentmodule:: ctapipe.io.containers
+
+.. autoclass:: ReconstructedContainer
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~ReconstructedContainer.classification
+      ~ReconstructedContainer.energy
+      ~ReconstructedContainer.shower
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: classification
+   .. autoattribute:: energy
+   .. autoattribute:: shower

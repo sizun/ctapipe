@@ -8,12 +8,10 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CameraGeometry &mdash; ctapipe v0.1.dev1214</title>
+  <title>CameraGeometry &mdash; ctapipe vv0.2.0.post53+git98e9b78</title>
   
 
   
-  
-    <link rel="shortcut icon" href="../_static/astropy_logo.ico"/>
   
 
   
@@ -32,7 +30,10 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1214" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ctapipe vv0.2.0.post53+git98e9b78" href="../index.html"/>
         <link rel="up" title="Input/Output (io)" href="../io/index.html"/>
         <link rel="next" title="hessio_event_source" href="ctapipe.io.hessio.hessio_event_source.html"/>
         <link rel="prev" title="make_rectangular_camera_geometry" href="ctapipe.io.camera.make_rectangular_camera_geometry.html"/> 
@@ -63,7 +64,7 @@
             
             
               <div class="version">
-                0.1.dev1214
+                v0.2.0.post53+git98e9b78
               </div>
             
           
@@ -153,7 +154,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/api/ctapipe.io.camera.CameraGeometry.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/ctapipe.io.camera.CameraGeometry.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -168,7 +169,7 @@
 <dl class="class">
 <dt id="ctapipe.io.camera.CameraGeometry">
 <em class="property">class </em><code class="descclassname">ctapipe.io.camera.</code><code class="descname">CameraGeometry</code><span class="sig-paren">(</span><em>cam_id</em>, <em>pix_id</em>, <em>pix_x</em>, <em>pix_y</em>, <em>pix_area</em>, <em>neighbors</em>, <em>pix_type</em>, <em>pix_rotation=&lt;Quantity 0.0 deg&gt;</em>, <em>cam_rotation=&lt;Quantity 0.0 deg&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/io/camera.html#CameraGeometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.io.camera.CameraGeometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p><a class="reference internal" href="#ctapipe.io.camera.CameraGeometry" title="ctapipe.io.camera.CameraGeometry"><code class="xref py py-obj docutils literal"><span class="pre">CameraGeometry</span></code></a> is a class that stores information about a
 Cherenkov Camera that us useful for imaging algorithms and
 displays. It contains lists of pixel positions, areas, pixel
@@ -176,51 +177,6 @@ shapes, as well as a neighbor (adjacency) list for each pixel.</p>
 <p>The class is intended to be generic, and work with any Cherenkov
 Camera geometry, including those that have square vs hexagonal
 pixels, gaps between pixels, etc.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>self: type</strong></p>
-<blockquote>
-<div><p>description</p>
-</div></blockquote>
-<p><strong>cam_id: camera id name or number</strong></p>
-<blockquote>
-<div><p>camera identification string</p>
-</div></blockquote>
-<p><strong>pix_id: array(int)</strong></p>
-<blockquote>
-<div><p>pixels id numbers</p>
-</div></blockquote>
-<p><strong>pix_x: array with units</strong></p>
-<blockquote>
-<div><p>position of each pixel (x-coordinate)</p>
-</div></blockquote>
-<p><strong>pix_y: array with units</strong></p>
-<blockquote>
-<div><p>position of each pixel (y-coordinate)</p>
-</div></blockquote>
-<p><strong>pix_area: array(float)</strong></p>
-<blockquote>
-<div><p>surface area of each pixe</p>
-</div></blockquote>
-<p><strong>neighbors: list(arrays)</strong></p>
-<blockquote>
-<div><p>adjacency list for each pixel</p>
-</div></blockquote>
-<p><strong>pix_type: string</strong></p>
-<blockquote>
-<div><p>either 'rectangular' or 'hexagonal'</p>
-</div></blockquote>
-<p><strong>pix_rotation: value convertable to an `astropy.coordinates.Angle`</strong></p>
-<blockquote>
-<div><p>rotation angle with unit (e.g. 12 * u.deg), or &quot;12d&quot;</p>
-</div></blockquote>
-<p class="last"><strong>cam_rotation: overall camera rotation with units</strong></p>
-</td>
-</tr>
-</tbody>
-</table>
 <p class="rubric">Methods Summary</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -241,7 +197,7 @@ pixels, gaps between pixels, etc.</p>
 <td>rotate the camera coordinates about the center of the camera by</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#ctapipe.io.camera.CameraGeometry.to_table" title="ctapipe.io.camera.CameraGeometry.to_table"><code class="xref py py-obj docutils literal"><span class="pre">to_table</span></code></a>()</td>
-<td>convert this to an <a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v1.3)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a></td>
+<td>convert this to an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v2.0.dev17638)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -296,7 +252,7 @@ transformation defined in <a class="reference internal" href="../coordinates/ind
 <dl class="method">
 <dt id="ctapipe.io.camera.CameraGeometry.to_table">
 <code class="descname">to_table</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/io/camera.html#CameraGeometry.to_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.io.camera.CameraGeometry.to_table" title="Permalink to this definition">¶</a></dt>
-<dd><p>convert this to an <a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v1.3)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a></p>
+<dd><p>convert this to an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v2.0.dev17638)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -322,8 +278,7 @@ transformation defined in <a class="reference internal" href="../coordinates/ind
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, ctapipe developers.
-      Last updated on 05 Jan 2017.
+        &copy; Copyright ctapipe developers.  Last updated 06 Jan 2017 13:27.
 
     </p>
   </div>
@@ -345,7 +300,7 @@ transformation defined in <a class="reference internal" href="../coordinates/ind
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1.dev1214',
+            VERSION:'v0.2.0.post53+git98e9b78',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

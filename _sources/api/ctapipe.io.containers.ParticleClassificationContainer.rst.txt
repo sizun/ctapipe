@@ -1,0 +1,23 @@
+ParticleClassificationContainer
+===============================
+
+.. currentmodule:: ctapipe.io.containers
+
+.. autoclass:: ParticleClassificationContainer
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~ParticleClassificationContainer.goodness_of_fit
+      ~ParticleClassificationContainer.is_valid
+      ~ParticleClassificationContainer.prediction
+      ~ParticleClassificationContainer.tel_ids
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: goodness_of_fit
+   .. autoattribute:: is_valid
+   .. autoattribute:: prediction
+   .. autoattribute:: tel_ids

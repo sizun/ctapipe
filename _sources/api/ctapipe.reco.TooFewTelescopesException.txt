@@ -1,8 +1,0 @@
-
-
-TooFewTelescopesException
-======================================
-
-.. currentmodule:: ctapipe.reco
-
-.. autoexception:: TooFewTelescopesException

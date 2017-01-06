@@ -8,12 +8,10 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.image.cleaning &mdash; ctapipe v0.1.dev1214</title>
+  <title>ctapipe.image.cleaning &mdash; ctapipe vv0.2.0.post53+git98e9b78</title>
   
 
   
-  
-    <link rel="shortcut icon" href="../../../_static/astropy_logo.ico"/>
   
 
   
@@ -32,7 +30,10 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1214" href="../../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="ctapipe vv0.2.0.post53+git98e9b78" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -61,7 +62,7 @@
             
             
               <div class="version">
-                0.1.dev1214
+                v0.2.0.post53+git98e9b78
               </div>
             
           
@@ -150,7 +151,7 @@
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tailcuts_clean&#39;</span><span class="p">,</span> <span class="s1">&#39;dilate&#39;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="tailcuts_clean"><a class="viewcode-back" href="../../../api/ctapipe.image.tailcuts_clean.html#ctapipe.image.tailcuts_clean">[docs]</a><span class="k">def</span> <span class="nf">tailcuts_clean</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">pedvars</span><span class="p">,</span> <span class="n">picture_thresh</span><span class="o">=</span><span class="mf">4.25</span><span class="p">,</span>
+<div class="viewcode-block" id="tailcuts_clean"><a class="viewcode-back" href="../../../api/ctapipe.image.tailcuts_clean.html#ctapipe.image.cleaning.tailcuts_clean">[docs]</a><span class="k">def</span> <span class="nf">tailcuts_clean</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">pedvars</span><span class="p">,</span> <span class="n">picture_thresh</span><span class="o">=</span><span class="mf">4.25</span><span class="p">,</span>
                    <span class="n">boundary_thresh</span><span class="o">=</span><span class="mf">2.25</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Clean an image by selection pixels that pass a two-threshold</span>
 <span class="sd">    tail-cuts procedure.  The picture and boundary thresholds are</span>
@@ -200,7 +201,7 @@
     <span class="k">return</span> <span class="n">clean_mask</span></div>
 
 
-<div class="viewcode-block" id="dilate"><a class="viewcode-back" href="../../../api/ctapipe.image.dilate.html#ctapipe.image.dilate">[docs]</a><span class="k">def</span> <span class="nf">dilate</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+<div class="viewcode-block" id="dilate"><a class="viewcode-back" href="../../../api/ctapipe.image.dilate.html#ctapipe.image.cleaning.dilate">[docs]</a><span class="k">def</span> <span class="nf">dilate</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Add one row of neighbors to the True values of a pixel mask.  This</span>
 <span class="sd">    can be used to include extra rows of pixels in a mask that was</span>
 <span class="sd">    pre-computed, e.g. via `tailcuts_clean`.</span>
@@ -221,8 +222,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, ctapipe developers.
-      Last updated on 05 Jan 2017.
+        &copy; Copyright ctapipe developers.  Last updated 06 Jan 2017 13:27.
 
     </p>
   </div>
@@ -244,7 +244,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.1.dev1214',
+            VERSION:'v0.2.0.post53+git98e9b78',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

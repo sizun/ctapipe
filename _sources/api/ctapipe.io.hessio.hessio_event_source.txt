@@ -1,8 +1,0 @@
-
-
-hessio_event_source
-=====================================
-
-.. currentmodule:: ctapipe.io.hessio
-
-.. autofunction:: hessio_event_source

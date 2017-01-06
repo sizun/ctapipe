@@ -8,12 +8,10 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Camera &mdash; ctapipe v0.1.dev1214</title>
+  <title>Camera &mdash; ctapipe vv0.2.0.post53+git98e9b78</title>
   
 
   
-  
-    <link rel="shortcut icon" href="../_static/astropy_logo.ico"/>
   
 
   
@@ -32,7 +30,10 @@
   
 
   
-    <link rel="top" title="ctapipe v0.1.dev1214" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ctapipe vv0.2.0.post53+git98e9b78" href="../index.html"/>
         <link rel="up" title="Instrument (instrument)" href="../instrument/index.html"/>
         <link rel="next" title="load" href="ctapipe.instrument.InstrumentDescription.load.html"/>
         <link rel="prev" title="rotate_camera" href="ctapipe.instrument.CameraDescription.rotate_camera.html"/> 
@@ -63,7 +64,7 @@
             
             
               <div class="version">
-                0.1.dev1214
+                v0.2.0.post53+git98e9b78
               </div>
             
           
@@ -150,7 +151,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/api/ctapipe.instrument.CameraDescription.Camera.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/ctapipe.instrument.CameraDescription.Camera.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -165,46 +166,9 @@
 <dl class="class">
 <dt id="ctapipe.instrument.CameraDescription.Camera">
 <em class="property">class </em><code class="descclassname">ctapipe.instrument.CameraDescription.</code><code class="descname">Camera</code><span class="sig-paren">(</span><em>pix_id</em>, <em>pix_X</em>, <em>pix_Y</em>, <em>pix_area</em>, <em>pix_type</em>, <em>pix_neighbors</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/instrument/CameraDescription.html#Camera"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.instrument.CameraDescription.Camera" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p><a class="reference internal" href="#ctapipe.instrument.CameraDescription.Camera" title="ctapipe.instrument.CameraDescription.Camera"><code class="xref py py-obj docutils literal"><span class="pre">Camera</span></code></a> is a class that provides and gets all the information about
 the camera of a specific telescope.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>self: type</strong></p>
-<blockquote>
-<div><p>description</p>
-</div></blockquote>
-<p><strong>pix_id: array (int)</strong></p>
-<blockquote>
-<div><p>pixel ids of the camera of the telescope</p>
-</div></blockquote>
-<p><strong>pix_X: array with units</strong></p>
-<blockquote>
-<div><p>position of each pixel (x-coordinate)</p>
-</div></blockquote>
-<p><strong>pix_Y: array with units</strong></p>
-<blockquote>
-<div><p>position of each pixel (y-coordinate)</p>
-</div></blockquote>
-<p><strong>pix_area: array with units</strong></p>
-<blockquote>
-<div><p>area of each pixel</p>
-</div></blockquote>
-<p><strong>pix_type: string</strong></p>
-<blockquote>
-<div><p>name of the pixel type (e.g. hexagonal)</p>
-</div></blockquote>
-<p><strong>pix_neighbors: ndarray (int)</strong></p>
-<blockquote class="last">
-<div><p>nD-array with pixel IDs of neighboring
-pixels of the pixels (n=number of pixels)</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
 <p class="rubric">Methods Summary</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -219,7 +183,7 @@ pixels of the pixels (n=number of pixels)</p>
 <td></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#ctapipe.instrument.CameraDescription.Camera.to_table" title="ctapipe.instrument.CameraDescription.Camera.to_table"><code class="xref py py-obj docutils literal"><span class="pre">to_table</span></code></a>([version])</td>
-<td>convert this to an <a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v1.3)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a></td>
+<td>convert this to an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v2.0.dev17638)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -239,7 +203,7 @@ from a list of pixel positions.</p>
 <dl class="staticmethod">
 <dt id="ctapipe.instrument.CameraDescription.Camera.to_table">
 <em class="property">static </em><code class="descname">to_table</code><span class="sig-paren">(</span><em>version='test'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/instrument/CameraDescription.html#Camera.to_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.instrument.CameraDescription.Camera.to_table" title="Permalink to this definition">¶</a></dt>
-<dd><p>convert this to an <a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v1.3)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a></p>
+<dd><p>convert this to an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v2.0.dev17638)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.table.Table</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -265,8 +229,7 @@ from a list of pixel positions.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, ctapipe developers.
-      Last updated on 05 Jan 2017.
+        &copy; Copyright ctapipe developers.  Last updated 06 Jan 2017 13:27.
 
     </p>
   </div>
@@ -288,7 +251,7 @@ from a list of pixel positions.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.1.dev1214',
+            VERSION:'v0.2.0.post53+git98e9b78',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

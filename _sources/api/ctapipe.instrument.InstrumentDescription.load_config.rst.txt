@@ -1,0 +1,6 @@
+load_config
+===========
+
+.. currentmodule:: ctapipe.instrument.InstrumentDescription
+
+.. autofunction:: load_config
