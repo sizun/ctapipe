@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>FitGammaHillas &mdash; ctapipe vv0.3.2.post12+gitb29ca26</title>
+  <title>FitGammaHillas &mdash; ctapipe v0.3.2.post17+gitebc184f</title>
   
 
   
@@ -33,9 +33,9 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe vv0.3.2.post12+gitb29ca26" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.3.2.post17+gitebc184f" href="../index.html"/>
         <link rel="up" title="Reconstruction (reco)" href="../reco/index.html"/>
-        <link rel="next" title="RecoShowerGeomAlgorithm" href="ctapipe.reco.RecoShowerGeomAlgorithm.html"/>
+        <link rel="next" title="GreatCircle" href="ctapipe.reco.GreatCircle.html"/>
         <link rel="prev" title="dist_to_traces" href="ctapipe.reco.dist_to_traces.html"/> 
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                v0.3.2.post12+gitb29ca26
+                0.3.2.post17+gitebc184f
               </div>
             
           
@@ -187,10 +187,10 @@ uncertainty on the reconstructed parameters</p>
 <td>calculates the origin of the gamma as the weighted average</td>
 </tr>
 <tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">fit_origin_minimise</span></code>([seed,&nbsp;test_function])</td>
-<td>fits the origin of the gamma with a minimisation procedure this</td>
+<td>Fits the origin of the gamma with a minimisation procedure this function expects that <a class="reference internal" href="#ctapipe.reco.FitGammaHillas.get_great_circles" title="ctapipe.reco.FitGammaHillas.get_great_circles"><code class="xref py py-func docutils literal"><span class="pre">get_great_circles</span></code></a> has been run already.</td>
 </tr>
 <tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_great_circles</span></code>(hillas_dict,&nbsp;inst,&nbsp;...)</td>
-<td></td>
+<td>creates a dictionary of <a class="reference internal" href="ctapipe.reco.GreatCircle.html#ctapipe.reco.GreatCircle" title="ctapipe.reco.GreatCircle"><code class="xref py py-class docutils literal"><span class="pre">GreatCircle</span></code></a> from a dictionary of hillas parameters</td>
 </tr>
 <tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code>(hillas_dict,&nbsp;inst,&nbsp;tel_phi,&nbsp;tel_theta)</td>
 <td>The function you want to call for the reconstruction of the event.</td>
@@ -216,38 +216,42 @@ of an (over-constrained) equation system</p>
 </tbody>
 </table>
 <p class="rubric">Notes</p>
-<p>The basis is the &quot;trace&quot; of each telescope's <code class="xref py py-obj docutils literal"><span class="pre">GreatCircle</span></code>
-which can be determined by the telescope's position P=(Px, Py)
-and the circle's normal vector, projected to the ground n=(nx,
-ny), so that for every r=(x, y) on the trace <span class="math">\(n r = n P\)</span>
-and <span class="math">\(n_x x + n_y y = d\)</span></p>
+<p>The basis is the &quot;trace&quot; of each telescope's <a class="reference internal" href="ctapipe.reco.GreatCircle.html#ctapipe.reco.GreatCircle" title="ctapipe.reco.GreatCircle"><code class="xref py py-class docutils literal"><span class="pre">GreatCircle</span></code></a> which
+can be determined by the telescope's position P=(Px, Py) and
+the circle's normal vector, projected to the ground n=(nx,
+ny), so that for every r=(x, y) on the trace</p>
+<p><span class="math">\(\vec n \cdot \vec r = \vec n \cdot \vec P\)</span></p>
+<p><span class="math">\(n_x \cdot x + n_y \cdot y = d\)</span></p>
 <p>In a perfect world, the traces of all telescopes cross in the
 shower's point of impact. This means that there is one common
 point (x, y) for every telescope, so we can write in matrix
 form:</p>
-<div class="math">
-\[\begin{split}\begin{pmatrix}
-   nx_1  &amp;  ny_1  \\
-   \vdots &amp; \vdots \\
+<div class="math" id="equation-fullmatrix">
+<span class="eqno">(1)<a class="headerlink" href="#equation-fullmatrix" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{pmatrix}
+    nx_1  &amp;  ny_1  \\
+    \vdots &amp; \vdots \\
     nx_n  &amp;  ny_n
 \end{pmatrix}
-    * (x, y) =
+    \cdot (x, y) =
 \begin{pmatrix}
-     d_1  \\
-     \vdots \\
-     d_n
+    d_1  \\
+    \vdots \\
+    d_n
 \end{pmatrix}\end{split}\]</div>
-<p>or <span class="math">\(A  r = D\)</span>.</p>
+<p>or <span class="math">\(\boldsymbol{A} \cdot \vec r = \vec D\)</span>.</p>
 <p>Since we do not live in a perfect world and there probably is
 no point r that fulfils this equation system, it is solved by
-the method of least linear square: 
-<span class="math">\(r_\chi^2 = (A^T A)^-1 A^T D (2)\)</span></p>
-<p><span class="math">\(r_\chi^2\)</span> minimises the squared difference of</p>
+the method of least linear square:</p>
+<div class="math" id="equation-rchisqr">
+<span class="eqno">(2)<a class="headerlink" href="#equation-rchisqr" title="Permalink to this equation">¶</a></span>\[\vec{r}_{\chi^2} = (\boldsymbol{A}^\text{T} \cdot \boldsymbol{A})^{-1}
+\boldsymbol{A}^\text{T} \cdot \vec D\]</div>
+<p><span class="math">\(\vec{r}_{\chi^2}\)</span> minimises the squared difference of</p>
 <div class="math">
-\[D - A r.\]</div>
-<p>Weights are applied to every line of equation (1) as stored in
+\[\vec D - \boldsymbol{A} \cdot \vec r.\]</div>
+<p>Weights are applied to every line of equation <a class="reference internal" href="#equation-fullmatrix">(1)</a> as stored in
 circle.weight (assuming they have been set in
-self.get_great_circles or elsewhere).</p>
+<a class="reference internal" href="#ctapipe.reco.FitGammaHillas.get_great_circles" title="ctapipe.reco.FitGammaHillas.get_great_circles"><code class="xref py py-func docutils literal"><span class="pre">get_great_circles</span></code></a>
+or elsewhere).</p>
 </dd></dl>
 
 <dl class="method">
@@ -255,14 +259,6 @@ self.get_great_circles or elsewhere).</p>
 <code class="descname">fit_core_minimise</code><span class="sig-paren">(</span><em>seed=(0</em>, <em>0)</em>, <em>test_function=&lt;function dist_to_traces&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/FitGammaHillas.html#FitGammaHillas.fit_core_minimise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.FitGammaHillas.fit_core_minimise" title="Permalink to this definition">¶</a></dt>
 <dd><p>reconstructs the shower core position from the already set up
 great circles</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">the core of the shower lies on the cross section of the
-great circle with the horizontal plane.
-the direction of this cross section is the cross-product of
-the circle's normal vector and the horizontal plane.
-here, we only care about the direction; not the orientation...</p>
-</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -280,6 +276,11 @@ tuple of floats or astropy.length -- if floats, assume metres</p>
 </tr>
 </tbody>
 </table>
+<p class="rubric">Notes</p>
+<p>The core of the shower lies on the cross section of the great circle with
+the horizontal plane. The direction of this cross section is the cross-product of
+the circle's normal vector and the horizontal plane.
+Here, we only care about the direction; not the orientation...</p>
 </dd></dl>
 
 <dl class="method">
@@ -292,10 +293,11 @@ direction of the intersections of all great circles</p>
 <dl class="method">
 <dt id="ctapipe.reco.FitGammaHillas.fit_origin_minimise">
 <code class="descname">fit_origin_minimise</code><span class="sig-paren">(</span><em>seed=(0</em>, <em>0</em>, <em>1)</em>, <em>test_function=&lt;function neg_angle_sum&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/FitGammaHillas.html#FitGammaHillas.fit_origin_minimise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.FitGammaHillas.fit_origin_minimise" title="Permalink to this definition">¶</a></dt>
-<dd><p>fits the origin of the gamma with a minimisation procedure this
-function expects that get_great_circles has been run already a
-seed should be given otherwise it defaults to &quot;straight up&quot;
-supperted functions to minimise are an M-estimator and the
+<dd><p>Fits the origin of the gamma with a minimisation procedure this
+function expects that
+<a class="reference internal" href="#ctapipe.reco.FitGammaHillas.get_great_circles" title="ctapipe.reco.FitGammaHillas.get_great_circles"><code class="xref py py-func docutils literal"><span class="pre">get_great_circles</span></code></a>
+has been run already. A seed should be given otherwise it defaults to
+&quot;straight up&quot; supperted functions to minimise are an M-estimator and the
 negative sum of the angles to all normal vectors of the great
 circles</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -327,7 +329,29 @@ the minimisation process</p>
 <dl class="method">
 <dt id="ctapipe.reco.FitGammaHillas.get_great_circles">
 <code class="descname">get_great_circles</code><span class="sig-paren">(</span><em>hillas_dict</em>, <em>inst</em>, <em>tel_phi</em>, <em>tel_theta</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/FitGammaHillas.html#FitGammaHillas.get_great_circles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.FitGammaHillas.get_great_circles" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>creates a dictionary of <a class="reference internal" href="ctapipe.reco.GreatCircle.html#ctapipe.reco.GreatCircle" title="ctapipe.reco.GreatCircle"><code class="xref py py-class docutils literal"><span class="pre">GreatCircle</span></code></a> from a dictionary of hillas parameters</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>hillas_dict</strong> : dictionary</p>
+<blockquote>
+<div><p>dictionary of hillas moments</p>
+</div></blockquote>
+<p><strong>inst</strong> : ctapipe instrument container</p>
+<blockquote>
+<div><p>the container you get from event.inst</p>
+</div></blockquote>
+<p><strong>tel_phi, tel_theta</strong> : dictionaries</p>
+<blockquote class="last">
+<div><p>dictionaries of the orientation angles of the telescopes
+needs to contain at least the same keys as in <code class="xref py py-obj docutils literal"><span class="pre">hillas_dict</span></code></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="ctapipe.reco.FitGammaHillas.predict">
@@ -368,7 +392,7 @@ the core position fit (e.g. CoG of all telescope images)</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ctapipe.reco.RecoShowerGeomAlgorithm.html" class="btn btn-neutral float-right" title="RecoShowerGeomAlgorithm" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ctapipe.reco.GreatCircle.html" class="btn btn-neutral float-right" title="GreatCircle" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="ctapipe.reco.dist_to_traces.html" class="btn btn-neutral" title="dist_to_traces" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -380,7 +404,7 @@ the core position fit (e.g. CoG of all telescope images)</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 13:51.
+        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 16:24.
 
     </p>
   </div>
@@ -402,7 +426,7 @@ the core position fit (e.g. CoG of all telescope images)</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'v0.3.2.post12+gitb29ca26',
+            VERSION:'0.3.2.post17+gitebc184f',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

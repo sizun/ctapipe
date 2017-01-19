@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.reco.FitGammaHillas &mdash; ctapipe vv0.3.2.post12+gitb29ca26</title>
+  <title>ctapipe.reco.FitGammaHillas &mdash; ctapipe v0.3.2.post17+gitebc184f</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe vv0.3.2.post12+gitb29ca26" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.3.2.post17+gitebc184f" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                v0.3.2.post12+gitb29ca26
+                0.3.2.post17+gitebc184f
               </div>
             
           
@@ -163,7 +163,7 @@
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;FitGammaHillas&#39;</span><span class="p">,</span>
            <span class="s1">&#39;TooFewTelescopesException&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;dist_to_traces&#39;</span><span class="p">,</span> <span class="s1">&#39;MEst&#39;</span><span class="p">]</span>
+           <span class="s1">&#39;dist_to_traces&#39;</span><span class="p">,</span> <span class="s1">&#39;MEst&#39;</span><span class="p">,</span> <span class="s1">&#39;GreatCircle&#39;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="TooFewTelescopesException"><a class="viewcode-back" href="../../../api/ctapipe.reco.TooFewTelescopesException.html#ctapipe.reco.TooFewTelescopesException">[docs]</a><span class="k">class</span> <span class="nc">TooFewTelescopesException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
@@ -240,11 +240,11 @@
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-
 <span class="sd">    uses the M-Estimator of the distance instead of the distance itself:</span>
 
-<span class="sd">    :math:`M_{Est} = \sum_i{ 2 \sqrt{1 + d_i^2} - 2}`</span>
+<span class="sd">    .. math::</span>
 
+<span class="sd">        M_\\text{Est} = \sum_i{ 2 \cdot \sqrt{1 + d_i^2} - 2}</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
 
@@ -270,11 +270,11 @@
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">      M_{Est} = \sum_i{ 2*\sqrt{1 + \chi^2} - 2}</span>
+<span class="sd">        M_\\text{Est} = \sum_i{ 2 \cdot \sqrt{1 + d_i^2} - 2}</span>
 
-<span class="sd">    .. note::</span>
-
-<span class="sd">      seemingly inferior to negative sum of sin(angle)...</span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    seemingly inferior to negative sum of sin(angle)...</span>
 
 
 <span class="sd">    Parameters</span>
@@ -397,6 +397,20 @@
         <span class="k">return</span> <span class="n">result</span></div>
 
 <div class="viewcode-block" id="FitGammaHillas.get_great_circles"><a class="viewcode-back" href="../../../api/ctapipe.reco.FitGammaHillas.html#ctapipe.reco.FitGammaHillas.get_great_circles">[docs]</a>    <span class="k">def</span> <span class="nf">get_great_circles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hillas_dict</span><span class="p">,</span> <span class="n">inst</span><span class="p">,</span> <span class="n">tel_phi</span><span class="p">,</span> <span class="n">tel_theta</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        creates a dictionary of :class:`.GreatCircle` from a dictionary of hillas parameters</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        hillas_dict : dictionary</span>
+<span class="sd">            dictionary of hillas moments</span>
+<span class="sd">        inst : ctapipe instrument container</span>
+<span class="sd">            the container you get from event.inst</span>
+<span class="sd">        tel_phi, tel_theta : dictionaries</span>
+<span class="sd">            dictionaries of the orientation angles of the telescopes</span>
+<span class="sd">            needs to contain at least the same keys as in `hillas_dict`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">circles</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">tel_id</span><span class="p">,</span> <span class="n">moments</span> <span class="ow">in</span> <span class="n">hillas_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 
@@ -448,10 +462,11 @@
         <span class="k">return</span> <span class="n">linalg</span><span class="o">.</span><span class="n">normalise</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">crossings</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">dimless</span><span class="p">,</span> <span class="n">crossings</span></div>
 
 <div class="viewcode-block" id="FitGammaHillas.fit_origin_minimise"><a class="viewcode-back" href="../../../api/ctapipe.reco.FitGammaHillas.html#ctapipe.reco.FitGammaHillas.fit_origin_minimise">[docs]</a>    <span class="k">def</span> <span class="nf">fit_origin_minimise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">test_function</span><span class="o">=</span><span class="n">neg_angle_sum</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;fits the origin of the gamma with a minimisation procedure this</span>
-<span class="sd">        function expects that get_great_circles has been run already a</span>
-<span class="sd">        seed should be given otherwise it defaults to &quot;straight up&quot;</span>
-<span class="sd">        supperted functions to minimise are an M-estimator and the</span>
+        <span class="sd">&#39;&#39;&#39; Fits the origin of the gamma with a minimisation procedure this</span>
+<span class="sd">        function expects that</span>
+<span class="sd">        :func:`get_great_circles&lt;ctapipe.reco.FitGammaHillas.get_great_circles&gt;`</span>
+<span class="sd">        has been run already. A seed should be given otherwise it defaults to</span>
+<span class="sd">        &quot;straight up&quot; supperted functions to minimise are an M-estimator and the</span>
 <span class="sd">        negative sum of the angles to all normal vectors of the great</span>
 <span class="sd">        circles</span>
 
@@ -496,12 +511,14 @@
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
+<span class="sd">        The basis is the &quot;trace&quot; of each telescope&#39;s :class:`.GreatCircle` which</span>
+<span class="sd">        can be determined by the telescope&#39;s position P=(Px, Py) and</span>
+<span class="sd">        the circle&#39;s normal vector, projected to the ground n=(nx,</span>
+<span class="sd">        ny), so that for every r=(x, y) on the trace</span>
 
-<span class="sd">        The basis is the &quot;trace&quot; of each telescope&#39;s `GreatCircle`</span>
-<span class="sd">        which can be determined by the telescope&#39;s position P=(Px, Py)</span>
-<span class="sd">        and the circle&#39;s normal vector, projected to the ground n=(nx,</span>
-<span class="sd">        ny), so that for every r=(x, y) on the trace :math:`n r = n P`</span>
-<span class="sd">        and :math:`n_x x + n_y y = d`</span>
+<span class="sd">        :math:`\vec n \cdot \vec r = \vec n \cdot \vec P`</span>
+
+<span class="sd">        :math:`n_x \cdot x + n_y \cdot y = d`</span>
 
 <span class="sd">        In a perfect world, the traces of all telescopes cross in the</span>
 <span class="sd">        shower&#39;s point of impact. This means that there is one common</span>
@@ -509,36 +526,41 @@
 <span class="sd">        form:</span>
 
 <span class="sd">        .. math::</span>
+<span class="sd">            \begin{pmatrix}</span>
+<span class="sd">                nx_1  &amp;  ny_1  \\</span>
+<span class="sd">                \vdots &amp; \vdots \\</span>
+<span class="sd">                nx_n  &amp;  ny_n</span>
+<span class="sd">            \end{pmatrix}</span>
+<span class="sd">                \cdot (x, y) =</span>
+<span class="sd">            \begin{pmatrix}</span>
+<span class="sd">                d_1  \\</span>
+<span class="sd">                \vdots \\</span>
+<span class="sd">                d_n</span>
+<span class="sd">            \end{pmatrix}</span>
+<span class="sd">            :label: fullmatrix</span>
 
-<span class="sd">          \begin{pmatrix}</span>
-<span class="sd">             nx_1  &amp;  ny_1  \\</span>
-<span class="sd">             \vdots &amp; \vdots \\</span>
-<span class="sd">              nx_n  &amp;  ny_n</span>
-<span class="sd">          \end{pmatrix}</span>
-<span class="sd">              * (x, y) =</span>
-<span class="sd">          \begin{pmatrix}</span>
-<span class="sd">               d_1  \\</span>
-<span class="sd">               \vdots \\</span>
-<span class="sd">               d_n</span>
-<span class="sd">          \end{pmatrix}</span>
 
-
-<span class="sd">        or :math:`A  r = D`.</span>
+<span class="sd">        or :math:`\boldsymbol{A} \cdot \vec r = \vec D`.</span>
 
 <span class="sd">        Since we do not live in a perfect world and there probably is</span>
 <span class="sd">        no point r that fulfils this equation system, it is solved by</span>
-<span class="sd">        the method of least linear square: </span>
-<span class="sd">        :math:`r_\chi^2 = (A^T A)^-1 A^T D (2)`</span>
+<span class="sd">        the method of least linear square:</span>
 
-<span class="sd">        :math:`r_\chi^2` minimises the squared difference of</span>
+<span class="sd">        .. math::</span>
+<span class="sd">            \vec{r}_{\chi^2} = (\boldsymbol{A}^\text{T} \cdot \boldsymbol{A})^{-1}</span>
+<span class="sd">            \boldsymbol{A}^\text{T} \cdot \vec D</span>
+<span class="sd">            :label: rchisqr</span>
+
+<span class="sd">        :math:`\vec{r}_{\chi^2}` minimises the squared difference of</span>
 
 <span class="sd">        .. math::</span>
 
-<span class="sd">            D - A r.</span>
+<span class="sd">            \vec D - \boldsymbol{A} \cdot \vec r.</span>
 
-<span class="sd">        Weights are applied to every line of equation (1) as stored in</span>
+<span class="sd">        Weights are applied to every line of equation :eq:`fullmatrix` as stored in</span>
 <span class="sd">        circle.weight (assuming they have been set in</span>
-<span class="sd">        self.get_great_circles or elsewhere).</span>
+<span class="sd">        :func:`get_great_circles&lt;ctapipe.reco.FitGammaHillas.get_great_circles&gt;`</span>
+<span class="sd">        or elsewhere).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -570,13 +592,12 @@
         <span class="sd">&#39;&#39;&#39;reconstructs the shower core position from the already set up</span>
 <span class="sd">        great circles</span>
 
-<span class="sd">        .. note::</span>
-
-<span class="sd">          the core of the shower lies on the cross section of the</span>
-<span class="sd">          great circle with the horizontal plane.</span>
-<span class="sd">          the direction of this cross section is the cross-product of</span>
-<span class="sd">          the circle&#39;s normal vector and the horizontal plane.</span>
-<span class="sd">          here, we only care about the direction; not the orientation...</span>
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The core of the shower lies on the cross section of the great circle with</span>
+<span class="sd">        the horizontal plane. The direction of this cross section is the cross-product of</span>
+<span class="sd">        the circle&#39;s normal vector and the horizontal plane.</span>
+<span class="sd">        Here, we only care about the direction; not the orientation...</span>
 
 
 <span class="sd">        Parameters</span>
@@ -614,7 +635,7 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_result_core</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">unit</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">GreatCircle</span><span class="p">:</span>
+<div class="viewcode-block" id="GreatCircle"><a class="viewcode-back" href="../../../api/ctapipe.reco.GreatCircle.html#ctapipe.reco.GreatCircle">[docs]</a><span class="k">class</span> <span class="nc">GreatCircle</span><span class="p">:</span>
     <span class="sd">&#39;&#39;&#39;a tiny helper class to collect some parameters for each great</span>
 <span class="sd">    great circle</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -631,11 +652,12 @@
 <span class="sd">            weight of this telescope for later use during the</span>
 <span class="sd">            reconstruction</span>
 
-<span class="sd">        Algorithm:</span>
-<span class="sd">        ----------</span>
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
 <span class="sd">        c : length 3 ndarray</span>
-<span class="sd">            c = (a × b) × a -&gt; a and c form an orthogonal base for the</span>
-<span class="sd">            great circle (only orthonormal if a and b are of unit-length)</span>
+<span class="sd">            :math:`\vec c = (\vec a \times \vec b) \times \vec a`</span>
+<span class="sd">            :math:`\rightarrow` a and c form an orthogonal base for the great circle</span>
+<span class="sd">            (only orthonormal if a and b are of unit-length)</span>
 <span class="sd">        norm : length 3 ndarray</span>
 <span class="sd">            normal vector of the circle&#39;s plane,</span>
 <span class="sd">            perpendicular to a, b and c</span>
@@ -653,7 +675,7 @@
         <span class="c1"># some weight for this circle</span>
         <span class="c1"># (put e.g. uncertainty on the Hillas parameters</span>
         <span class="c1"># or number of PE in here)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span></div>
 </pre></div>
 
            </div>
@@ -665,7 +687,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 13:51.
+        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 16:24.
 
     </p>
   </div>
@@ -687,7 +709,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'v0.3.2.post12+gitb29ca26',
+            VERSION:'0.3.2.post17+gitebc184f',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
