@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reconstruction (reco) &mdash; ctapipe v0.3.2.post17+gitebc184f</title>
+  <title>Reconstruction (reco) &mdash; ctapipe v0.3.2.post18+git041505a</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.3.2.post17+gitebc184f" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.3.2.post18+git041505a" href="../index.html"/>
         <link rel="next" title="MEst" href="../api/ctapipe.reco.MEst.html"/>
         <link rel="prev" title="Serializer" href="../api/ctapipe.io.serializer.Serializer.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.2.post17+gitebc184f
+                0.3.2.post18+git041505a
               </div>
             
           
@@ -99,10 +99,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../io/index.html">Input/Output (<code class="docutils literal"><span class="pre">io</span></code>)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reconstruction (<code class="docutils literal"><span class="pre">reco</span></code>)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#currently-implemented-algorithms">Currently Implemented Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#moment-based-stereo-reconstruction">Moment-Based Stereo Reconstruction</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#reference-api">Reference/API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#module-ctapipe.reco">ctapipe.reco Package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#class-inheritance-diagram">Class Inheritance Diagram</a></li>
 </ul>
 </li>
 </ul>
@@ -159,7 +164,21 @@
 <span id="reco"></span><h1>Reconstruction (<code class="xref py py-obj docutils literal"><span class="pre">reco</span></code>)<a class="headerlink" href="#reconstruction-reco" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="#module-ctapipe.reco" title="ctapipe.reco"><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.reco</span></code></a> contains functions and classes to reconstruct physical shower events.</p>
+<p><a class="reference internal" href="#module-ctapipe.reco" title="ctapipe.reco"><code class="xref py py-obj docutils literal"><span class="pre">ctapipe.reco</span></code></a> contains functions and classes to reconstruct physical
+shower parameters, using either stereo (multiple images of a shower)
+or mono (single telescope) information.</p>
+<p>All shower reconstruction algorithms should be subclasses of
+<code class="xref py py-obj docutils literal"><span class="pre">RecoShowerAlgorithm</span></code> which defines some common functionality.</p>
+</div>
+<div class="section" id="currently-implemented-algorithms">
+<h2>Currently Implemented Algorithms<a class="headerlink" href="#currently-implemented-algorithms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="moment-based-stereo-reconstruction">
+<h3>Moment-Based Stereo Reconstruction<a class="headerlink" href="#moment-based-stereo-reconstruction" title="Permalink to this headline">¶</a></h3>
+<p>Moment-base reconstruction uses the moments of each shower image (the
+<em>Hillas Parameters</em> to estimate the shower axis for each camera, and
+combines them geometrically to estimate the true shower direction.</p>
+<p>The implementation is in the <a class="reference internal" href="../api/ctapipe.reco.FitGammaHillas.html#ctapipe.reco.FitGammaHillas" title="ctapipe.reco.FitGammaHillas"><code class="xref py py-obj docutils literal"><span class="pre">FitGammaHillas</span></code></a> class.</p>
+</div>
 </div>
 <div class="section" id="reference-api">
 <h2>Reference/API<a class="headerlink" href="#reference-api" title="Permalink to this headline">¶</a></h2>
@@ -205,6 +224,17 @@
 </tbody>
 </table>
 </div>
+<div class="section" id="class-inheritance-diagram">
+<h4>Class Inheritance Diagram<a class="headerlink" href="#class-inheritance-diagram" title="Permalink to this headline">¶</a></h4>
+<img src="../_images/inheritance-f678cc7e79cfb1e48f3e967fc34748dd1f4916f3.png" alt="Inheritance diagram of ctapipe.reco.FitGammaHillas.FitGammaHillas, ctapipe.reco.FitGammaHillas.GreatCircle, ctapipe.reco.reco_algorithms.RecoShowerGeomAlgorithm, ctapipe.reco.FitGammaHillas.TooFewTelescopesException" usemap="#inheritance7898305620" class="inheritance"/>
+<map id="inheritance7898305620" name="inheritance7898305620">
+<area shape="rect" id="node1" title="Base class of all Components (sometimes called" alt="" coords="393,78,461,97"/>
+<area shape="rect" id="node5" title="This is the base class from which all direction reconstruction" alt="" coords="497,78,640,97"/>
+<area shape="rect" id="node4" title="class that reconstructs the direction of an atmospheric shower" alt="" coords="676,78,764,97"/>
+<area shape="rect" id="node6" title="a tiny helper class to collect some parameters for each great" alt="" coords="45,41,112,60"/>
+<area shape="rect" id="node7" title="The base class for all classes that have descriptors." alt="" coords="36,78,121,97"/>
+</map>
+</div>
 </div>
 </div>
 </div>
@@ -228,7 +258,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 16:24.
+        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 16:42.
 
     </p>
   </div>
@@ -250,7 +280,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.2.post17+gitebc184f',
+            VERSION:'0.3.2.post18+git041505a',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
