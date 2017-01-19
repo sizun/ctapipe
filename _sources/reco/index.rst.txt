@@ -14,7 +14,7 @@ shower parameters, using either stereo (multiple images of a shower)
 or mono (single telescope) information.
 
 All shower reconstruction algorithms should be subclasses of
-`RecoShowerAlgorithm` which defines some common functionality.
+`RecoShowerGeomAlgorithm` which defines some common functionality.
 
 Currently Implemented Algorithms
 ================================
