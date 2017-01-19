@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Input/Output (io) &mdash; ctapipe vv0.2.0.post53+git98e9b78</title>
+  <title>Input/Output (io) &mdash; ctapipe vv0.3.2.post11+git8c54b14</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe vv0.2.0.post53+git98e9b78" href="../index.html"/>
+    <link rel="top" title="ctapipe vv0.3.2.post11+git8c54b14" href="../index.html"/>
         <link rel="next" title="make_rectangular_camera_geometry" href="../api/ctapipe.io.camera.make_rectangular_camera_geometry.html"/>
         <link rel="prev" title="write_fits" href="../api/ctapipe.instrument.InstrumentDescription.write_fits.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                v0.2.0.post53+git98e9b78
+                v0.3.2.post11+git8c54b14
               </div>
             
           
@@ -340,8 +340,8 @@ tables or pickle files)</p>
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.MCCameraEventContainer.html#ctapipe.io.containers.MCCameraEventContainer" title="ctapipe.io.containers.MCCameraEventContainer"><code class="xref py py-obj docutils literal"><span class="pre">MCCameraEventContainer</span></code></a>()</td>
 <td>Storage of mc data for a single telescope that change per event</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.CalibratedCameraContainer.html#ctapipe.io.containers.CalibratedCameraContainer" title="ctapipe.io.containers.CalibratedCameraContainer"><code class="xref py py-obj docutils literal"><span class="pre">CalibratedCameraContainer</span></code></a>()</td>
-<td>Storage of output of camera calibrationm e.g the final calibrated image in intensity units and other per-event calculated calibration information.</td>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.CameraCalibrationContainer.html#ctapipe.io.containers.CameraCalibrationContainer" title="ctapipe.io.containers.CameraCalibrationContainer"><code class="xref py py-obj docutils literal"><span class="pre">CameraCalibrationContainer</span></code></a>()</td>
+<td>Storage of externally calculated calibration parameters (not per-event)</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.ReconstructedShowerContainer.html#ctapipe.io.containers.ReconstructedShowerContainer" title="ctapipe.io.containers.ReconstructedShowerContainer"><code class="xref py py-obj docutils literal"><span class="pre">ReconstructedShowerContainer</span></code></a>()</td>
 <td>Standard output of algorithms reconstructing shower geometry</td>
@@ -354,6 +354,12 @@ tables or pickle files)</p>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.ReconstructedContainer.html#ctapipe.io.containers.ReconstructedContainer" title="ctapipe.io.containers.ReconstructedContainer"><code class="xref py py-obj docutils literal"><span class="pre">ReconstructedContainer</span></code></a>()</td>
 <td>collect reconstructed shower info from multiple algorithms</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../api/ctapipe.io.containers.DL1CameraContainer.html#ctapipe.io.containers.DL1CameraContainer" title="ctapipe.io.containers.DL1CameraContainer"><code class="xref py py-obj docutils literal"><span class="pre">DL1CameraContainer</span></code></a>()</td>
+<td>Storage of output of camera calibrationm e.g the final calibrated image in intensity units and other per-event calculated calibration information.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../api/ctapipe.io.containers.DL1Container.html#ctapipe.io.containers.DL1Container" title="ctapipe.io.containers.DL1Container"><code class="xref py py-obj docutils literal"><span class="pre">DL1Container</span></code></a>()</td>
+<td>DL1 Calibrated Camera Images and associated data</td>
 </tr>
 </tbody>
 </table>
@@ -400,7 +406,7 @@ tables or pickle files)</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 06 Jan 2017 13:27.
+        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 12:42.
 
     </p>
   </div>
@@ -422,7 +428,7 @@ tables or pickle files)</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'v0.2.0.post53+git98e9b78',
+            VERSION:'v0.3.2.post11+git8c54b14',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -431,6 +437,7 @@ tables or pickle files)</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

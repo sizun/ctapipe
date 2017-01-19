@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.tools.info &mdash; ctapipe vv0.2.0.post53+git98e9b78</title>
+  <title>ctapipe.tools.info &mdash; ctapipe vv0.3.2.post11+git8c54b14</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe vv0.2.0.post53+git98e9b78" href="../../../index.html"/>
+    <link rel="top" title="ctapipe vv0.3.2.post11+git8c54b14" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                v0.2.0.post53+git98e9b78
+                v0.3.2.post11+git8c54b14
               </div>
             
           
@@ -191,11 +191,11 @@
 
 <span class="k">def</span> <span class="nf">_info_version</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Print version info.&quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">ctapipe</span> <span class="k">import</span> <span class="n">version</span>
+    <span class="kn">import</span> <span class="nn">ctapipe</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">*** ctapipe version info ***</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;version: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">version</span><span class="o">.</span><span class="n">version</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;release: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">version</span><span class="o">.</span><span class="n">release</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;githash: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">version</span><span class="o">.</span><span class="n">githash</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;version: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ctapipe</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
+    <span class="c1">#print(&#39;release: {0}&#39;.format(version.release))</span>
+    <span class="c1">#print(&#39;githash: {0}&#39;.format(version.githash))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 
 
@@ -247,7 +247,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 06 Jan 2017 13:27.
+        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 12:42.
 
     </p>
   </div>
@@ -269,7 +269,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'v0.2.0.post53+git98e9b78',
+            VERSION:'v0.3.2.post11+git8c54b14',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -278,6 +278,7 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

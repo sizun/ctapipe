@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CalibratedCameraContainer &mdash; ctapipe vv0.2.0.post53+git98e9b78</title>
+  <title>DL1CameraContainer &mdash; ctapipe vv0.3.2.post11+git8c54b14</title>
   
 
   
@@ -33,10 +33,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe vv0.2.0.post53+git98e9b78" href="../index.html"/>
+    <link rel="top" title="ctapipe vv0.3.2.post11+git8c54b14" href="../index.html"/>
         <link rel="up" title="Input/Output (io)" href="../io/index.html"/>
-        <link rel="next" title="ReconstructedShowerContainer" href="ctapipe.io.containers.ReconstructedShowerContainer.html"/>
-        <link rel="prev" title="MCCameraEventContainer" href="ctapipe.io.containers.MCCameraEventContainer.html"/> 
+        <link rel="next" title="DL1Container" href="ctapipe.io.containers.DL1Container.html"/>
+        <link rel="prev" title="ReconstructedContainer" href="ctapipe.io.containers.ReconstructedContainer.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                v0.2.0.post53+git98e9b78
+                v0.3.2.post11+git8c54b14
               </div>
             
           
@@ -149,11 +149,11 @@
       
           <li><a href="../io/index.html">Input/Output (<code class="docutils literal"><span class="pre">io</span></code>)</a> &raquo;</li>
       
-    <li>CalibratedCameraContainer</li>
+    <li>DL1CameraContainer</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/api/ctapipe.io.containers.CalibratedCameraContainer.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/ctapipe.io.containers.DL1CameraContainer.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -163,11 +163,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="calibratedcameracontainer">
-<h1>CalibratedCameraContainer<a class="headerlink" href="#calibratedcameracontainer" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="dl1cameracontainer">
+<h1>DL1CameraContainer<a class="headerlink" href="#dl1cameracontainer" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="ctapipe.io.containers.CalibratedCameraContainer">
-<em class="property">class </em><code class="descclassname">ctapipe.io.containers.</code><code class="descname">CalibratedCameraContainer</code><a class="reference internal" href="../_modules/ctapipe/io/containers.html#CalibratedCameraContainer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.io.containers.CalibratedCameraContainer" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.io.containers.DL1CameraContainer">
+<em class="property">class </em><code class="descclassname">ctapipe.io.containers.</code><code class="descname">DL1CameraContainer</code><a class="reference internal" href="../_modules/ctapipe/io/containers.html#DL1CameraContainer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.io.containers.DL1CameraContainer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">ctapipe.core.container.Container</span></code></p>
 <p>Storage of output of camera calibrationm e.g the final calibrated
 image in intensity units and other per-event calculated
@@ -179,39 +179,31 @@ calibration information.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.io.containers.CalibratedCameraContainer.calibrated_image" title="ctapipe.io.containers.CalibratedCameraContainer.calibrated_image"><code class="xref py py-obj docutils literal"><span class="pre">calibrated_image</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.io.containers.DL1CameraContainer.extracted_samples" title="ctapipe.io.containers.DL1CameraContainer.extracted_samples"><code class="xref py py-obj docutils literal"><span class="pre">extracted_samples</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.io.containers.CalibratedCameraContainer.integration_window" title="ctapipe.io.containers.CalibratedCameraContainer.integration_window"><code class="xref py py-obj docutils literal"><span class="pre">integration_window</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.io.containers.DL1CameraContainer.image" title="ctapipe.io.containers.DL1CameraContainer.image"><code class="xref py py-obj docutils literal"><span class="pre">image</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.io.containers.CalibratedCameraContainer.peakpos" title="ctapipe.io.containers.CalibratedCameraContainer.peakpos"><code class="xref py py-obj docutils literal"><span class="pre">peakpos</span></code></a></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.io.containers.CalibratedCameraContainer.pedestal_subtracted_adc" title="ctapipe.io.containers.CalibratedCameraContainer.pedestal_subtracted_adc"><code class="xref py py-obj docutils literal"><span class="pre">pedestal_subtracted_adc</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.io.containers.DL1CameraContainer.peakpos" title="ctapipe.io.containers.DL1CameraContainer.peakpos"><code class="xref py py-obj docutils literal"><span class="pre">peakpos</span></code></a></td>
 <td></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
-<dt id="ctapipe.io.containers.CalibratedCameraContainer.calibrated_image">
-<code class="descname">calibrated_image</code><em class="property"> = array of camera image [electron]</em><a class="headerlink" href="#ctapipe.io.containers.CalibratedCameraContainer.calibrated_image" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.io.containers.DL1CameraContainer.extracted_samples">
+<code class="descname">extracted_samples</code><em class="property"> = numpy array of bools indicating which samples were included in the charge extraction as a result of the charge extractor chosen. Shape=(nchan, npix, nsamples).</em><a class="headerlink" href="#ctapipe.io.containers.DL1CameraContainer.extracted_samples" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="ctapipe.io.containers.CalibratedCameraContainer.integration_window">
-<code class="descname">integration_window</code><em class="property"> = map per channel of bool ndarrays of shape (npix, nsamples) indicating the samples used in the obtaining of the charge, dependant on the integration method used</em><a class="headerlink" href="#ctapipe.io.containers.CalibratedCameraContainer.integration_window" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.io.containers.DL1CameraContainer.image">
+<code class="descname">image</code><em class="property"> = np array of camera image [electron]</em><a class="headerlink" href="#ctapipe.io.containers.DL1CameraContainer.image" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="ctapipe.io.containers.CalibratedCameraContainer.peakpos">
-<code class="descname">peakpos</code><em class="property"> = position of the peak as determined by the peak-finding algorithm for each pixel and channel</em><a class="headerlink" href="#ctapipe.io.containers.CalibratedCameraContainer.peakpos" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="ctapipe.io.containers.CalibratedCameraContainer.pedestal_subtracted_adc">
-<code class="descname">pedestal_subtracted_adc</code><em class="property"> = Map of channel to subtracted ADC image</em><a class="headerlink" href="#ctapipe.io.containers.CalibratedCameraContainer.pedestal_subtracted_adc" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.io.containers.DL1CameraContainer.peakpos">
+<code class="descname">peakpos</code><em class="property"> = numpy array containing position of the peak as determined by the peak-finding algorithm for each pixel and channel</em><a class="headerlink" href="#ctapipe.io.containers.DL1CameraContainer.peakpos" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -225,10 +217,10 @@ calibration information.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ctapipe.io.containers.ReconstructedShowerContainer.html" class="btn btn-neutral float-right" title="ReconstructedShowerContainer" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ctapipe.io.containers.DL1Container.html" class="btn btn-neutral float-right" title="DL1Container" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ctapipe.io.containers.MCCameraEventContainer.html" class="btn btn-neutral" title="MCCameraEventContainer" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ctapipe.io.containers.ReconstructedContainer.html" class="btn btn-neutral" title="ReconstructedContainer" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -237,7 +229,7 @@ calibration information.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 06 Jan 2017 13:27.
+        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 12:42.
 
     </p>
   </div>
@@ -259,7 +251,7 @@ calibration information.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'v0.2.0.post53+git98e9b78',
+            VERSION:'v0.3.2.post11+git8c54b14',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -268,6 +260,7 @@ calibration information.</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>RawCameraContainer &mdash; ctapipe vv0.2.0.post53+git98e9b78</title>
+  <title>RawCameraContainer &mdash; ctapipe vv0.3.2.post11+git8c54b14</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe vv0.2.0.post53+git98e9b78" href="../index.html"/>
+    <link rel="top" title="ctapipe vv0.3.2.post11+git8c54b14" href="../index.html"/>
         <link rel="up" title="Input/Output (io)" href="../io/index.html"/>
         <link rel="next" title="MCEventContainer" href="ctapipe.io.containers.MCEventContainer.html"/>
         <link rel="prev" title="RawDataContainer" href="ctapipe.io.containers.RawDataContainer.html"/> 
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                v0.2.0.post53+git98e9b78
+                v0.3.2.post11+git8c54b14
               </div>
             
           
@@ -183,17 +183,25 @@
 <tr class="row-even"><td><a class="reference internal" href="#ctapipe.io.containers.RawCameraContainer.adc_sums" title="ctapipe.io.containers.RawCameraContainer.adc_sums"><code class="xref py py-obj docutils literal"><span class="pre">adc_sums</span></code></a></td>
 <td></td>
 </tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.io.containers.RawCameraContainer.num_samples" title="ctapipe.io.containers.RawCameraContainer.num_samples"><code class="xref py py-obj docutils literal"><span class="pre">num_samples</span></code></a></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 <p class="rubric">Attributes Documentation</p>
 <dl class="attribute">
 <dt id="ctapipe.io.containers.RawCameraContainer.adc_samples">
-<code class="descname">adc_samples</code><em class="property"> = map of channel to arrays of (n_pixels, n_samples)</em><a class="headerlink" href="#ctapipe.io.containers.RawCameraContainer.adc_samples" title="Permalink to this definition">¶</a></dt>
+<code class="descname">adc_samples</code><em class="property"> = numpy array containing ADC samples(n_channels x n_pixels, n_samples)</em><a class="headerlink" href="#ctapipe.io.containers.RawCameraContainer.adc_samples" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="ctapipe.io.containers.RawCameraContainer.adc_sums">
-<code class="descname">adc_sums</code><em class="property"> = map of channel to (masked) arrays of all integrated ADC data (n_pixels)</em><a class="headerlink" href="#ctapipe.io.containers.RawCameraContainer.adc_sums" title="Permalink to this definition">¶</a></dt>
+<code class="descname">adc_sums</code><em class="property"> = numpy array containing integrated ADC data (n_channels x n_pixels)</em><a class="headerlink" href="#ctapipe.io.containers.RawCameraContainer.adc_sums" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ctapipe.io.containers.RawCameraContainer.num_samples">
+<code class="descname">num_samples</code><em class="property"> = number of time samples for telescope</em><a class="headerlink" href="#ctapipe.io.containers.RawCameraContainer.num_samples" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -219,7 +227,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 06 Jan 2017 13:27.
+        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 12:42.
 
     </p>
   </div>
@@ -241,7 +249,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'v0.2.0.post53+git98e9b78',
+            VERSION:'v0.3.2.post11+git8c54b14',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -250,6 +258,7 @@
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

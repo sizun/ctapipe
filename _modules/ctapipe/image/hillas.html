@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.image.hillas &mdash; ctapipe vv0.2.0.post53+git98e9b78</title>
+  <title>ctapipe.image.hillas &mdash; ctapipe vv0.3.2.post11+git8c54b14</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe vv0.2.0.post53+git98e9b78" href="../../../index.html"/>
+    <link rel="top" title="ctapipe vv0.3.2.post11+git8c54b14" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                v0.2.0.post53+git98e9b78
+                v0.3.2.post11+git8c54b14
               </div>
             
           
@@ -308,6 +308,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    hillas_parameters : `MomentParameters`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">unit</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">pix_x</span><span class="p">)</span><span class="o">.</span><span class="n">unit</span>
     <span class="n">pix_x</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span><span class="o">.</span><span class="n">value</span>
     <span class="n">pix_y</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">pix_y</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span><span class="o">.</span><span class="n">value</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
@@ -404,15 +405,15 @@
     <span class="c1"># azwidth = np.sqrt(azwidth_2)</span>
 
     <span class="k">return</span> <span class="n">MomentParameters</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
-                             <span class="n">cen_x</span><span class="o">=</span><span class="n">mean_x</span><span class="p">,</span>
-                             <span class="n">cen_y</span><span class="o">=</span><span class="n">mean_y</span><span class="p">,</span>
-                             <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="p">,</span>
-                             <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
-                             <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span>
-                             <span class="n">phi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">phi</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span>
-                             <span class="n">psi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">delta</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span>
-                             <span class="n">miss</span><span class="o">=</span><span class="n">miss</span><span class="p">,</span>
-                             <span class="n">skewness</span><span class="o">=</span><span class="n">skewness</span><span class="p">,</span>
+                            <span class="n">cen_x</span><span class="o">=</span><span class="n">mean_x</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
+                            <span class="n">cen_y</span><span class="o">=</span><span class="n">mean_y</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
+                            <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
+                            <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
+                            <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
+                            <span class="n">phi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">phi</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span>
+                            <span class="n">psi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">delta</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span>
+                            <span class="n">miss</span><span class="o">=</span><span class="n">miss</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
+                            <span class="n">skewness</span><span class="o">=</span><span class="n">skewness</span><span class="p">,</span>
                             <span class="n">kurtosis</span><span class="o">=</span><span class="n">kurtosis</span><span class="p">)</span></div>
 
 <span class="k">def</span> <span class="nf">static_pix</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="p">):</span>
@@ -537,7 +538,7 @@
     <span class="c1"># polar coordinates of centroid</span>
 
     <span class="n">rr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xm2</span> <span class="o">+</span> <span class="n">ym2</span><span class="p">)</span>  <span class="c1"># could use hypot(xm, ym), but already have squares</span>
-    <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">ym</span><span class="p">,</span> <span class="n">xm</span><span class="p">)</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">ym</span><span class="p">,</span> <span class="n">xm</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span>
 
     <span class="c1"># common factors:</span>
 
@@ -603,13 +604,14 @@
                     <span class="n">vy4</span> <span class="o">*</span> <span class="n">spsi2</span> <span class="o">*</span> <span class="n">spsi2</span><span class="p">)</span>
         <span class="n">kurtosis</span> <span class="o">=</span> <span class="n">kurt</span> <span class="o">/</span> <span class="p">(</span><span class="n">length</span><span class="o">*</span><span class="n">length</span><span class="o">*</span><span class="n">length</span><span class="o">*</span><span class="n">length</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>  <span class="c1"># Skip Higher Moments</span>
-        <span class="n">psi</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span>
         <span class="n">skewness</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="n">kurtosis</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">asym</span> <span class="o">=</span> <span class="mf">0.0</span>
 
     <span class="k">return</span> <span class="n">MomentParameters</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">cen_x</span><span class="o">=</span><span class="n">xm</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span> <span class="n">cen_y</span><span class="o">=</span><span class="n">ym</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
-                            <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">rr</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
-                            <span class="n">phi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">phi</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span> <span class="n">psi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">psi</span><span class="p">),</span>
+                            <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">rr</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
+                            <span class="n">phi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">phi</span><span class="p">),</span> <span class="n">psi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">psi</span><span class="p">),</span>
                             <span class="n">miss</span><span class="o">=</span><span class="n">miss</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span> <span class="n">skewness</span><span class="o">=</span><span class="n">skewness</span><span class="p">,</span>
                             <span class="n">kurtosis</span><span class="o">=</span><span class="n">kurtosis</span><span class="p">)</span></div>
 
@@ -638,14 +640,19 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">pix_x</span><span class="p">)</span><span class="o">==</span><span class="n">Quantity</span><span class="p">:</span>
-        <span class="n">unit</span> <span class="o">=</span> <span class="n">pix_x</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
-        <span class="k">assert</span> <span class="n">pix_x</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span> <span class="o">==</span> <span class="n">pix_y</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+        <span class="n">unit</span> <span class="o">=</span> <span class="n">pix_x</span><span class="o">.</span><span class="n">unit</span>
+        <span class="k">assert</span> <span class="n">pix_x</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">pix_y</span><span class="o">.</span><span class="n">unit</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">unit</span> <span class="o">=</span> <span class="mf">1.0</span>
 
     <span class="n">pix_x</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span><span class="o">.</span><span class="n">value</span>
     <span class="n">pix_y</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">pix_y</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="c1"># make sure they are numpy arrays so we can use numpy operations</span>
+    <span class="c1">#pix_x = np.asanyarray(pix_x)</span>
+    <span class="c1">#pix_y = np.asanyarray(pix_y)</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
     <span class="k">assert</span> <span class="n">pix_x</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span>
     <span class="k">assert</span> <span class="n">pix_y</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span>
 
@@ -744,11 +751,11 @@
 
     <span class="c1"># Code to de-interface with historical code</span>
     <span class="n">size</span> <span class="o">=</span> <span class="n">sumsig</span>
-    <span class="n">m_x</span> <span class="o">=</span> <span class="n">xm</span><span class="o">*</span><span class="n">unit</span>
-    <span class="n">m_y</span> <span class="o">=</span> <span class="n">ym</span><span class="o">*</span><span class="n">unit</span>
-    <span class="n">length</span> <span class="o">=</span> <span class="n">length</span><span class="o">*</span><span class="n">unit</span>
-    <span class="n">width</span> <span class="o">=</span> <span class="n">width</span><span class="o">*</span><span class="n">unit</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">dist</span><span class="o">*</span><span class="n">unit</span>
+    <span class="n">m_x</span> <span class="o">=</span> <span class="n">xm</span>
+    <span class="n">m_y</span> <span class="o">=</span> <span class="n">ym</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">length</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">dist</span>
 
     <span class="n">psi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">((</span><span class="n">d</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span> <span class="o">*</span> <span class="n">ym</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">vxy</span> <span class="o">*</span> <span class="n">xm</span><span class="p">,</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">vxy</span> <span class="o">*</span> <span class="n">ym</span> <span class="o">-</span> <span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">*</span> <span class="n">xm</span><span class="p">)</span>
     <span class="n">cpsi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span>
@@ -775,9 +782,11 @@
     <span class="n">skewness</span> <span class="o">=</span> <span class="n">asymm</span><span class="o">*</span><span class="n">asymm</span><span class="o">*</span><span class="n">asymm</span>
     <span class="n">kurtosis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
 
-    <span class="k">return</span> <span class="n">MomentParameters</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">cen_x</span><span class="o">=</span><span class="n">m_x</span><span class="p">,</span> <span class="n">cen_y</span><span class="o">=</span><span class="n">m_y</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
-                            <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">phi</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span> <span class="n">psi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">psi</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span>
-                            <span class="n">miss</span><span class="o">=</span><span class="n">miss</span><span class="p">,</span>
+    <span class="k">return</span> <span class="n">MomentParameters</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">cen_x</span><span class="o">=</span><span class="n">m_x</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span> <span class="n">cen_y</span><span class="o">=</span><span class="n">m_y</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
+                            <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
+                            <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">phi</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span>
+                            <span class="n">psi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">psi</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span>
+                            <span class="n">miss</span><span class="o">=</span><span class="n">miss</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
                             <span class="n">skewness</span><span class="o">=</span><span class="n">skewness</span><span class="p">,</span> <span class="n">kurtosis</span><span class="o">=</span><span class="n">kurtosis</span><span class="p">)</span></div>
 
 <span class="k">def</span> <span class="nf">static_xy</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="p">):</span>
@@ -818,6 +827,7 @@
         <span class="n">static_xy</span><span class="o">.</span><span class="n">pix_xy3</span> <span class="o">=</span> <span class="n">pix_x</span> <span class="o">*</span> <span class="n">static_xy</span><span class="o">.</span><span class="n">pix_y3</span>
         <span class="n">static_xy</span><span class="o">.</span><span class="n">pix_y4</span> <span class="o">=</span> <span class="n">static_xy</span><span class="o">.</span><span class="n">pix_y3</span> <span class="o">*</span> <span class="n">pix_y</span>
 
+
 <div class="viewcode-block" id="hillas_parameters_4"><a class="viewcode-back" href="../../../api/ctapipe.image.hillas_parameters_4.html#ctapipe.image.hillas_parameters_4">[docs]</a><span class="k">def</span> <span class="nf">hillas_parameters_4</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">recalculate_pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute Hillas parameters for a given shower image.</span>
 
@@ -845,8 +855,8 @@
 
 
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">pix_x</span><span class="p">)</span><span class="o">==</span><span class="n">Quantity</span><span class="p">:</span>
-        <span class="n">unit</span> <span class="o">=</span> <span class="n">pix_x</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
-        <span class="k">assert</span> <span class="n">pix_x</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span> <span class="o">==</span> <span class="n">pix_y</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>
+        <span class="n">unit</span> <span class="o">=</span> <span class="n">pix_x</span><span class="o">.</span><span class="n">unit</span>
+        <span class="k">assert</span> <span class="n">pix_x</span><span class="o">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">pix_y</span><span class="o">.</span><span class="n">unit</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">unit</span> <span class="o">=</span> <span class="mf">1.0</span>
     <span class="c1"># MP: Actually, I don&#39;t know why we need to strip the units... shouldn&#39; the calculations all work with them?</span>
@@ -953,11 +963,11 @@
 
     <span class="c1"># Code to de-interface with historical code</span>
     <span class="n">size</span> <span class="o">=</span> <span class="n">sumsig</span>
-    <span class="n">m_x</span> <span class="o">=</span> <span class="n">xm</span><span class="o">*</span><span class="n">unit</span>
-    <span class="n">m_y</span> <span class="o">=</span> <span class="n">ym</span><span class="o">*</span><span class="n">unit</span>
-    <span class="n">length</span> <span class="o">=</span> <span class="n">length</span><span class="o">*</span><span class="n">unit</span>
-    <span class="n">width</span> <span class="o">=</span> <span class="n">width</span><span class="o">*</span><span class="n">unit</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">dist</span><span class="o">*</span><span class="n">unit</span>
+    <span class="n">m_x</span> <span class="o">=</span> <span class="n">xm</span>
+    <span class="n">m_y</span> <span class="o">=</span> <span class="n">ym</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">length</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">dist</span>
     <span class="n">psi</span> <span class="o">=</span> <span class="n">psi</span>
 
     <span class="c1"># Note, &quot;skewness&quot; is the same as the Whipple/MP &quot;asymmetry^3&quot;, which is fine.</span>
@@ -1021,11 +1031,11 @@
     <span class="c1"># z = np.sqrt(d * d + 4 * xym * xym)</span>
     <span class="c1"># azwidth = np.sqrt((x2m + y2m - z) / 2.0)</span>
 
-    <span class="k">return</span> <span class="n">MomentParameters</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">cen_x</span><span class="o">=</span><span class="n">m_x</span><span class="p">,</span> <span class="n">cen_y</span><span class="o">=</span><span class="n">m_y</span><span class="p">,</span>
-                            <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span>
+    <span class="k">return</span> <span class="n">MomentParameters</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">cen_x</span><span class="o">=</span><span class="n">m_x</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span> <span class="n">cen_y</span><span class="o">=</span><span class="n">m_y</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
+                            <span class="n">length</span><span class="o">=</span><span class="n">length</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
                             <span class="n">phi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">phi</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span>
                             <span class="n">psi</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">psi</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">),</span>
-                            <span class="n">miss</span><span class="o">=</span><span class="n">miss</span><span class="p">,</span>
+                            <span class="n">miss</span><span class="o">=</span><span class="n">miss</span><span class="o">*</span><span class="n">unit</span><span class="p">,</span>
                             <span class="n">skewness</span><span class="o">=</span><span class="n">skewness</span><span class="p">,</span> <span class="n">kurtosis</span><span class="o">=</span><span class="n">kurtosis</span><span class="p">)</span></div>
 
 <span class="c1"># use the 1 version by default. Version 2 has apparent differences.</span>
@@ -1042,7 +1052,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 06 Jan 2017 13:27.
+        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 12:42.
 
     </p>
   </div>
@@ -1064,7 +1074,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'v0.2.0.post53+git98e9b78',
+            VERSION:'v0.3.2.post11+git8c54b14',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -1073,6 +1083,7 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

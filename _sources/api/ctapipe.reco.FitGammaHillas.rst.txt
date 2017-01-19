@@ -10,7 +10,8 @@ FitGammaHillas
 
    .. autosummary::
 
-      ~FitGammaHillas.fit_core
+      ~FitGammaHillas.fit_core_crosses
+      ~FitGammaHillas.fit_core_minimise
       ~FitGammaHillas.fit_origin_crosses
       ~FitGammaHillas.fit_origin_minimise
       ~FitGammaHillas.get_great_circles
@@ -18,7 +19,8 @@ FitGammaHillas
 
    .. rubric:: Methods Documentation
 
-   .. automethod:: fit_core
+   .. automethod:: fit_core_crosses
+   .. automethod:: fit_core_minimise
    .. automethod:: fit_origin_crosses
    .. automethod:: fit_origin_minimise
    .. automethod:: get_great_circles

@@ -1,0 +1,19 @@
+CameraCalibrationContainer
+==========================
+
+.. currentmodule:: ctapipe.io.containers
+
+.. autoclass:: CameraCalibrationContainer
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~CameraCalibrationContainer.dc_to_pe
+      ~CameraCalibrationContainer.pedestal
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: dc_to_pe
+   .. autoattribute:: pedestal

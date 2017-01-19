@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>FitGammaHillas &mdash; ctapipe vv0.2.0.post53+git98e9b78</title>
+  <title>FitGammaHillas &mdash; ctapipe vv0.3.2.post11+git8c54b14</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe vv0.2.0.post53+git98e9b78" href="../index.html"/>
+    <link rel="top" title="ctapipe vv0.3.2.post11+git8c54b14" href="../index.html"/>
         <link rel="up" title="Reconstruction (reco)" href="../reco/index.html"/>
         <link rel="next" title="RecoShowerGeomAlgorithm" href="ctapipe.reco.RecoShowerGeomAlgorithm.html"/>
         <link rel="prev" title="dist_to_traces" href="ctapipe.reco.dist_to_traces.html"/> 
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                v0.2.0.post53+git98e9b78
+                v0.3.2.post11+git8c54b14
               </div>
             
           
@@ -177,49 +177,105 @@ uncertainty on the reconstructed parameters</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">fit_core</span></code>([seed,&nbsp;test_function])</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">fit_core_crosses</span></code>([unit])</td>
+<td>calculates the core position as the least linear square solution</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">fit_core_minimise</span></code>([seed,&nbsp;test_function])</td>
 <td>reconstructs the shower core position from the already set up</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">fit_origin_crosses</span></code>()</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">fit_origin_crosses</span></code>()</td>
 <td>calculates the origin of the gamma as the weighted average</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">fit_origin_minimise</span></code>([seed,&nbsp;test_function])</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">fit_origin_minimise</span></code>([seed,&nbsp;test_function])</td>
 <td>fits the origin of the gamma with a minimisation procedure this</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">get_great_circles</span></code>(hillas_dict,&nbsp;inst,&nbsp;...)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_great_circles</span></code>(hillas_dict,&nbsp;inst,&nbsp;...)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code>(hillas_dict,&nbsp;inst,&nbsp;tel_phi,&nbsp;tel_theta)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">predict</span></code>(hillas_dict,&nbsp;inst,&nbsp;tel_phi,&nbsp;tel_theta)</td>
 <td>The function you want to call for the reconstruction of the event.</td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods Documentation</p>
 <dl class="method">
-<dt id="ctapipe.reco.FitGammaHillas.fit_core">
-<code class="descname">fit_core</code><span class="sig-paren">(</span><em>seed=(&lt;Quantity 0.0 m&gt;</em>, <em>&lt;Quantity 0.0 m&gt;)</em>, <em>test_function=&lt;function dist_to_traces&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/FitGammaHillas.html#FitGammaHillas.fit_core"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.FitGammaHillas.fit_core" title="Permalink to this definition">¶</a></dt>
+<dt id="ctapipe.reco.FitGammaHillas.fit_core_crosses">
+<code class="descname">fit_core_crosses</code><span class="sig-paren">(</span><em>unit=Unit(&quot;m&quot;)</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/FitGammaHillas.html#FitGammaHillas.fit_core_crosses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.FitGammaHillas.fit_core_crosses" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculates the core position as the least linear square solution
+of an (over-constrained) equation system</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>r_chisqr</strong> : shape (2) numpy array</p>
+<blockquote class="last">
+<div><p>the minimum χ² solution for the shower impact position</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The basis is the &quot;trace&quot; of each telescope's <code class="xref py py-obj docutils literal"><span class="pre">GreatCircle</span></code> which
+can be determined by the telescope's position P=(Px, Py) and
+the circle's normal vector, projected to the ground n=(nx,
+ny), so that for every r=(x, y) on the trace</p>
+<p><span class="math">\(n  r = n P\)</span>
+<span class="math">\(n_x  x + n_y y = d\)</span></p>
+<p>In a perfect world, the traces of all telescopes cross in the
+shower's point of impact. This means that there is one common
+point (x, y) for every telescope, so we can write in matrix
+form:</p>
+<div class="math">
+\[\begin{split}\begin{pmatrix}
+   nx_1  &amp;  ny_1  \\
+   \vdots &amp; \vdots \\
+    nx_n  &amp;  ny_n
+\end{pmatrix}
+    * (x, y) =
+\begin{pmatrix}
+     d_1  \\
+     \vdots \\
+     d_n
+\end{pmatrix}\end{split}\]</div>
+<p>or <span class="math">\(A  r = D\)</span>.</p>
+<p>Since we do not live in a perfect world and there probably is
+no point r that fulfils this equation system, it is solved by
+the method of least linear square: <span class="math">\(r_\chi^2 = (A^T
+A)^-1 A^T D (2)\)</span></p>
+<p><span class="math">\(r_\chi^2\)</span> minimises the squared difference of</p>
+<div class="math">
+\[D - A r.\]</div>
+<p>Weights are applied to every line of equation (1) as stored in
+circle.weight (assuming they have been set in
+self.get_great_circles or elsewhere).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ctapipe.reco.FitGammaHillas.fit_core_minimise">
+<code class="descname">fit_core_minimise</code><span class="sig-paren">(</span><em>seed=(0</em>, <em>0)</em>, <em>test_function=&lt;function dist_to_traces&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/FitGammaHillas.html#FitGammaHillas.fit_core_minimise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.FitGammaHillas.fit_core_minimise" title="Permalink to this definition">¶</a></dt>
 <dd><p>reconstructs the shower core position from the already set up
 great circles</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">the core of the shower lies on the cross section of the
-great circle with the horizontal plane the direction of this
-cross section is the cross-product of the normal vectors of
-the circle and the horizontal plane here we only care about
-the direction; not the orientation...</p>
+great circle with the horizontal plane.
+the direction of this cross section is the cross-product of
+the circle's normal vector and the horizontal plane.
+here, we only care about the direction; not the orientation...</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>seed</strong> : python tuple * astropy quantity, optional</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>seed</strong> : tuple, optional (default: (0, 0))</p>
 <blockquote>
-<div><p>shape (2) tuple with optional starting coordinates in</p>
+<div><p>shape (2) tuple with optional starting coordinates
+tuple of floats or astropy.length -- if floats, assume metres</p>
 </div></blockquote>
-<p><strong>test_function</strong> : function object, optional</p>
+<p><strong>test_function</strong> : function object, optional (default: dist_to_traces)</p>
 <blockquote class="last">
-<div><p>function to be used by the minimiser
-by default uses self._dist_to_traces</p>
+<div><p>function to be used by the minimiser</p>
 </div></blockquote>
 </td>
 </tr>
@@ -236,7 +292,7 @@ direction of the intersections of all great circles</p>
 
 <dl class="method">
 <dt id="ctapipe.reco.FitGammaHillas.fit_origin_minimise">
-<code class="descname">fit_origin_minimise</code><span class="sig-paren">(</span><em>seed=(0</em>, <em>0</em>, <em>1)</em>, <em>test_function=&lt;function n_angle_sum&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/FitGammaHillas.html#FitGammaHillas.fit_origin_minimise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.FitGammaHillas.fit_origin_minimise" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit_origin_minimise</code><span class="sig-paren">(</span><em>seed=(0</em>, <em>0</em>, <em>1)</em>, <em>test_function=&lt;function neg_angle_sum&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/reco/FitGammaHillas.html#FitGammaHillas.fit_origin_minimise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.reco.FitGammaHillas.fit_origin_minimise" title="Permalink to this definition">¶</a></dt>
 <dd><p>fits the origin of the gamma with a minimisation procedure this
 function expects that get_great_circles has been run already a
 seed should be given otherwise it defaults to &quot;straight up&quot;
@@ -251,11 +307,10 @@ circles</p>
 <blockquote>
 <div><p>starting point of the minimisation</p>
 </div></blockquote>
-<p><strong>test_function</strong> : member function if this class</p>
+<p><strong>test_function</strong> : function object, optional (default: neg_angle_sum)</p>
 <blockquote>
-<div><p>either n_angle_sum or MEst (or own implementation...)
-defaults to n_angle_sum if none is given
-n_angle_sum seemingly superior to MEst</p>
+<div><p>either neg_angle_sum or MEst (or own implementation...)
+neg_angle_sum seemingly superior to MEst</p>
 </div></blockquote>
 </td>
 </tr>
@@ -326,7 +381,7 @@ the core position fit (e.g. CoG of all telescope images)</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 06 Jan 2017 13:27.
+        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 12:42.
 
     </p>
   </div>
@@ -348,7 +403,7 @@ the core position fit (e.g. CoG of all telescope images)</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'v0.2.0.post53+git98e9b78',
+            VERSION:'v0.3.2.post11+git8c54b14',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -357,6 +412,7 @@ the core position fit (e.g. CoG of all telescope images)</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

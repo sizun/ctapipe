@@ -12,8 +12,10 @@ RawCameraContainer
 
       ~RawCameraContainer.adc_samples
       ~RawCameraContainer.adc_sums
+      ~RawCameraContainer.num_samples
 
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: adc_samples
    .. autoattribute:: adc_sums
+   .. autoattribute:: num_samples

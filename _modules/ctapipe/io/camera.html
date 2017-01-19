@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.io.camera &mdash; ctapipe vv0.2.0.post53+git98e9b78</title>
+  <title>ctapipe.io.camera &mdash; ctapipe vv0.3.2.post11+git8c54b14</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe vv0.2.0.post53+git98e9b78" href="../../../index.html"/>
+    <link rel="top" title="ctapipe vv0.3.2.post11+git8c54b14" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                v0.2.0.post53+git98e9b78
+                v0.3.2.post11+git8c54b14
               </div>
             
           
@@ -173,7 +173,7 @@
     <span class="p">(</span><span class="mi">1855</span><span class="p">,</span> <span class="mf">28.0</span><span class="p">):</span>  <span class="p">(</span><span class="s1">&#39;LST&#39;</span><span class="p">,</span> <span class="s1">&#39;LSTCam&#39;</span><span class="p">,</span> <span class="s1">&#39;hexagonal&#39;</span><span class="p">,</span> <span class="mf">0.</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span> <span class="o">-</span><span class="mf">100.893</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">),</span>
     <span class="p">(</span><span class="mi">1296</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>  <span class="p">(</span><span class="s1">&#39;SST&#39;</span><span class="p">,</span> <span class="s1">&#39;SST-1m&#39;</span><span class="p">,</span> <span class="s1">&#39;hexagonal&#39;</span><span class="p">,</span> <span class="mi">30</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">),</span>
     <span class="p">(</span><span class="mi">1764</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>  <span class="p">(</span><span class="s1">&#39;MST&#39;</span><span class="p">,</span> <span class="s1">&#39;FlashCam&#39;</span><span class="p">,</span> <span class="s1">&#39;hexagonal&#39;</span><span class="p">,</span> <span class="mi">30</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">2368</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>  <span class="p">(</span><span class="s1">&#39;SST&#39;</span><span class="p">,</span> <span class="s1">&#39;ASTRI&#39;</span><span class="p">,</span> <span class="s1">&#39;rectangular&#39;</span><span class="p">,</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span> <span class="mi">90</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">2368</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>  <span class="p">(</span><span class="s1">&#39;SST&#39;</span><span class="p">,</span> <span class="s1">&#39;ASTRI&#39;</span><span class="p">,</span> <span class="s1">&#39;rectangular&#39;</span><span class="p">,</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span> <span class="mf">90.</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">),</span>
     <span class="p">(</span><span class="mi">11328</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span> <span class="p">(</span><span class="s1">&#39;SCT&#39;</span><span class="p">,</span> <span class="s1">&#39;SCTCam&#39;</span><span class="p">,</span> <span class="s1">&#39;rectangular&#39;</span><span class="p">,</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span> <span class="mi">0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">),</span>
 <span class="p">}</span>
 
@@ -299,6 +299,30 @@
 <span class="c1"># utility functions:</span>
 <span class="c1"># ======================================================================</span>
 
+<span class="k">def</span> <span class="nf">get_min_pixel_seperation</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Obtain the minimum seperation between two pixels on the camera</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pix_x : array_like</span>
+<span class="sd">        x position of each pixel</span>
+<span class="sd">    pix_y : array_like</span>
+<span class="sd">        y position of each pixels</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pixsep : astropy.units.Unit</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#    dx = pix_x[1] - pix_x[0]    &lt;=== Not adjacent for DC-SSTs!!</span>
+    <span class="c1">#    dy = pix_y[1] - pix_y[0]</span>
+
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">pix_x</span> <span class="o">-</span> <span class="n">pix_x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">pix_y</span> <span class="o">-</span> <span class="n">pix_y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">pixsep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dx</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="k">return</span> <span class="n">pixsep</span>
+
 
 <span class="k">def</span> <span class="nf">find_neighbor_pixels</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">,</span> <span class="n">rad</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;use a KD-Tree to quickly find nearest neighbors of the pixels in a</span>
@@ -349,16 +373,7 @@
 <span class="sd">    - the pixels are square or hexagonal</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="c1">#    dx = pix_x[1] - pix_x[0]    &lt;=== Not adjacent for DC-SSTs!!</span>
-<span class="c1">#    dy = pix_y[1] - pix_y[0]</span>
-
-    <span class="n">pixsep</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">ipix</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pix_x</span><span class="p">)):</span>
-        <span class="n">dx</span> <span class="o">=</span> <span class="n">pix_x</span><span class="p">[</span><span class="n">ipix</span><span class="p">]</span> <span class="o">-</span> <span class="n">pix_x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">dy</span> <span class="o">=</span> <span class="n">pix_y</span><span class="p">[</span><span class="n">ipix</span><span class="p">]</span> <span class="o">-</span> <span class="n">pix_y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">pixsep</span><span class="o">.</span><span class="n">append</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dx</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># dist between pixels 0 and ipix</span>
-
-    <span class="n">dist</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">pixsep</span><span class="p">)</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">get_min_pixel_seperation</span><span class="p">(</span><span class="n">pix_x</span><span class="p">,</span> <span class="n">pix_y</span><span class="p">)</span>
 
     <span class="n">tel_type</span><span class="p">,</span> <span class="n">cam_id</span><span class="p">,</span> <span class="n">pix_type</span><span class="p">,</span> <span class="n">pix_rotation</span><span class="p">,</span> <span class="n">cam_rotation</span> <span class="o">=</span> <span class="n">_guess_camera_type</span><span class="p">(</span>
         <span class="nb">len</span><span class="p">(</span><span class="n">pix_x</span><span class="p">),</span> <span class="n">optical_foclen</span>
@@ -538,7 +553,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 06 Jan 2017 13:27.
+        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 12:42.
 
     </p>
   </div>
@@ -560,7 +575,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'v0.2.0.post53+git98e9b78',
+            VERSION:'v0.3.2.post11+git8c54b14',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
@@ -569,6 +584,7 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
