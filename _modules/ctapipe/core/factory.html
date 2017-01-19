@@ -175,30 +175,30 @@
 
 <span class="sd">    .. code:: python</span>
 
-<span class="sd">    from ctapipe.core import Factory</span>
-<span class="sd">    from traitlets import (Integer, Float, List, Dict, Unicode)</span>
+<span class="sd">        from ctapipe.core import Factory</span>
+<span class="sd">        from traitlets import (Integer, Float, List, Dict, Unicode)</span>
 
-<span class="sd">    class MyFactory(Factory):</span>
-<span class="sd">        name = &quot;myfactory&quot;</span>
-<span class="sd">        description = &quot;do some things and stuff&quot;</span>
+<span class="sd">        class MyFactory(Factory):</span>
+<span class="sd">            name = &quot;myfactory&quot;</span>
+<span class="sd">            description = &quot;do some things and stuff&quot;</span>
 
-<span class="sd">        subclasses = Factory.child_subclasses(ParentClass)</span>
-<span class="sd">        subclass_names = [c.__name__ for c in subclasses]</span>
+<span class="sd">            subclasses = Factory.child_subclasses(ParentClass)</span>
+<span class="sd">            subclass_names = [c.__name__ for c in subclasses]</span>
 
-<span class="sd">        discriminator = Unicode(&#39;DefaultProduct&#39;,</span>
-<span class="sd">                         help=&#39;Product to obtain: {}&#39;</span>
-<span class="sd">                         .format(subclass_names)).tag(config=True)</span>
+<span class="sd">            discriminator = Unicode(&#39;DefaultProduct&#39;,</span>
+<span class="sd">                             help=&#39;Product to obtain: {}&#39;</span>
+<span class="sd">                             .format(subclass_names)).tag(config=True)</span>
 
-<span class="sd">        # Product classes traits</span>
-<span class="sd">        # Would be nice to have these automatically set...!</span>
-<span class="sd">        product_trait1 = Int(7, help=&quot;&quot;).tag(config=True)</span>
-<span class="sd">        product_trait2 = Int(7, help=&quot;&quot;).tag(config=True)</span>
+<span class="sd">            # Product classes traits</span>
+<span class="sd">            # Would be nice to have these automatically set...!</span>
+<span class="sd">            product_trait1 = Int(7, help=&quot;&quot;).tag(config=True)</span>
+<span class="sd">            product_trait2 = Int(7, help=&quot;&quot;).tag(config=True)</span>
 
-<span class="sd">        def get_factory_name(self):</span>
-<span class="sd">            return self.name</span>
+<span class="sd">            def get_factory_name(self):</span>
+<span class="sd">                return self.name</span>
 
-<span class="sd">        def get_product_name(self):</span>
-<span class="sd">            return self.discriminator</span>
+<span class="sd">            def get_product_name(self):</span>
+<span class="sd">                return self.discriminator</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">subclasses</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Set to all_subclasses(ParentClass) in factory</span>
     <span class="n">subclass_names</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Set to [c.__name__ for c in subclasses] in factory</span>
@@ -218,6 +218,7 @@
 <span class="sd">            Passes the correct logger to the component.</span>
 <span class="sd">            Set to None if no Tool to pass.</span>
 <span class="sd">        kwargs</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">tool</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">product</span> <span class="o">=</span> <span class="kc">None</span>
@@ -227,6 +228,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return all base subclasses of a parent class. Finds the bottom level</span>
 <span class="sd">        subclasses that have no further children.</span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        cls : class</span>
@@ -299,7 +301,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 12:49.
+        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 13:51.
 
     </p>
   </div>

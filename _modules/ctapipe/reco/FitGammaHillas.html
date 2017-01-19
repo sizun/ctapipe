@@ -238,13 +238,13 @@
 <span class="sd">    between the core and the position of the telescope and `{ trace[1],</span>
 <span class="sd">    -trace[0] }` as the normal vector of the trace.</span>
 
-<span class="sd">    .. note::</span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
 
-<span class="sd">      uses the M-Estimator of the distance instead of the distance itself:</span>
+<span class="sd">    uses the M-Estimator of the distance instead of the distance itself:</span>
 
-<span class="sd">    .. math::</span>
+<span class="sd">    :math:`M_{Est} = \sum_i{ 2 \sqrt{1 + d_i^2} - 2}`</span>
 
-<span class="sd">      M_{Est} = \sum_i{ 2 \sqrt{1 + d_i^2} - 2}</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
 
@@ -497,13 +497,11 @@
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
 
-<span class="sd">        The basis is the &quot;trace&quot; of each telescope&#39;s `GreatCircle` which</span>
-<span class="sd">        can be determined by the telescope&#39;s position P=(Px, Py) and</span>
-<span class="sd">        the circle&#39;s normal vector, projected to the ground n=(nx,</span>
-<span class="sd">        ny), so that for every r=(x, y) on the trace</span>
-
-<span class="sd">            n * r = n * P </span>
-<span class="sd">            nx * x + ny * y = d</span>
+<span class="sd">        The basis is the &quot;trace&quot; of each telescope&#39;s `GreatCircle`</span>
+<span class="sd">        which can be determined by the telescope&#39;s position P=(Px, Py)</span>
+<span class="sd">        and the circle&#39;s normal vector, projected to the ground n=(nx,</span>
+<span class="sd">        ny), so that for every r=(x, y) on the trace :math:`n r = n P`</span>
+<span class="sd">        and :math:`n_x x + n_y y = d`</span>
 
 <span class="sd">        In a perfect world, the traces of all telescopes cross in the</span>
 <span class="sd">        shower&#39;s point of impact. This means that there is one common</span>
@@ -529,8 +527,8 @@
 
 <span class="sd">        Since we do not live in a perfect world and there probably is</span>
 <span class="sd">        no point r that fulfils this equation system, it is solved by</span>
-<span class="sd">        the method of least linear square: :math:`r_\chi^2 = (A^T</span>
-<span class="sd">        A)^-1 A^T D `(2)</span>
+<span class="sd">        the method of least linear square: </span>
+<span class="sd">        :math:`r_\chi^2 = (A^T A)^-1 A^T D (2)`</span>
 
 <span class="sd">        :math:`r_\chi^2` minimises the squared difference of</span>
 
@@ -667,7 +665,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 12:49.
+        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 13:51.
 
     </p>
   </div>

@@ -179,31 +179,32 @@ discriminator in get_product_name() in your custom Factory class.</p>
 <p>To then obtain the product class from the factory, use 'get_class()&quot;,
 which can be used to then initialise the class. The correct traits
 from the correspoding product are set automatically from the factory.</p>
-<p>from ctapipe.core import Factory
-from traitlets import (Integer, Float, List, Dict, Unicode)</p>
-<dl class="docutils">
-<dt>class MyFactory(Factory):</dt>
-<dd><p class="first">name = &quot;myfactory&quot;
-description = &quot;do some things and stuff&quot;</p>
-<p>subclasses = Factory.child_subclasses(ParentClass)
-subclass_names = [c.__name__ for c in subclasses]</p>
-<dl class="docutils">
-<dt>discriminator = Unicode('DefaultProduct',</dt>
-<dd>help='Product to obtain: {}'
-.format(subclass_names)).tag(config=True)</dd>
-</dl>
-<p># Product classes traits
-# Would be nice to have these automatically set...!
-product_trait1 = Int(7, help=&quot;&quot;).tag(config=True)
-product_trait2 = Int(7, help=&quot;&quot;).tag(config=True)</p>
-<dl class="last docutils">
-<dt>def get_factory_name(self):</dt>
-<dd>return self.name</dd>
-<dt>def get_product_name(self):</dt>
-<dd>return self.discriminator</dd>
-</dl>
-</dd>
-</dl>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ctapipe.core</span> <span class="k">import</span> <span class="n">Factory</span>
+<span class="kn">from</span> <span class="nn">traitlets</span> <span class="k">import</span> <span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Float</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Unicode</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">MyFactory</span><span class="p">(</span><span class="n">Factory</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;myfactory&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;do some things and stuff&quot;</span>
+
+    <span class="n">subclasses</span> <span class="o">=</span> <span class="n">Factory</span><span class="o">.</span><span class="n">child_subclasses</span><span class="p">(</span><span class="n">ParentClass</span><span class="p">)</span>
+    <span class="n">subclass_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">__name__</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">subclasses</span><span class="p">]</span>
+
+    <span class="n">discriminator</span> <span class="o">=</span> <span class="n">Unicode</span><span class="p">(</span><span class="s1">&#39;DefaultProduct&#39;</span><span class="p">,</span>
+                     <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Product to obtain: </span><span class="si">{}</span><span class="s1">&#39;</span>
+                     <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subclass_names</span><span class="p">))</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Product classes traits</span>
+    <span class="c1"># Would be nice to have these automatically set...!</span>
+    <span class="n">product_trait1</span> <span class="o">=</span> <span class="n">Int</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">product_trait2</span> <span class="o">=</span> <span class="n">Int</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_factory_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">get_product_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">discriminator</span>
+</pre></div>
+</div>
 <p class="rubric">Attributes Summary</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -256,17 +257,18 @@ product_trait2 = Int(7, help=&quot;&quot;).tag(config=True)</p>
 <dt id="ctapipe.core.Factory.child_subclasses">
 <em class="property">static </em><code class="descname">child_subclasses</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/core/factory.html#Factory.child_subclasses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.core.Factory.child_subclasses" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return all base subclasses of a parent class. Finds the bottom level
-subclasses that have no further children.
-Parameters
-----------
-cls : class</p>
-<blockquote>
-<div>high level class object that contains the desired children classes</div></blockquote>
+subclasses that have no further children.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>cls</strong> : class</p>
+<blockquote>
+<div><p>high level class object that contains the desired children classes</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list</p>
 <blockquote class="last">
 <div><p>list of bottom level subclasses</p>
 </div></blockquote>
@@ -327,7 +329,7 @@ Simply return the discriminator traitlet.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 12:49.
+        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 13:51.
 
     </p>
   </div>
