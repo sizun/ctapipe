@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting Started For Developers &mdash; ctapipe v0.3.2.post19+gite47c8f4</title>
+  <title>Getting Started For Developers &mdash; ctapipe v0.3.2.post27+git8b468e2</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.3.2.post19+gite47c8f4" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.3.2.post27+git8b468e2" href="../index.html"/>
         <link rel="next" title="Development Guidelines" href="../development/index.html"/>
         <link rel="prev" title="CTA Experimental Pipeline Framework (ctapipe)" href="../index.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.2.post19+gite47c8f4
+                0.3.2.post27+git8b468e2
               </div>
             
           
@@ -93,6 +93,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#step-3-setup">Step 3: Setup</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#developing-a-new-feature-or-code-change">Developing a new feature or code change</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#more-development-help">More Development help</a></li>
 </ul>
 </li>
@@ -156,6 +157,13 @@
             
   <div class="section" id="getting-started-for-developers">
 <span id="getting-started"></span><h1>Getting Started For Developers<a class="headerlink" href="#getting-started-for-developers" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">the following guide is used only if you want to <em>develop</em> the
+<code class="xref py py-obj docutils literal"><span class="pre">ctapipe</span></code> package, if you just want to write code that uses it
+externally, you can install <code class="xref py py-obj docutils literal"><span class="pre">ctapipe</span></code> as a conda package
+with <code class="xref py py-obj docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">cta-observatory</span> <span class="pre">ctapipe</span></code>.</p>
+</div>
 <p>This guide assumes you are using the <em>Anaconda</em> python distribution,
 installed locally (<em>miniconda</em> should also work).</p>
 <p>First you should create a virtual environment in which to do your
@@ -171,7 +179,7 @@ choose another name if you like)</p>
 <p>Next, switch to this new virtual environment and install some other useful tools for development:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">source</span> activate cta
 
-conda install pyhessio ipython ipython-notebook ipython-qtconsole spyder pyflakes traitlets
+conda install -c cta-observatory pyhessio ipython ipython-notebook pyflakes traitlets
 conda install -c conda-forge autopep8 graphviz
 </pre></div>
 </div>
@@ -191,6 +199,8 @@ repository (cta-observatory/ctapipe).</p>
 <p>Follow the instructions in the link above to make a <em>fork</em> of the
 ctapipe repo in your own GitHub userspace. That fork will be then
 called <em>yourusername</em>/ctapipe (it's as simple as clicking the fork button on <a class="reference external" href="https://github.com/cta-observatory/ctapipe">main ctapipe github page</a>.</p>
+<p>You only need to make this fork once, when you first start developing, and
+you can use it from then on.</p>
 </div>
 <div class="section" id="step-2-clone">
 <h3>Step 2: clone<a class="headerlink" href="#step-2-clone" title="Permalink to this headline">¶</a></h3>
@@ -240,8 +250,20 @@ to your local working copy):</p>
 </div>
 </div>
 </div>
+<div class="section" id="developing-a-new-feature-or-code-change">
+<h2>Developing a new feature or code change<a class="headerlink" href="#developing-a-new-feature-or-code-change" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>You should always create a branch when developing some new code (unless it is</dt>
+<dd>a very small change).  Genearlly make a new branch for each new feature, so
+that you can make pull-requests for each one separately and not mix code
+from each.</dd>
+</dl>
+<p>Start working on a feature:</p>
+</div>
 <div class="section" id="more-development-help">
 <h2>More Development help<a class="headerlink" href="#more-development-help" title="Permalink to this headline">¶</a></h2>
+<p>For coding details, read the <a class="reference internal" href="../development/index.html#guidelines"><span class="std std-ref">Development Guidelines</span></a> section of this
+documentation.</p>
 <p>More information on how to develop code using the GitHub-FLow workflow
 (which is what we are using) can be found in the AstroPy documentation
 <a class="reference external" href="http://astropy.readthedocs.org/en/latest/development/workflow/get_devel_version.html#get-devel">http://astropy.readthedocs.org/en/latest/development/workflow/get_devel_version.html#get-devel</a>
@@ -277,7 +299,7 @@ issue pull-requests.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 16:45.
+        &copy; Copyright ctapipe developers.  Last updated 23 Jan 2017 16:50.
 
     </p>
   </div>
@@ -299,7 +321,7 @@ issue pull-requests.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.2.post19+gite47c8f4',
+            VERSION:'0.3.2.post27+git8b468e2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

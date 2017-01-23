@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Histogram &mdash; ctapipe v0.3.2.post19+gite47c8f4</title>
+  <title>Histogram &mdash; ctapipe v0.3.2.post27+git8b468e2</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.3.2.post19+gite47c8f4" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.3.2.post27+git8b468e2" href="../index.html"/>
         <link rel="up" title="Utilities (utils)" href="../utils/index.html"/>
         <link rel="next" title="Visualization (visualization)" href="../visualization/index.html"/>
         <link rel="prev" title="traitlets_config_to_fits" href="ctapipe.utils.traitlets_config_to_fits.html"/> 
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.3.2.post19+gite47c8f4
+                0.3.2.post27+git8b468e2
               </div>
             
           
@@ -162,7 +162,7 @@
 <h1>Histogram<a class="headerlink" href="#histogram" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="ctapipe.utils.Histogram">
-<em class="property">class </em><code class="descclassname">ctapipe.utils.</code><code class="descname">Histogram</code><span class="sig-paren">(</span><em>nbins=None</em>, <em>ranges=None</em>, <em>name='Histogram'</em>, <em>axisNames=None</em>, <em>initFromFITS=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/utils/fitshistogram.html#Histogram"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.utils.Histogram" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">ctapipe.utils.</code><code class="descname">Histogram</code><span class="sig-paren">(</span><em>nbins=None</em>, <em>ranges=None</em>, <em>name='Histogram'</em>, <em>axis_names=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/utils/fitshistogram.html#Histogram"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.utils.Histogram" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>An N-D histogram class with FITS image I/O.</p>
 <p>The output FITS file will contain an ImageHDU datacube and
@@ -176,7 +176,7 @@ capable of working with FITS datacubes (like SAOImage DS9).</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>bins: array_like(int)</strong></p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>nbins: array_like(int)</strong></p>
 <blockquote>
 <div><p>list of number of bins for each dimension</p>
 </div></blockquote>
@@ -189,19 +189,38 @@ capable of working with FITS datacubes (like SAOImage DS9).</p>
 <div><p>name of histogram (will be used as FITS extension name when written
 to a file</p>
 </div></blockquote>
-<p><strong>axisNames: list(str)</strong></p>
-<blockquote>
-<div><p>name of each axis</p>
-</div></blockquote>
-<p><strong>initFromFITS: None or `astropy.io.fits.ImageHDU`</strong></p>
+<p><strong>axis_names: list(str)</strong></p>
 <blockquote class="last">
-<div><p>if not None, construct the Histogram object from the given
-FITS HDU</p>
+<div><p>name of each axis</p>
 </div></blockquote>
 </td>
 </tr>
 </tbody>
 </table>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hist</span> <span class="o">=</span> <span class="n">Histogram</span><span class="p">(</span><span class="n">nbins</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">ranges</span><span class="o">=</span><span class="p">[[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span> <span class="c1"># make 100 random 2D events</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hist</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Get a point in the histogram (can also get multiple values at once by
+passing an array)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">val</span> <span class="o">=</span> <span class="n">hist</span><span class="o">.</span><span class="n">get_value</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vals</span> <span class="o">=</span> <span class="n">hist</span><span class="o">.</span><span class="n">get_value</span><span class="p">([[</span><span class="mf">0.1</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span><span class="mf">0.9</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>Get the full data array and do things with it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">meanx</span> <span class="o">=</span> <span class="n">hist</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Write it to a FITS image file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hist</span><span class="o">.</span><span class="n">to_fits</span><span class="p">()</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s2">&quot;output.fits&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Read it from FITS image file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hist2</span> <span class="o">=</span> <span class="n">Histogram</span><span class="o">.</span><span class="n">from_fits</span><span class="p">(</span><span class="s2">&quot;output.fits&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <p class="rubric">Attributes Summary</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -242,20 +261,20 @@ FITS HDU</p>
 <tr class="row-even"><td><a class="reference internal" href="#ctapipe.utils.Histogram.fill" title="ctapipe.utils.Histogram.fill"><code class="xref py py-obj docutils literal"><span class="pre">fill</span></code></a>(datapoints,&nbsp;\*\*kwargs)</td>
 <td>generate a histogram from data points.  Since the results of</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.utils.Histogram.from_fits" title="ctapipe.utils.Histogram.from_fits"><code class="xref py py-obj docutils literal"><span class="pre">from_fits</span></code></a>(inputFITS)</td>
-<td>load a FITS histogram file</td>
+<tr class="row-odd"><td><a class="reference internal" href="#ctapipe.utils.Histogram.from_fits" title="ctapipe.utils.Histogram.from_fits"><code class="xref py py-obj docutils literal"><span class="pre">from_fits</span></code></a>(input_fits)</td>
+<td>Construct a <a class="reference internal" href="#ctapipe.utils.Histogram" title="ctapipe.utils.Histogram"><code class="xref py py-obj docutils literal"><span class="pre">Histogram</span></code></a> from a previously written FITS histogram file</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.utils.Histogram.get_value" title="ctapipe.utils.Histogram.get_value"><code class="xref py py-obj docutils literal"><span class="pre">get_value</span></code></a>(coords[,&nbsp;outlierValue])</td>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.utils.Histogram.get_value" title="ctapipe.utils.Histogram.get_value"><code class="xref py py-obj docutils literal"><span class="pre">get_value</span></code></a>(coords[,&nbsp;outlier_value])</td>
 <td>Returns the values of the histogram at the given world</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#ctapipe.utils.Histogram.interpolate" title="ctapipe.utils.Histogram.interpolate"><code class="xref py py-obj docutils literal"><span class="pre">interpolate</span></code></a>(nbins)</td>
-<td>Change the shape of the histogram using an n-dimensional interpolation function.</td>
+<td>Change the shape of the histogram using an n-dimensional interpolation function (via <code class="xref py py-obj docutils literal"><span class="pre">ndimage.map_coordinates</span></code>).</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#ctapipe.utils.Histogram.outliers" title="ctapipe.utils.Histogram.outliers"><code class="xref py py-obj docutils literal"><span class="pre">outliers</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#ctapipe.utils.Histogram.outliers" title="ctapipe.utils.Histogram.outliers"><code class="xref py py-obj docutils literal"><span class="pre">outliers</span></code></a></td>
 <td>returns the number of outlier points (the number of input</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#ctapipe.utils.Histogram.to_fits" title="ctapipe.utils.Histogram.to_fits"><code class="xref py py-obj docutils literal"><span class="pre">to_fits</span></code></a>()</td>
-<td>return A FITS hdu, suitable for writing to disk</td>
+<td>Convert the <a class="reference internal" href="#ctapipe.utils.Histogram" title="ctapipe.utils.Histogram"><code class="xref py py-obj docutils literal"><span class="pre">Histogram</span></code></a> into an <a class="reference external" href="http://docs.astropy.org/en/latest/io/fits/api/images.html#astropy.io.fits.ImageHDU" title="(in Astropy v2.0.dev17711)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.io.fits.ImageHDU</span></code></a>, suitable for writing to a file.</td>
 </tr>
 </tbody>
 </table>
@@ -297,18 +316,14 @@ use in vector operations</p>
 
 <dl class="method">
 <dt id="ctapipe.utils.Histogram.draw_2d">
-<code class="descname">draw_2d</code><span class="sig-paren">(</span><em>dims=[0, 1], **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/utils/fitshistogram.html#Histogram.draw_2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.utils.Histogram.draw_2d" title="Permalink to this definition">¶</a></dt>
+<code class="descname">draw_2d</code><span class="sig-paren">(</span><em>dims=(0</em>, <em>1)</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/utils/fitshistogram.html#Histogram.draw_2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.utils.Histogram.draw_2d" title="Permalink to this definition">¶</a></dt>
 <dd><p>draw the histogram using pcolormesh() (only works for 2D
 histograms currently)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>self: type</strong></p>
-<blockquote>
-<div><p>description</p>
-</div></blockquote>
-<p><strong>dims: (int,int)</strong></p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>dims: (int,int)</strong></p>
 <blockquote>
 <div><p>indices of which dimensions to draw</p>
 </div></blockquote>
@@ -347,57 +362,91 @@ creating the histogram</p>
 </table>
 </dd></dl>
 
-<dl class="method">
+<dl class="staticmethod">
 <dt id="ctapipe.utils.Histogram.from_fits">
-<code class="descname">from_fits</code><span class="sig-paren">(</span><em>inputFITS</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/utils/fitshistogram.html#Histogram.from_fits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.utils.Histogram.from_fits" title="Permalink to this definition">¶</a></dt>
-<dd><p>load a FITS histogram file</p>
-<p>Arguments:
-- <code class="xref py py-obj docutils literal"><span class="pre">inputfits</span></code>: filename or fits HDU</p>
+<em class="property">static </em><code class="descname">from_fits</code><span class="sig-paren">(</span><em>input_fits</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/utils/fitshistogram.html#Histogram.from_fits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.utils.Histogram.from_fits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a <a class="reference internal" href="#ctapipe.utils.Histogram" title="ctapipe.utils.Histogram"><code class="xref py py-obj docutils literal"><span class="pre">Histogram</span></code></a> from a previously written FITS histogram file
+or HDU (see <a class="reference internal" href="#ctapipe.utils.Histogram.to_fits" title="ctapipe.utils.Histogram.to_fits"><code class="xref py py-obj docutils literal"><span class="pre">Histogram.to_fits()</span></code></a>)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>input_fits: string or astropy.io.fits.ImageHDU</strong></p>
+<blockquote class="last">
+<div><p>File or HDU to read into histogram (Should be a FITS HDU
+originally created by <a class="reference internal" href="#ctapipe.utils.Histogram.to_fits" title="ctapipe.utils.Histogram.to_fits"><code class="xref py py-obj docutils literal"><span class="pre">Histogram.to_fits()</span></code></a>, may not work for
+general FITS images)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="ctapipe.utils.Histogram.get_value">
-<code class="descname">get_value</code><span class="sig-paren">(</span><em>coords</em>, <em>outlierValue=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/utils/fitshistogram.html#Histogram.get_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.utils.Histogram.get_value" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_value</code><span class="sig-paren">(</span><em>coords</em>, <em>outlier_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/utils/fitshistogram.html#Histogram.get_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.utils.Histogram.get_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the values of the histogram at the given world
 coordinate(s)</p>
-<p>Arguments:</p>
-<ul class="simple">
-<li><code class="xref py py-obj docutils literal"><span class="pre">coords</span></code>: list/array of M coordinates of dimension N (where
-the N is the histogram dimension)</li>
-<li><code class="xref py py-obj docutils literal"><span class="pre">outlierValue</span></code>: value for outliers, if None, coordinates
-outside the edges of the histogram will be given the edge
-value</li>
-</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>coords: array_like</strong></p>
+<blockquote>
+<div><p>array of M coordinates of dimension N (where
+the N is the histogram dimension)</p>
+</div></blockquote>
+<p><strong>outlier_value: float or None</strong></p>
+<blockquote class="last">
+<div><p>value for outliers, if None, coordinates outside the edges of the
+histogram will be given the edge value</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="ctapipe.utils.Histogram.interpolate">
 <code class="descname">interpolate</code><span class="sig-paren">(</span><em>nbins</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/utils/fitshistogram.html#Histogram.interpolate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.utils.Histogram.interpolate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Change the shape of the histogram using an n-dimensional
-interpolation function.</p>
-<p>Arguments:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#ctapipe.utils.Histogram.bins" title="ctapipe.utils.Histogram.bins"><code class="xref py py-obj docutils literal"><span class="pre">bins</span></code></a>: a tuple of the new number of bins to interpolate
+interpolation function (via <code class="xref py py-obj docutils literal"><span class="pre">ndimage.map_coordinates</span></code>).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>nbins: tuple of int</strong></p>
+<blockquote class="last">
+<div><p>a tuple of the new number of bins to interpolate
 this histogram over (e.g. if the original histogram was
 (100,100), setting bins to (200,200) would provide double
-the resolution, with the interviening bins interpolated.</li>
-</ul>
+the resolution, with the interviening bins interpolated.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="ctapipe.utils.Histogram.outliers">
-<code class="descname">outliers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/utils/fitshistogram.html#Histogram.outliers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.utils.Histogram.outliers" title="Permalink to this definition">¶</a></dt>
+<code class="descname">outliers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ctapipe.utils.Histogram.outliers" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns the number of outlier points (the number of input
 datapoints - the sum of the histogram). This assumes the data
-of the histogram is unmodified (and is &quot;counts&quot;)</p>
+of the histogram is unmodified (and represents &quot;counts&quot;).</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="ctapipe.utils.Histogram.to_fits">
 <code class="descname">to_fits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/utils/fitshistogram.html#Histogram.to_fits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.utils.Histogram.to_fits" title="Permalink to this definition">¶</a></dt>
-<dd><p>return A FITS hdu, suitable for writing to disk</p>
-<p>to write it, just do</p>
-<p>myhist.to_fits().writeto(&quot;outputfile.fits&quot;)</p>
+<dd><p>Convert the <a class="reference internal" href="#ctapipe.utils.Histogram" title="ctapipe.utils.Histogram"><code class="xref py py-obj docutils literal"><span class="pre">Histogram</span></code></a> into an <a class="reference external" href="http://docs.astropy.org/en/latest/io/fits/api/images.html#astropy.io.fits.ImageHDU" title="(in Astropy v2.0.dev17711)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.io.fits.ImageHDU</span></code></a>,
+suitable for writing to a file.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myhist</span><span class="o">.</span><span class="n">to_fits</span><span class="p">()</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s2">&quot;outputfile.fits.gz&quot;</span><span class="p">,</span> <span class="n">clobber</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -423,7 +472,7 @@ of the histogram is unmodified (and is &quot;counts&quot;)</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 19 Jan 2017 16:45.
+        &copy; Copyright ctapipe developers.  Last updated 23 Jan 2017 16:50.
 
     </p>
   </div>
@@ -445,7 +494,7 @@ of the histogram is unmodified (and is &quot;counts&quot;)</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.2.post19+gite47c8f4',
+            VERSION:'0.3.2.post27+git8b468e2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
