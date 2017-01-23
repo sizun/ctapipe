@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting Started For Developers &mdash; ctapipe v0.3.2.post27+git8b468e2</title>
+  <title>Getting Started For Developers &mdash; ctapipe v0.3.2.post28+gitdad3968</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.3.2.post27+git8b468e2" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.3.2.post28+gitdad3968" href="../index.html"/>
         <link rel="next" title="Development Guidelines" href="../development/index.html"/>
         <link rel="prev" title="CTA Experimental Pipeline Framework (ctapipe)" href="../index.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.2.post27+git8b468e2
+                0.3.2.post28+gitdad3968
               </div>
             
           
@@ -93,7 +93,15 @@
 <li class="toctree-l3"><a class="reference internal" href="#step-3-setup">Step 3: Setup</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#developing-a-new-feature-or-code-change">Developing a new feature or code change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developing-a-new-feature-or-code-change">Developing a new feature or code change</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-feature-branch">1. Create a feature branch:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#edit-the-code">2. Edit the code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#push-your-branch-to-your-fork-on-github">3. Push your branch to your fork on github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-a-pull-request">4. make a <em>Pull Request</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wait-for-a-code-review">5. Wait for a code review</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#delete-your-feature-branch">6. delete your feature branch</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#more-development-help">More Development help</a></li>
 </ul>
 </li>
@@ -252,13 +260,72 @@ to your local working copy):</p>
 </div>
 <div class="section" id="developing-a-new-feature-or-code-change">
 <h2>Developing a new feature or code change<a class="headerlink" href="#developing-a-new-feature-or-code-change" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>You should always create a branch when developing some new code (unless it is</dt>
-<dd>a very small change).  Genearlly make a new branch for each new feature, so
+<p>You should always create a branch when developing some new code (unless it is
+a very small change).  Genearlly make a new branch for each new feature, so
 that you can make pull-requests for each one separately and not mix code
-from each.</dd>
-</dl>
-<p>Start working on a feature:</p>
+from each.  Remember that <code class="xref py py-obj docutils literal"><span class="pre">git</span> <span class="pre">checkout</span></code> switches between branches,
+<code class="xref py py-obj docutils literal"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span></code> creates a new branch, and <code class="xref py py-obj docutils literal"><span class="pre">git</span> <span class="pre">branch</span></code> on it's own
+will tell you which branches are available and which one you are currently on.</p>
+<p>First think of a name for your code change, here we'll use
+<em>implement_feature_1</em> as an example.</p>
+<div class="section" id="create-a-feature-branch">
+<h3>1. Create a feature branch:<a class="headerlink" href="#create-a-feature-branch" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>git checkout -b implement_feature_1
+</pre></div>
+</div>
+</div>
+<div class="section" id="edit-the-code">
+<h3>2. Edit the code<a class="headerlink" href="#edit-the-code" title="Permalink to this headline">¶</a></h3>
+<p>and make as many commits as you want (more than one is generally
+better for large changes!).</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>git add some_changed_file.py another_file.py
+git commit
+  <span class="o">[</span><span class="nb">type</span> descriptive message in window that pops up<span class="o">]</span>
+</pre></div>
+</div>
+<p>and repeat. Of course, make sure you frequently test via <code class="xref py py-obj docutils literal"><span class="pre">make</span> <span class="pre">test</span></code> (or
+<code class="xref py py-obj docutils literal"><span class="pre">py.test</span></code> in a sub-module), check the style, and make sure the docs  render
+correctly (both code and top-level) using <code class="xref py py-obj docutils literal"><span class="pre">make</span> <span class="pre">doc</span></code>.</p>
+</div>
+<div class="section" id="push-your-branch-to-your-fork-on-github">
+<h3>3. Push your branch to your fork on github<a class="headerlink" href="#push-your-branch-to-your-fork-on-github" title="Permalink to this headline">¶</a></h3>
+<p>(sometimes refered to as
+&quot;publishing&quot; since it becomes public, but only in your fork) by running</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>git push
+</pre></div>
+</div>
+<p>You can do this at any time and more than once. It just moves the changes
+from your local branch on your development machine to your fork on github.</p>
+</div>
+<div class="section" id="make-a-pull-request">
+<h3>4. make a <em>Pull Request</em><a class="headerlink" href="#make-a-pull-request" title="Permalink to this headline">¶</a></h3>
+<p>When you're happy, you make  PR on on your github fork page by clicking &quot;pull
+request&quot;.  You can also do this via the GitHub GUI if you have that installed.</p>
+<p>Make sure to describe all the changes and give examples and use cases!</p>
+<p>See the <a class="reference internal" href="../development/pullrequests.html#pullrequests"><span class="std std-ref">Making and Accepting Pull Requests</span></a> section for more info.</p>
+</div>
+<div class="section" id="wait-for-a-code-review">
+<h3>5. Wait for a code review<a class="headerlink" href="#wait-for-a-code-review" title="Permalink to this headline">¶</a></h3>
+<p>At least one reviewer must accept your request.</p>
+<p>If the reviewer asks for changes, all you need to do is make them, <code class="xref py py-obj docutils literal"><span class="pre">git</span>
+<span class="pre">commit</span></code> them and then run <code class="xref py py-obj docutils literal"><span class="pre">git</span> <span class="pre">push</span></code> and the reviewer will see the changes.
+When they accept them, they will be merged into the <em>master</em> repo on
+cta-observatory's account.</p>
+</div>
+<div class="section" id="delete-your-feature-branch">
+<h3>6. delete your feature branch<a class="headerlink" href="#delete-your-feature-branch" title="Permalink to this headline">¶</a></h3>
+<p>since it is no longer needed:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>git checkout master   <span class="c1"># switch back to your master branch</span>
+</pre></div>
+</div>
+<p>pull in the upstream changes, which should include your new features, and
+remove the branch from the local and remote (github).</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>git pull upstream master
+git branch --delete --remotes implement_feature_1
+</pre></div>
+</div>
+<p>Note the last step can also be done on the GitHub website.</p>
+</div>
 </div>
 <div class="section" id="more-development-help">
 <h2>More Development help<a class="headerlink" href="#more-development-help" title="Permalink to this headline">¶</a></h2>
@@ -299,7 +366,7 @@ issue pull-requests.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 23 Jan 2017 16:50.
+        &copy; Copyright ctapipe developers.  Last updated 23 Jan 2017 17:22.
 
     </p>
   </div>
@@ -321,7 +388,7 @@ issue pull-requests.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.2.post27+git8b468e2',
+            VERSION:'0.3.2.post28+gitdad3968',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
