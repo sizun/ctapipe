@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Coordinates (coordinates) &mdash; ctapipe v0.3.2.post28+gitdad3968</title>
+  <title>Coordinates (coordinates) &mdash; ctapipe v0.3.2.post44+git7d69584</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.3.2.post28+gitdad3968" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.3.2.post44+git7d69584" href="../index.html"/>
         <link rel="next" title="project_to_ground" href="../api/ctapipe.coordinates.project_to_ground.html"/>
         <link rel="prev" title="Pointing calibration" href="../calib/index_pointing.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.2.post28+gitdad3968
+                0.3.2.post44+git7d69584
               </div>
             
           
@@ -91,7 +91,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../analysis/index.html">Analysis (<code class="docutils literal"><span class="pre">analysis</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../calib/index.html">Calibration (<code class="docutils literal"><span class="pre">calib</span></code>)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Coordinates (<code class="docutils literal"><span class="pre">coordinates</span></code>)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#earth-orientiation-corrections">Earth Orientiation Corrections</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#todo">TODO:</a></li>
 </ul>
 </li>
@@ -175,6 +176,25 @@ system.</p>
 <p>Maybe we'll use the <a class="reference external" href="http://gwcs.readthedocs.org/en/latest/">gwcs</a> package
 for generalised world coordinate transformations to implement some coordinate
 transformations, e.g. precision pointing corrections using a pointing model.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Due to the underlying implementation of astropy coordinates and time
+representations, the transformation of a single coordinate between
+frames or time systems has a small overhead in speed.
+This can be mitigated by transforming many coordinates at once, which is
+much faster. All routines can accept arrays instead of single values.</p>
+</div>
+</div>
+<div class="section" id="earth-orientiation-corrections">
+<h2>Earth Orientiation Corrections<a class="headerlink" href="#earth-orientiation-corrections" title="Permalink to this headline">¶</a></h2>
+<p>Polar motion and leap-second corrections are taken into account automatically
+by the use of <a class="reference external" href="http://docs.astropy.org/en/latest/coordinates/index.html#module-astropy.coordinates" title="(in Astropy v2.0.dev17711)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.coordinates</span></code></a> and <a class="reference external" href="http://docs.astropy.org/en/latest/time/index.html#module-astropy.time" title="(in Astropy v2.0.dev17711)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.time</span></code></a>.  Updates to the IERS
+tables are loaded automatically if an internet connection is available.  If
+you want to see what corrections are being used, use the following example:</p>
+<p>(<a class="reference external" href="../coordinates/index-1.py">Source code</a>, <a class="reference external" href="../coordinates/index-1.png">png</a>, <a class="reference external" href="../coordinates/index-1.hires.png">hires.png</a>, <a class="reference external" href="../coordinates/index-1.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/index-1.png" src="../_images/index-1.png" />
+</div>
 <div class="section" id="todo">
 <h3>TODO:<a class="headerlink" href="#todo" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -186,12 +206,20 @@ Terrestrial Time with a specific MJD_offset.</li>
 </div>
 <div class="section" id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p>Coordinate frames and transformations are implemented using the
-<a class="reference external" href="http://docs.astropy.org/en/latest/coordinates/index.html#module-astropy.coordinates" title="(in Astropy v2.0.dev17711)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.coordinates</span></code></a> framework, which uses the ERFA (open-license form
-of the IAU SOFA library) internalyl for astronomical math.</p>
 <p>The coordinate library defines a set of <em>frames</em>, which represent
-different coordinate reprentations. Coordiantes sohuld be described
+different coordinate reprentations. Coordinates should be described
 using an <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.coordinates.SkyCoord.html#astropy.coordinates.SkyCoord" title="(in Astropy v2.0.dev17711)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.coordinates.SkyCoord</span></code></a> in the appropriate frame.</p>
+<p>The following special frames are defined for CTA:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../api/ctapipe.coordinates.CameraFrame.html#ctapipe.coordinates.CameraFrame" title="ctapipe.coordinates.CameraFrame"><code class="xref py py-obj docutils literal"><span class="pre">CameraFrame</span></code></a></li>
+<li><a class="reference internal" href="../api/ctapipe.coordinates.GroundFrame.html#ctapipe.coordinates.GroundFrame" title="ctapipe.coordinates.GroundFrame"><code class="xref py py-obj docutils literal"><span class="pre">GroundFrame</span></code></a></li>
+<li><a class="reference internal" href="../api/ctapipe.coordinates.TiltedGroundFrame.html#ctapipe.coordinates.TiltedGroundFrame" title="ctapipe.coordinates.TiltedGroundFrame"><code class="xref py py-obj docutils literal"><span class="pre">TiltedGroundFrame</span></code></a></li>
+<li><a class="reference internal" href="../api/ctapipe.coordinates.NominalFrame.html#ctapipe.coordinates.NominalFrame" title="ctapipe.coordinates.NominalFrame"><code class="xref py py-obj docutils literal"><span class="pre">NominalFrame</span></code></a></li>
+<li><a class="reference internal" href="../api/ctapipe.coordinates.HorizonFrame.html#ctapipe.coordinates.HorizonFrame" title="ctapipe.coordinates.HorizonFrame"><code class="xref py py-obj docutils literal"><span class="pre">HorizonFrame</span></code></a></li>
+<li><a class="reference internal" href="../api/ctapipe.coordinates.TelescopeFrame.html#ctapipe.coordinates.TelescopeFrame" title="ctapipe.coordinates.TelescopeFrame"><code class="xref py py-obj docutils literal"><span class="pre">TelescopeFrame</span></code></a></li>
+</ul>
+<p>they can be transformed to and from any other <a class="reference external" href="http://docs.astropy.org/en/latest/coordinates/index.html#module-astropy.coordinates" title="(in Astropy v2.0.dev17711)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.coordinates</span></code></a> frame, like
+<a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.coordinates.AltAz.html#astropy.coordinates.AltAz" title="(in Astropy v2.0.dev17711)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.coordinates.AltAz</span></code></a> or <a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.coordinates.ICRS.html#astropy.coordinates.ICRS" title="(in Astropy v2.0.dev17711)"><code class="xref py py-obj docutils literal"><span class="pre">astropy.coordinates.ICRS</span></code></a> (RA/Dec)</p>
 <div class="section" id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">astropy.units</span> <span class="kn">as</span> <span class="nn">u</span>
@@ -302,7 +330,7 @@ another, it is most efficient to pass them all at once.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 23 Jan 2017 17:22.
+        &copy; Copyright ctapipe developers.  Last updated 24 Jan 2017 13:39.
 
     </p>
   </div>
@@ -324,7 +352,7 @@ another, it is most efficient to pass them all at once.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.2.post28+gitdad3968',
+            VERSION:'0.3.2.post44+git7d69584',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
