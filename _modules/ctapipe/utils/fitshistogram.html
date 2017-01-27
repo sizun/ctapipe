@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ctapipe.utils.fitshistogram &mdash; ctapipe v0.3.2.post44+git7d69584</title>
+  <title>ctapipe.utils.fitshistogram &mdash; ctapipe v0.3.3.post25+git8722228</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="ctapipe v0.3.2.post44+git7d69584" href="../../../index.html"/>
+    <link rel="top" title="ctapipe v0.3.3.post25+git8722228" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.3.2.post44+git7d69584
+                0.3.3.post25+git8722228
               </div>
             
           
@@ -503,7 +503,7 @@
         <span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bin_centers</span><span class="p">(</span><span class="n">dim</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">drawstyle</span><span class="o">=</span><span class="s1">&#39;steps-mid&#39;</span><span class="p">,</span>
                     <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Histogram.interpolate"><a class="viewcode-back" href="../../../api/ctapipe.utils.Histogram.html#ctapipe.utils.Histogram.interpolate">[docs]</a>    <span class="k">def</span> <span class="nf">interpolate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nbins</span><span class="p">):</span>
+<div class="viewcode-block" id="Histogram.resample_inplace"><a class="viewcode-back" href="../../../api/ctapipe.utils.Histogram.html#ctapipe.utils.Histogram.resample_inplace">[docs]</a>    <span class="k">def</span> <span class="nf">resample_inplace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nbins</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Change the shape of the histogram using an n-dimensional</span>
 <span class="sd">        interpolation function (via `ndimage.map_coordinates`).</span>
@@ -511,7 +511,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        nbins: tuple of int</span>
-<span class="sd">            a tuple of the new number of bins to interpolate</span>
+<span class="sd">            a tuple of the new number of bins to resample_inplace</span>
 <span class="sd">            this histogram over (e.g. if the original histogram was</span>
 <span class="sd">            (100,100), setting bins to (200,200) would provide double</span>
 <span class="sd">            the resolution, with the interviening bins interpolated.</span>
@@ -544,7 +544,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 24 Jan 2017 13:39.
+        &copy; Copyright ctapipe developers.  Last updated 27 Jan 2017 17:47.
 
     </p>
   </div>
@@ -566,7 +566,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.3.2.post44+git7d69584',
+            VERSION:'0.3.3.post25+git8722228',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

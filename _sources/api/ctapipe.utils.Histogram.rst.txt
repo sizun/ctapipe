@@ -12,7 +12,9 @@ Histogram
 
       ~Histogram.bin_lower_edges
       ~Histogram.bins
+      ~Histogram.hist
       ~Histogram.ndims
+      ~Histogram.outliers
       ~Histogram.ranges
 
    .. rubric:: Methods Summary
@@ -25,15 +27,16 @@ Histogram
       ~Histogram.fill
       ~Histogram.from_fits
       ~Histogram.get_value
-      ~Histogram.interpolate
-      ~Histogram.outliers
+      ~Histogram.resample_inplace
       ~Histogram.to_fits
 
    .. rubric:: Attributes Documentation
 
    .. autoattribute:: bin_lower_edges
    .. autoattribute:: bins
+   .. autoattribute:: hist
    .. autoattribute:: ndims
+   .. autoattribute:: outliers
    .. autoattribute:: ranges
 
    .. rubric:: Methods Documentation
@@ -44,6 +47,5 @@ Histogram
    .. automethod:: fill
    .. automethod:: from_fits
    .. automethod:: get_value
-   .. automethod:: interpolate
-   .. automethod:: outliers
+   .. automethod:: resample_inplace
    .. automethod:: to_fits
