@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>traitlets.traitlets &mdash; ctapipe v0.3.3.post25+git8722228</title>
+  <title>traitlets.traitlets &mdash; ctapipe v0.3.4.post6+git43a2e83</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="ctapipe v0.3.3.post25+git8722228" href="../../index.html"/>
+    <link rel="top" title="ctapipe v0.3.4.post6+git43a2e83" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.3.3.post25+git8722228
+                0.3.4.post6+git43a2e83
               </div>
             
           
@@ -1265,16 +1265,10 @@
                 <span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
                 <span class="k">raise</span> <span class="n">e</span>
             <span class="k">finally</span><span class="p">:</span>
-                <span class="c1"># Reset the notify_change to original value, enable cross-validation</span>
-                <span class="c1"># and fire resulting change notifications.</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">notify_change</span> <span class="o">=</span> <span class="n">notify_change</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_cross_validation_lock</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="c1"># Restore method retrieval from class</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">notify_change</span>
 
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">notify_change</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">MethodType</span><span class="p">):</span>
-                    <span class="c1"># Presence of the notify_change method</span>
-                    <span class="c1"># on __dict__ can cause memory leaks</span>
-                    <span class="c1"># and prevents pickleability</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;notify_change&#39;</span><span class="p">)</span>
                 <span class="c1"># trigger delayed notifications</span>
                 <span class="k">for</span> <span class="n">changes</span> <span class="ow">in</span> <span class="n">cache</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
                     <span class="k">for</span> <span class="n">change</span> <span class="ow">in</span> <span class="n">changes</span><span class="p">:</span>
@@ -2849,7 +2843,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 27 Jan 2017 17:47.
+        &copy; Copyright ctapipe developers.  Last updated 08 Feb 2017 12:44.
 
     </p>
   </div>
@@ -2871,7 +2865,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.3.3.post25+git8722228',
+            VERSION:'0.3.4.post6+git43a2e83',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

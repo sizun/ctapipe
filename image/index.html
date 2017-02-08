@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Imaging (image) &mdash; ctapipe v0.3.3.post25+git8722228</title>
+  <title>Imaging (image) &mdash; ctapipe v0.3.4.post6+git43a2e83</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.3.3.post25+git8722228" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.3.4.post6+git43a2e83" href="../index.html"/>
         <link rel="next" title="chi_squared" href="../api/ctapipe.image.chi_squared.html"/>
         <link rel="prev" title="Flow-based framework (flow)" href="../flow/index.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.3.post25+git8722228
+                0.3.4.post6+git43a2e83
               </div>
             
           
@@ -355,31 +355,27 @@
 <p>Hillas shower parametrization.</p>
 <div class="section" id="todo">
 <h4>TODO:<a class="headerlink" href="#todo" title="Permalink to this headline">¶</a></h4>
-<ul>
+<ul class="simple">
 <li><dl class="first docutils">
 <dt>remove alpha calculation (which is only about (0,0)),</dt>
-<dd><p class="first last">and make a get alpha function that does it from an arbitrary point given a pre-computed list of parameters
+<dd>and make a get alpha function that does it from an arbitrary point given a pre-computed list of parameters
 (has this alpha function been implemented?  V. easy, given centroid and psi, or miss and dist/r)
-(logically, should also remove &quot;miss&quot;, which is relative to (0,0)</p>
-</dd>
+(logically, should also remove &quot;miss&quot;, which is relative to (0,0)</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>add function(s) to calculate asymmetry (or asymmetries?) including sign calculation</dt>
-<dd><p class="first last">(for now, MP/Whipple asymmetry is positive for &quot;tail&quot; pointing away from (0,0))
-(I have a wonderful way to to this, but this margin is too small to contain it)</p>
-</dd>
+<dd>(for now, MP/Whipple asymmetry is positive for &quot;tail&quot; pointing away from (0,0))
+(I have a wonderful way to to this, but this margin is too small to contain it)</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>psi of hillas_parameters_1 and 2 does not match. Mismatch in hillas_parameters_2 need to be resolved:</dt>
-<dd><p class="first last">psi of hillas_parameters_1 has inconsistent sign.  hillas_parameters_2/3/4 better, since +ve for tail pointing away
-Mismatch between hillas_parameters_1/2 fixed in previous version, shouldn't this TODO be removed?</p>
-</dd>
+<dd>psi of hillas_parameters_1 has inconsistent sign.  hillas_parameters_2/3/4 better, since +ve for tail pointing away
+Mismatch between hillas_parameters_1/2 fixed in previous version, shouldn't this TODO be removed?</dd>
 </dl>
 </li>
-<li><p class="first">Implement higher order hillas parameters in hillas_parameters_2: Done (MP)</p>
-</li>
+<li>Implement higher order hillas parameters in hillas_parameters_2: Done (MP)</li>
 </ul>
 </div>
 <div class="section" id="change-log">
@@ -680,7 +676,7 @@ implementation, which tries to intellegently switch between the two. Speed tests
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 27 Jan 2017 17:47.
+        &copy; Copyright ctapipe developers.  Last updated 08 Feb 2017 12:44.
 
     </p>
   </div>
@@ -702,7 +698,7 @@ implementation, which tries to intellegently switch between the two. Speed tests
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.3.post25+git8722228',
+            VERSION:'0.3.4.post6+git43a2e83',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
