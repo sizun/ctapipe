@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CameraDisplay &mdash; ctapipe v0.3.4.post6+git43a2e83</title>
+  <title>CameraDisplay &mdash; ctapipe v0.3.4.post13+git2f38f60</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.3.4.post6+git43a2e83" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.3.4.post13+git2f38f60" href="../index.html"/>
         <link rel="up" title="Visualization (visualization)" href="../visualization/index.html"/>
         <link rel="prev" title="ArrayDisplay" href="ctapipe.visualization.ArrayDisplay.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.4.post6+git43a2e83
+                0.3.4.post13+git2f38f60
               </div>
             
           
@@ -292,7 +292,7 @@ plt.savefig(filename). This includes <code class="xref py py-obj docutils litera
 <td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#ctapipe.visualization.CameraDisplay.update" title="ctapipe.visualization.CameraDisplay.update"><code class="xref py py-obj docutils literal"><span class="pre">update</span></code></a>([force])</td>
-<td>signal a redraw if necessary</td>
+<td>redraw the display now</td>
 </tr>
 </tbody>
 </table>
@@ -317,7 +317,8 @@ instance, e.g. from <code class="xref py py-obj docutils literal"><span class="p
 <p>Possible values:</p>
 <ul class="simple">
 <li>&quot;lin&quot;: linear scale</li>
-<li>&quot;log&quot;: log scale</li>
+<li>&quot;log&quot;: log scale (cannot have negative values)</li>
+<li>&quot;symlog&quot;: symmetric log scale (negative values are ok)</li>
 <li>any matplotlib.colors.Normalize instance, e. g. PowerNorm(gamma=-2)</li>
 </ul>
 </dd></dl>
@@ -458,7 +459,7 @@ or linewidth=6)</p>
 <dl class="method">
 <dt id="ctapipe.visualization.CameraDisplay.update">
 <code class="descname">update</code><span class="sig-paren">(</span><em>force=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ctapipe/visualization/mpl.html#CameraDisplay.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ctapipe.visualization.CameraDisplay.update" title="Permalink to this definition">¶</a></dt>
-<dd><p>signal a redraw if necessary</p>
+<dd><p>redraw the display now</p>
 </dd></dl>
 
 </dd></dl>
@@ -482,7 +483,7 @@ or linewidth=6)</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 08 Feb 2017 12:44.
+        &copy; Copyright ctapipe developers.  Last updated 20 Feb 2017 17:27.
 
     </p>
   </div>
@@ -504,7 +505,7 @@ or linewidth=6)</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.4.post6+git43a2e83',
+            VERSION:'0.3.4.post13+git2f38f60',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

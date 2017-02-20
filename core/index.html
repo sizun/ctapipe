@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Core Structures and Base Classes (core) &mdash; ctapipe v0.3.4.post6+git43a2e83</title>
+  <title>Core Structures and Base Classes (core) &mdash; ctapipe v0.3.4.post13+git2f38f60</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="ctapipe v0.3.4.post6+git43a2e83" href="../index.html"/>
+    <link rel="top" title="ctapipe v0.3.4.post13+git2f38f60" href="../index.html"/>
         <link rel="next" title="Component" href="../api/ctapipe.core.Component.html"/>
         <link rel="prev" title="TiltedGroundFrame" href="../api/ctapipe.coordinates.TiltedGroundFrame.html"/> 
 
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.4.post6+git43a2e83
+                0.3.4.post13+git2f38f60
               </div>
             
           
@@ -172,30 +172,10 @@ this will also handle provenance metadata.</p>
 <p>All <em>ctapipe</em> applications should derive from these classes in order
 to provide a common interface.</p>
 <p>For details about creating command-line tools, see <a class="reference internal" href="../tools/index.html#tools"><span class="std std-ref">Command line tools (tools)</span></a></p>
-<img src="../_images/graphviz-b284f75f2a0ec6a7871987f37b30de7f8404b918.png" alt="digraph Core {
-
-  node [shape=rect fontsize=12 fontname=&quot;Arial&quot;];
-  edge [fontname = &quot;Arial&quot; fontsize = 10 dir=front]
-
-  splines = line
-  subgraph cluster_Tool_0 {
-
-    label=&quot;Tool (configuration/command-line, logging, provenance)&quot;;
-    rankdir=&quot;TB&quot;
-
-       Container_1 [shape=ellipse];
-     Component_1 [fillcolor=dodgerblue3, fontcolor=white, style=filled, label=&quot;Component&quot;];
-     Component_2 [fillcolor=dodgerblue3, fontcolor=white, style=filled,label=&quot;Component&quot;];
-
-     { rank=same; Component_1 Component_2 Container_1 }
-
-
-}
-
-  Component_1 -&gt; Container_1
-  Container_1 -&gt; Component_2
-
-}" />
+<p>The following shows the conceptual difference between <code class="xref py py-obj docutils literal"><span class="pre">Tools</span></code> and
+<code class="xref py py-obj docutils literal"><span class="pre">Components</span></code> with overall pipelines and stages.  Serialization and
+Deserialization are simply specialized Components that perform data access.</p>
+<img alt="../_images/tool-component.pdf" src="../_images/tool-component.pdf" />
 </div>
 <div class="section" id="reference-api">
 <h2>Reference/API<a class="headerlink" href="#reference-api" title="Permalink to this headline">¶</a></h2>
@@ -270,7 +250,7 @@ to provide a common interface.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright ctapipe developers.  Last updated 08 Feb 2017 12:44.
+        &copy; Copyright ctapipe developers.  Last updated 20 Feb 2017 17:27.
 
     </p>
   </div>
@@ -292,7 +272,7 @@ to provide a common interface.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.3.4.post6+git43a2e83',
+            VERSION:'0.3.4.post13+git2f38f60',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
