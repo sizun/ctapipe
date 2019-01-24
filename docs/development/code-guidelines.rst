@@ -24,15 +24,50 @@ errors, and these should be used frequently.
 
 .. code-block:: sh
 		
-    % pip install hacking  # installs all checker tools
+	% pip install hacking  # installs all checker tools
 
-    % pyflakes file.py # checks for code errors
-    % flake8 file.py   # checks style and code errors
-    % flake8           # checks code in all subdirs
+	% pyflakes file.py # checks for code errors
+	% flake8 file.py   # checks style and code errors
+	% flake8           # checks code in all subdirs
 
 
 If you use *PyCharm* as an IDE, there is also a GUI function to find
 and review all common code errors and style issues.
+
+Unit-tests
+----------
+
+A *unit test* is a piece of code that tests a single functionality of
+a library (e.g. a function, method, or class).
+
+All code your write should have associated *unit tests* to ensure the
+code works, gives resonable results, handles error cases properly, and
+to keep bugs at a minimum
+
+Unit tests in `ctapipe` use the `PyTest system
+<http://docs.pytest.org>`_ .  Each module should put tests in a
+`[module_name]/test` subdirectory, which can contain one or more files
+called `test_[X]` containing tests to run (these are automatically
+discovered by name).
+
+To run the test suite, you can run `make test` from the top-level
+ctapipe directory (which is just an alias to `python -m pytest`).  You
+can also run tests in subdirectories to limit which ones are run.
+
+Follow these basic guidelines:
+
+1. There should be at least a unit test that *executes* all
+   functions/classes/methods that you have written (minimally just
+   runs them)
+2. You should write tests that give simple inputs and check that the
+   expected output is returned
+3. Make sure to test edge and error cases for your functions
+   (e.g. test what happens if an unexpected but still valid input is
+   given)
+4. Any time you fix a bug, it is good practice to add a unit test to
+   make sure that bug does not appear again in the future (this is
+   called regression testing)
+
 
 Data Structures
 ---------------
@@ -71,7 +106,55 @@ Logging and debugging
   common logging failities of `ctapipe`.  Log messages should be
   simple, and no not include the filename, function name, time, or any
   other metadata (which can be attached automatically by the logging
-  system)
+  system). See https://docs.python.org/3/howto/logging.html for more info
+
+* Logging within a `Tool` or `Component` subclass: use the `self.log` logger
+  instance
+
+* logging in a library file that is not part of Tool or Component: define a
+  logger at the top of the python file, and name it by using `__name__` as
+  follows:
+
+
+.. code-block:: python
+
+	# at the top of your file:
+
+	import logging
+	logger = logging.getLogger(__name__)
+
+
+Python logging works as follows:
+
+.. code-block:: python
+
+	logger.warning("this might be a problem")
+	logger.info("basic status")
+	logger.debug("debugging message")
+	logger.error("a serious problem")
+	logger.critical("this should never happen!")
+
+And which messages print out and in what logging format can be defined at
+run-time, along with filtering capabilities (e.g. only show log messages from
+a particular file or class).
+
+Some logging guidelines:
+
+* you should **not** include the name of your function/class, line number, name
+  of the file, or similar info in a log message. That information can be added
+  automatically by the logger by changing the log format if needed (all log
+  messages come with an attached `LogRecord` which contains all of the
+  necessary metadata: name, level, pathname, filename, line number, message,
+  arguments,exc_info (for exceptions), function name, stack info, process name, and
+  optinal user-defined fields.
+
+* the log message should be human-readable and explain to a user not fully
+  familiar with the code what is happening.
+
+* if the message refers to a value, you can insert it into the message using
+  format `logger.debug("some message: {}".format(val)")` or the log syntax
+  `logger.debug("some message: %d", val)`
+
 
 Function or method Input/Output
 -------------------------------
@@ -97,7 +180,7 @@ where units need to be transformed.  Internally in a function, this is not neces
 
    @quantity_input
    def my_function_that_should_enforce_units(width: u.m , length:u.m, angle:u.deg):
-       print(width.value, "is in meters") # no need for further conversion 
+	   print(width.value, "is in meters") # no need for further conversion
 
 
 With this decorator, the inputs will be automatically converted to the
@@ -108,16 +191,16 @@ call this like:
 
    # works:
    my_function_that_should_enforce_units(width=12*u.cm,
-		                         length=16*u.m,
+								 length=16*u.m,
 					 angle=1.0*u.rad)
 
    # throws exception
    my_function_that_should_enforce_units(width=12,   # no units, fails
-		                         length=16,
+								 length=16,
 					 angle=1.0)
    # throws exception
    my_function_that_should_enforce_units(width=12*u.TeV, # bad conversion, fails
-		                         length=16*u.m,
+								 length=16*u.m,
 					 angle=1.0*u.rad)
 
 Note however, that this introduces some overhead as the units are
@@ -125,9 +208,6 @@ tested and converted for each function call. For functions that are
 called frequently, it's best to enforce a unit earlier (e.g when the
 parameters are defined), and assume it.
    
-Unit-tests
-----------
-
 
 Writing Algorithms
 ------------------
@@ -162,20 +242,20 @@ help when writing algorithms:
 
   .. code-block:: python
 
-     def mangle_signal(signal, px, py, centerpoint=(0,0), setpoint=2.0*u.m):
-         """
+	 def mangle_signal(signal, px, py, centerpoint=(0,0), setpoint=2.0*u.m):
+		 """
 	 Mangles an image
 		  
 	 Parameters:
 	 -----------
 	 signal : np.ndarray
-	     array of signal values for each point in space
+		 array of signal values for each point in space
 	 px,py  : np.ndarray
-	     arrays of x and y valyes of each signal value
+		 arrays of x and y valyes of each signal value
 	 centerpoint : (x,y)
-	     center value in pixel coordinates
+		 center value in pixel coordinates
 	 setpoint : float quantity
-	     a parameter in meters
+		 a parameter in meters
 	 """
 	 ...
 
@@ -186,16 +266,16 @@ help when writing algorithms:
 
   .. code-block:: python
 
-     class SignalMangler:
+	 class SignalMangler:
 
-         def __init__(self, px, py, lookup_table_filename):
-             self.transform_table = Table.read(lookup_table_filename)
-	     self.px = px
-	     self.py = py
+		 def __init__(self, px, py, lookup_table_filename):
+			 self.transform_table = Table.read(lookup_table_filename)
+		 self.px = px
+		 self.py = py
 
 	 def mangle(self, signal):
-	     ...
-	    
+		 ...
+
 * if there are multiple implemenations of the same generic algorithm,
   a *class hierarchy* should be use where the base class defines the
   common interface to all algorithm instances.
@@ -217,44 +297,38 @@ help when writing algorithms:
   .. code-block:: python
 
 
-     # these should become user-defined parameters:
-     
-     filename = "events.tar.gz"
-     tel_id = 1
+	 # these should become user-defined parameters:
 
-     # initialize any algorithms
-     
-     source = calibrated_event_source(filename)
-     ImageMangler mangler(geom.pix_x, geom.pix_y, "transformtable.fits")
-     Serializer serializer = ...
+	 filename = "events.tar.gz"
+	 tel_id = 1
 
-     # simple loop over events, calling each algorithm and directly
-     #passing data
-     
-     for event in source:
+	 # initialize any algorithms
+
+	 source = calibrated_event_source(filename)
+	 ImageMangler mangler(geom.pix_x, geom.pix_y, "transformtable.fits")
+
+	 # simple loop over events, calling each algorithm and directly
+	 #passing data
+
+	 for event in source:
   
-         image = event.dl1.tel[tel_id].image
-         mangled_image = mangler.mangle(image)
-         image_parameters = parameterize_image(mangled_image)
+		 image = event.dl1.tel[tel_id].image
+		 mangled_image = mangler.mangle(image)
+		 image_parameters = parameterize_image(mangled_image)
 
-         # here you may here pack your output values into a Container if 
-         # they are not already in one. We assume here that mangled_image
-         # and image_parameters are already Container subclasses
-     
-         serializer.write([mangled_image, image_parameters])
 
 * When your algorithm test code (as above) works well and you are
   happy with the results, you can do two things:
   
   1. convert your test code into a `ctapipe.core.Tool` so that it
-     becomes a command-line program released with ctapipe (with no
-     modification to the data flow).  This should be done anyway, if
-     it is useful, since the `Tool` you create can be refactored
-     later.
+	 becomes a command-line program released with ctapipe (with no
+	 modification to the data flow).  This should be done anyway, if
+	 it is useful, since the `Tool` you create can be refactored
+	 later.
   2. request to the framework experts to have each algorithm wrapped
-     in a chainable flow framework to allow parallelization and other
-     advanced features.  Note that the choice of flow-framework is
-     under study, so leaving things simple as above lets multiple
-     systems be tested.
+	 in a chainable flow framework to allow parallelization and other
+	 advanced features.  Note that the choice of flow-framework is
+	 under study, so leaving things simple as above lets multiple
+	 systems be tested.
 
 

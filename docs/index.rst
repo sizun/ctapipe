@@ -3,31 +3,31 @@
 .. _ctapipe:
 
 =====================================================
- CTA Experimental Pipeline Framework (:mod:`ctapipe`)
+ Prototype CTA Pipeline Framework (:mod:`ctapipe`)
 =====================================================
 
 .. currentmodule:: ctapipe
 
 **version**:  |version|
 
-.. image:: event.png
+.. image:: ctapipe_logo.png
    :align: center
    :width: 90%
 
 What is ctapipe?
 ================
 
-`ctapipe` is an experimental framework for the data processing
-pipelines for CTA.
+`ctapipe` is a framework for prototyping the low-level data processing algorithms for the Cherenkov Telescope Array. 
 
 .. CAUTION::
    This is not yet stable code, so expect large and rapid changes to
-   structure and functionality as we explore various design choices.
+   structure and functionality as we explore various design choices before
+   the 1.0 release.
 
 * Code, feature requests, bug reports, pull requests: https://github.com/cta-observatory/ctapipe
 * Docs: https://cta-observatory.github.io/ctapipe/
 * License: BSD-3
-* Python 3.4 or later (Python 2 is not supported)
+* Python 3.6 or later (Python 2 is not supported)
 
 
 
@@ -44,7 +44,9 @@ General documentation
   development/index
   tools/index
   */index
-
+  FAQ
+  bibliography
+  changelog
 
 Module API Status (relative to next release)
 ============================================
@@ -58,15 +60,13 @@ Module API Status (relative to next release)
 ================  ===============
  Module           Status
 ================  ===============
-`analysis`        empty
-`calib`           caution
-`coordinates`     **stable**
+`analysis`        **stable**
+`calib`           **stable**
+`coordinates`     caution
 `core`            **stable**
-`flow`            experimental
-`instrument`      unstable
-`pipeline`        deprecated
-`plotting`        caution
-`reco`            caution
+`instrument`      **stable**
+`io`              **stable** 
+`reco`            **stable**
 `utils`           **stable**
 `visualization`   **stable**
 ================  ===============

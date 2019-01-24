@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 """
 Example of drawing and updating a Camera using a toymodel shower images.
 
@@ -10,9 +9,11 @@ running.
 import matplotlib.pylab as plt
 import numpy as np
 from astropy import units as u
-from ctapipe import io, visualization
-from ctapipe.image import toymodel
 from matplotlib.animation import FuncAnimation
+
+from ctapipe.image import toymodel
+from ctapipe.instrument import TelescopeDescription
+from ctapipe.visualization import CameraDisplay
 
 if __name__ == '__main__':
 
@@ -20,17 +21,24 @@ if __name__ == '__main__':
     fig, ax = plt.subplots()
 
     # load the camera
-    geom = io.CameraGeometry.from_name("hess", 1)
-    disp = visualization.CameraDisplay(geom, ax=ax)
-    disp.cmap = plt.cm.terrain
+    tel = TelescopeDescription.from_name("SST-1M", "DigiCam")
+    geom = tel.camera
+
+    fov = 0.3
+    maxwid = 0.05
+    maxlen = 0.1
+
+    disp = CameraDisplay(geom, ax=ax)
+    disp.cmap = 'inferno'
     disp.add_colorbar(ax=ax)
 
     def update(frame):
-        centroid = np.random.uniform(-0.5, 0.5, size=2)
-        width = np.random.uniform(0, 0.01)
-        length = np.random.uniform(0, 0.03) + width
-        angle = np.random.uniform(0, 360)
-        intens = np.random.exponential(2) * 50
+        centroid = np.random.uniform(-fov, fov, size=2)
+        width = np.random.uniform(0.01, maxwid)
+        length = np.random.uniform(width, maxlen)
+        angle = np.random.uniform(0, 180)
+        intens = width * length * (5e4 + 1e5 * np.random.exponential(2))
+
         model = toymodel.generate_2d_shower_model(
             centroid=centroid,
             width=width,
@@ -38,13 +46,12 @@ if __name__ == '__main__':
             psi=angle * u.deg,
         )
         image, sig, bg = toymodel.make_toymodel_shower_image(
-            geom, model.pdf,
+            geom,
+            model.pdf,
             intensity=intens,
-            nsb_level_pe=5000,
+            nsb_level_pe=5,
         )
-        image /= image.max()
         disp.image = image
 
-
-    anim = FuncAnimation(fig, update, interval=250)
+    anim = FuncAnimation(fig, update, interval=500)
     plt.show()

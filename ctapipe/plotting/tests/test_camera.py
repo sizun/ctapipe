@@ -1,26 +1,29 @@
-from ctapipe.io.hessio import hessio_event_source
-from ...utils.datasets import get_datasets_path
-from ..camera import CameraPlotter
+from ctapipe.io import event_source
+from ctapipe.utils import get_dataset_path
+from ctapipe.plotting.camera import CameraPlotter
 import numpy as np
 
 
 def test_eventplotter():
-    dataset = get_datasets_path("gamma_test.simtel.gz")
-    source = hessio_event_source(dataset)
-    event = next(source)
-    data = event.r0.tel[38].adc_samples[0]
-    plotter = CameraPlotter(event)
+    dataset = get_dataset_path("gamma_test.simtel.gz")
+    with event_source(dataset, max_events=1) as source:
+        event = next(iter(source))
 
-    camera = plotter.draw_camera(38, data[:, 0])
-    assert camera is not None
-    np.testing.assert_array_equal(camera.image, data[:, 0])
+        telid = list(event.r0.tels_with_data)[0]
 
-    plotter.draw_camera_pixel_ids(38, [0, 1, 2])
+        data = event.r0.tel[telid].waveform[0]
+        plotter = CameraPlotter(event)
 
-    waveform = plotter.draw_waveform(data[0, :])
-    assert waveform is not None
-    np.testing.assert_array_equal(waveform.get_ydata(), data[0, :])
+        camera = plotter.draw_camera(telid, data[:, 0])
+        assert camera is not None
+        np.testing.assert_array_equal(camera.image, data[:, 0])
 
-    line = plotter.draw_waveform_positionline(0)
-    assert line is not None
-    np.testing.assert_array_equal(line.get_xdata(), [0, 0])
+        plotter.draw_camera_pixel_ids(telid, [0, 1, 2])
+
+        waveform = plotter.draw_waveform(data[0, :])
+        assert waveform is not None
+        np.testing.assert_array_equal(waveform.get_ydata(), data[0, :])
+
+        line = plotter.draw_waveform_positionline(0)
+        assert line is not None
+        np.testing.assert_array_equal(line.get_xdata(), [0, 0])
